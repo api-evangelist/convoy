@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-event-type-schema.json",
+  "title": "Convoy EventType",
+  "description": "A declared event type within a project, optionally with a JSON Schema for payload validation.",
+  "properties": {
+    "category": {
+      "type": "string"
+    },
+    "deprecated_at": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "json_schema": {
+      "items": {
+        "type": "integer"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

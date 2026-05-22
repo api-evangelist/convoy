@@ -1,0 +1,6 @@
+{
+  "operationId": "BulkUpdateFilters",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/bulk_update",
+  "summary": "Update multiple subscription filters"
+}

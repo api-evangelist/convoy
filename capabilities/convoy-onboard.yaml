@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Convoy API \u2014 Onboard"
+  description: "Convoy webhooks gateway \u2014 Onboard. 1 operations. Lead operation: Bulk onboard endpoints with subscriptions.\
+    \ Self-contained Naftiko capability covering one Convoy business surface."
+  tags:
+  - Convoy
+  - Webhooks
+  - Onboard
+  created: '2026-05-22'
+  modified: '2026-05-22'
+binds:
+- namespace: env
+  keys:
+    CONVOY_API_KEY: CONVOY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: convoy-onboard
+    baseUri: https://us.getconvoy.cloud/api
+    description: "Convoy API \u2014 Onboard business capability. Self-contained, no shared references."
+    authentication:
+      type: bearer
+      token: '{{env.CONVOY_API_KEY}}'
+    resources:
+    - name: v1-projects-project-id-onboard
+      path: /v1/projects/{projectID}/onboard
+      operations:
+      - name: BulkOnboard
+        method: POST
+        description: Bulk onboard endpoints with subscriptions
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: dry_run
+          in: query
+          type: boolean
+          required: false
+          description: Validate without creating
+        - name: body
+          in: body
+          type: object
+          required: false
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: convoy-onboard-rest
+    port: 8080
+    description: "REST adapter for Convoy API \u2014 Onboard. One Spectral-compliant resource per consumed operation, prefixed\
+      \ with /v1."
+    resources:
+    - path: /v1/projects/{project-id}/onboard
+      name: v1-projects-project-id-onboard
+      description: REST surface for /v1/projects/{project-id}/onboard.
+      operations:
+      - method: POST
+        name: BulkOnboard
+        description: Bulk onboard endpoints with subscriptions
+        call: convoy-onboard.BulkOnboard
+        with:
+          projectID: rest.projectID
+          dry_run: rest.dry_run
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: convoy-onboard-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Convoy API \u2014 Onboard. One tool per consumed operation, routed inline through this capability's\
+      \ consumes block."
+    tools:
+    - name: bulk-onboard-endpoints-subscriptions
+      description: Bulk onboard endpoints with subscriptions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: convoy-onboard.BulkOnboard
+      with:
+        projectID: tools.projectID
+        dry_run: tools.dry_run
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

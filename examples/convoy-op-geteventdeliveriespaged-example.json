@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEventDeliveriesPaged",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/eventdeliveries",
+  "summary": "List all event deliveries"
+}

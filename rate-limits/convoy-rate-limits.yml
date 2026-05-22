@@ -1,0 +1,122 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Convoy
+providerId: convoy
+created: '2026-05-22'
+modified: '2026-05-22'
+reconciled: true
+tags:
+  - Webhooks
+  - Rate Limits
+  - Webhook Gateway
+description: >-
+  Convoy applies rate limits in two places. First, at the platform tier, the
+  managed Convoy Cloud Pro plan caps event delivery at 25 events/second
+  (Enterprise is custom). Second, per-endpoint rate limits can be configured
+  by the customer through the Endpoint resource (count + duration window) and
+  are enforced by the delivery worker before issuing the outbound HTTP call.
+  Inbound API request rate limits to the Convoy management API itself are
+  not publicly documented as fixed values.
+sources:
+  - https://getconvoy.io/pricing
+  - https://getconvoy.io/docs/api-reference/welcome
+  - https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json
+  - https://github.com/frain-dev/convoy
+
+policies:
+  - id: convoy-cloud-pro-event-rate
+    name: Convoy Cloud Pro — Event Delivery Rate
+    type: rate-limit
+    scope: account
+    appliesTo: managed-cloud-pro
+    metric: event
+    limit: 25
+    window: second
+    enforcement: enforced
+    onExceed: deferred-to-next-window
+    description: >-
+      "25 events/second" — the documented per-account rate ceiling on the Pro
+      plan. Excess delivery work queues for subsequent windows rather than
+      failing.
+    source: https://getconvoy.io/pricing
+
+  - id: convoy-cloud-enterprise-event-rate
+    name: Convoy Cloud Enterprise — Event Delivery Rate
+    type: rate-limit
+    scope: account
+    appliesTo: managed-cloud-enterprise
+    metric: event
+    limit: -1
+    window: second
+    enforcement: negotiated
+    onExceed: contractual
+    description: >-
+      "Custom" — Enterprise customers negotiate event-throughput targets and
+      bursting allowances directly with Convoy.
+    source: https://getconvoy.io/pricing
+
+  - id: convoy-endpoint-rate-limit
+    name: Per-Endpoint Rate Limit
+    type: rate-limit
+    scope: endpoint
+    appliesTo: any
+    metric: event
+    limit: configurable
+    window: configurable
+    enforcement: enforced
+    onExceed: deferred-to-next-window
+    description: >-
+      Each Convoy Endpoint resource carries `rate_limit` (count) and
+      `rate_limit_duration` (seconds) fields. The delivery worker throttles
+      attempts against the endpoint to the configured count per window.
+    source: https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json
+
+  - id: convoy-subscription-rate-limit
+    name: Per-Subscription Rate Limit
+    type: rate-limit
+    scope: subscription
+    appliesTo: any
+    metric: event
+    limit: configurable
+    window: configurable
+    enforcement: enforced
+    onExceed: deferred-to-next-window
+    description: >-
+      Subscriptions expose a `rate_limit_config` block (count + duration)
+      that further constrains fan-out throughput along that subscription's
+      path.
+    source: https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json
+
+  - id: convoy-retry-policy
+    name: Retry Cadence (Effective Rate Control)
+    type: backoff
+    scope: endpoint
+    appliesTo: any
+    metric: attempt
+    limit: 20
+    window: usage
+    enforcement: enforced
+    onExceed: marked-failed
+    description: >-
+      Convoy retries failed deliveries using either linear (constant-time,
+      default 1 hour) or exponential backoff with ±10% jitter (formula
+      `min(delaySeconds * 2^attempt, maxRetrySeconds) + jitter`, default cap
+      7200 seconds). Default retry limit is 20 attempts.
+    source: https://getconvoy.io/docs/webhook-guides/webhook-retries
+
+  - id: convoy-management-api-rate
+    name: Convoy Management API Rate Limit
+    type: rate-limit
+    scope: api-key
+    appliesTo: management-api
+    metric: request
+    limit: not-publicly-documented
+    window: not-publicly-documented
+    enforcement: unknown
+    onExceed: unknown
+    description: >-
+      Convoy does not publicly document a fixed rate limit on its management
+      API surface. Self-hosted operators set their own; Cloud limits are
+      governed by the platform tier above.
+    source: https://getconvoy.io/docs/api-reference/welcome

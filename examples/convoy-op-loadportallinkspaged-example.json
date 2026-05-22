@@ -1,0 +1,6 @@
+{
+  "operationId": "LoadPortalLinksPaged",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/portal-links",
+  "summary": "List all portal links"
+}

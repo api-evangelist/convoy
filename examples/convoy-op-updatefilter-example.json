@@ -1,0 +1,6 @@
+{
+  "operationId": "UpdateFilter",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/{filterID}",
+  "summary": "Update a filter"
+}

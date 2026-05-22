@@ -1,0 +1,6 @@
+{
+  "operationId": "GetMetaEvent",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/meta-events/{metaEventID}",
+  "summary": "Retrieve a meta event"
+}

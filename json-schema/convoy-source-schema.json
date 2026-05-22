@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-source-schema.json",
+  "title": "Convoy Source",
+  "description": "An ingest source (HTTP webhook, REST API, or message broker such as Kafka, AMQP, Pub/Sub, or SQS) that emits events into Convoy.",
+  "properties": {
+    "body_function": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "custom_response": {
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "content_type": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "forward_headers": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "header_function": {
+      "type": "string"
+    },
+    "idempotency_keys": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "is_disabled": {
+      "type": "boolean"
+    },
+    "mask_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "provider": {
+      "enum": [
+        "github",
+        "twitter",
+        "shopify"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "GithubSourceProvider",
+        "TwitterSourceProvider",
+        "ShopifySourceProvider"
+      ]
+    },
+    "provider_config": {
+      "properties": {
+        "twitter": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "pub_sub": {
+      "properties": {
+        "amqp": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "google": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "kafka": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "sqs": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "workers": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "type": {
+      "enum": [
+        "http",
+        "rest_api",
+        "pub_sub",
+        "db_change_stream"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "HTTPSource",
+        "RestApiSource",
+        "PubSubSource",
+        "DBChangeStream"
+      ]
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "verifier": {
+      "properties": {
+        "api_key": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "basic_auth": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "hmac": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object"
+}

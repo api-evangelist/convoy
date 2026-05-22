@@ -1,0 +1,6 @@
+{
+  "operationId": "DeleteSource",
+  "method": "DELETE",
+  "path": "/v1/projects/{projectID}/sources/{sourceID}",
+  "summary": "Delete a source"
+}

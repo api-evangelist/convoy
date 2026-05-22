@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEndpoint",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/endpoints/{endpointID}",
+  "summary": "Retrieve endpoint"
+}

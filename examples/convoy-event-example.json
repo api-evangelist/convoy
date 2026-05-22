@@ -1,0 +1,18 @@
+{
+  "uid": "evt_01HZ51N5KQ8X3R7P0M2A6BZ7CD",
+  "event_type": "invoice.paid",
+  "data": {
+    "invoice_id": "inv_001A2B",
+    "amount_cents": 49900,
+    "currency": "USD",
+    "customer_id": "cust_acme_001",
+    "paid_at": "2026-05-22T10:14:00Z"
+  },
+  "headers": {
+    "X-Source": "billing-service"
+  },
+  "idempotency_key": "evt-invoice-paid-inv_001A2B",
+  "is_duplicate_event": false,
+  "created_at": "2026-05-22T10:14:01Z",
+  "updated_at": "2026-05-22T10:14:01Z"
+}

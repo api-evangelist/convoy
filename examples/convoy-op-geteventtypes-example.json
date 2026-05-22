@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEventTypes",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/event-types",
+  "summary": "Retrieves a project's event types"
+}

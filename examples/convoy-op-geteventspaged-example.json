@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEventsPaged",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/events",
+  "summary": "List all events"
+}

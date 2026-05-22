@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-delivery-attempt-structure.json",
+  "title": "Convoy DeliveryAttempt",
+  "description": "An individual HTTP attempt against a destination endpoint.",
+  "type": "object",
+  "properties": {
+    "api_version": {
+      "description": "",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "endpoint_id": {
+      "description": "",
+      "type": "string"
+    },
+    "error": {
+      "description": "",
+      "type": "string"
+    },
+    "http_status": {
+      "description": "",
+      "type": "string"
+    },
+    "ip_address": {
+      "description": "",
+      "type": "string"
+    },
+    "method": {
+      "description": "",
+      "type": "string"
+    },
+    "msg_id": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "request_http_header": {
+      "description": "",
+      "type": "object"
+    },
+    "response_data": {
+      "description": "",
+      "type": "string"
+    },
+    "response_http_header": {
+      "description": "",
+      "type": "object"
+    },
+    "status": {
+      "description": "",
+      "type": "boolean"
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

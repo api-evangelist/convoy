@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-portal-link-schema.json",
+  "title": "Convoy PortalLink",
+  "description": "A scoped, embeddable customer-facing dashboard link granting access to a subset of endpoints.",
+  "properties": {
+    "auth_key": {
+      "type": "string"
+    },
+    "auth_type": {
+      "enum": [
+        "refresh_token",
+        "static_token"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "PortalAuthTypeRefreshToken",
+        "PortalAuthTypeStaticToken"
+      ]
+    },
+    "can_manage_endpoint": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "endpoint_count": {
+      "type": "integer"
+    },
+    "endpoints": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "endpoints_metadata": {
+      "items": {
+        "properties": {
+          "advanced_signatures": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "authentication": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "content_type": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "created_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "deleted_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "description": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "events": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "failure_rate": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "http_timeout": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "mtls_client_cert": {
+            "allOf": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            },
+            "description": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "name": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "owner_id": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "project_id": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "rate_limit": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "rate_limit_duration": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "secrets": {
+            "items": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            },
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "slack_webhook_url": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "support_email": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "uid": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "updated_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "url": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "name": {
+      "type": "string"
+    },
+    "owner_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "token": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "BulkCreateFilters",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/bulk",
+  "summary": "Create multiple subscription filters"
+}

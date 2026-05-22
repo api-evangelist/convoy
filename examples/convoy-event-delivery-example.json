@@ -1,0 +1,17 @@
+{
+  "uid": "evd_01HZ51N5MS2K8R3X0Y9P6Q1T9V",
+  "event_id": "evt_01HZ51N5KQ8X3R7P0M2A6BZ7CD",
+  "endpoint_id": "01HZ4F0J0G3Y2QH9N5T7AZBQ6V",
+  "subscription_id": "sub_01HZ4F0J0G3Y2QH9N5T7AZBQ72",
+  "status": "Success",
+  "description": "200 OK from https://api.acme.example.com/webhooks/convoy",
+  "metadata": {
+    "num_trials": 1,
+    "retry_limit": 20,
+    "interval_seconds": 20,
+    "strategy": "exponential",
+    "next_send_time": "0001-01-01T00:00:00Z"
+  },
+  "created_at": "2026-05-22T10:14:01Z",
+  "updated_at": "2026-05-22T10:14:02Z"
+}

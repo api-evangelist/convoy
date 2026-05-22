@@ -1,0 +1,264 @@
+name: Convoy
+description: >-
+  Convoy is an open-source, cloud-native webhooks gateway used to securely
+  ingest, persist, debug, deliver, and manage events. It positions itself as
+  "the complete solution for secure, scalable, and reliable webhook delivery,"
+  covering both outbound (sending) and inbound (receiving) webhooks with
+  retries, payload signing, fan-out, rate limiting, message broker ingestion,
+  and customer-facing portals. Convoy is offered as a self-hosted open-source
+  project (Elastic License v2.0, with the OpenAPI spec under MPL 2.0) and a
+  fully managed cloud service in US and EU regions.
+url: https://github.com/api-evangelist/convoy
+humanURL: https://getconvoy.io
+baseURL: https://us.getconvoy.cloud/api
+image: https://avatars.githubusercontent.com/u/64033435?s=200&v=4
+created: '2026-05-22'
+modified: '2026-05-22'
+specificationVersion: '0.18'
+type: Index
+aid: convoy
+tags:
+  - Webhooks
+  - Webhook Gateway
+  - Event Delivery
+  - Eventing
+  - Messaging
+  - Integration
+  - API Infrastructure
+
+apis:
+  - name: Convoy API
+    description: >-
+      The Convoy REST API, version 26.3.5, exposes 44 operations across 11
+      resource groups for managing webhook delivery infrastructure:
+      Subscriptions, Endpoints, Events, Sources, Event Deliveries, Delivery
+      Attempts, Portal Links, Meta Events, Event Types, Filters, and Onboard.
+      All operations are scoped to a project (`/v1/projects/{projectID}/...`)
+      and authenticated via Bearer API key in the Authorization header. The
+      managed cloud is split into independently-deployed US and EU regions.
+    humanURL: https://getconvoy.io/docs/api-reference/welcome
+    baseURL: https://us.getconvoy.cloud/api
+    image: https://avatars.githubusercontent.com/u/64033435?s=200&v=4
+    aid: convoy:convoy-api
+    tags:
+      - Webhooks
+      - Event Delivery
+      - API Gateway
+      - Subscriptions
+      - Endpoints
+    properties:
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json
+      - type: OpenAPI
+        url: ./openapi/convoy-openapi.yml
+      - type: APIReference
+        url: https://getconvoy.io/docs/api-reference/welcome
+      - type: Documentation
+        url: https://getconvoy.io/docs/
+      - type: Authentication
+        url: https://getconvoy.io/docs/api-reference/authentication
+      - type: GettingStarted
+        url: https://getconvoy.io/docs/quickstart
+      - type: Regions
+        url: https://getconvoy.io/docs
+      - type: GitHubRepository
+        url: https://github.com/frain-dev/convoy
+      - type: TermsOfService
+        url: https://getconvoy.io/terms
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-endpoints.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-events.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-event-types.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-event-deliveries.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-delivery-attempts.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-subscriptions.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-sources.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-portal-links.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-filters.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-meta-events.yaml
+      - type: NaftikoCapability
+        url: ./capabilities/convoy-onboard.yaml
+      - type: JSONSchema
+        url: ./json-schema/convoy-endpoint-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-event-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-event-delivery-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-delivery-attempt-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-subscription-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-source-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-portal-link-schema.json
+      - type: JSONSchema
+        url: ./json-schema/convoy-event-type-schema.json
+      - type: JSONLD
+        url: ./json-ld/convoy-context.jsonld
+      - type: SpectralRules
+        url: ./rules/convoy-rules.yml
+      - type: Vocabulary
+        url: ./vocabulary/convoy-vocabulary.yml
+      - type: Examples
+        url: ./examples/
+    contact:
+      - FN: Convoy Support
+        email: support@getconvoy.io
+        url: https://getconvoy.io/docs
+
+common:
+  - type: Portal
+    url: https://getconvoy.io
+  - type: DeveloperPortal
+    url: https://getconvoy.io/docs/
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: SignUp
+    url: https://dashboard.getconvoy.io/signup
+  - type: Login
+    url: https://dashboard.getconvoy.io/login
+  - type: Pricing
+    url: https://getconvoy.io/pricing
+  - type: Plans
+    url: ./plans/convoy-plans-pricing.yml
+  - type: RateLimits
+    url: ./rate-limits/convoy-rate-limits.yml
+  - type: ChangeLog
+    url: https://getconvoy.io/changelog
+  - type: Blog
+    url: https://getconvoy.io/blog
+  - type: StatusPage
+    url: https://status.getconvoy.io
+  - type: Security
+    url: https://getconvoy.io/docs/product-manual/signatures
+  - type: Compliance
+    url: https://getconvoy.io/pricing
+  - type: Support
+    url: mailto:support@getconvoy.io
+  - type: Contact
+    url: https://getconvoy.io
+  - type: GitHubOrganization
+    url: https://github.com/frain-dev
+  - type: GitHubRepository
+    name: convoy
+    url: https://github.com/frain-dev/convoy
+    description: The Cloud Native Webhooks Gateway (Go, Elastic License v2.0, 2,805+ stars).
+  - type: SDK
+    name: convoy-go
+    url: https://github.com/frain-dev/convoy-go
+    description: Official Go SDK for Convoy.
+  - type: SDK
+    name: convoy.js
+    url: https://github.com/frain-dev/convoy.js
+    description: Official JavaScript/TypeScript SDK for Convoy.
+  - type: SDK
+    name: convoy-python
+    url: https://github.com/frain-dev/convoy-python
+    description: Official Python SDK for Convoy.
+  - type: SDK
+    name: convoy-php
+    url: https://github.com/frain-dev/convoy-php
+    description: Official PHP SDK for Convoy.
+  - type: SDK
+    name: convoy.rb
+    url: https://github.com/frain-dev/convoy.rb
+    description: Official Ruby SDK for Convoy.
+  - type: CLI
+    name: convoy-cli
+    url: https://github.com/frain-dev/convoy-cli
+    description: CLI tool for debugging Convoy webhook events locally.
+  - type: CLI
+    name: homebrew-tools
+    url: https://github.com/frain-dev/homebrew-tools
+    description: Homebrew formulas for installing Frain/Convoy binaries.
+  - type: Integrations
+    name: Helm Charts
+    url: https://github.com/frain-dev/helm-charts
+    description: Official Kubernetes Helm charts for deploying Convoy.
+  - type: Integrations
+    name: Prometheus + Grafana Dashboards
+    url: https://github.com/frain-dev/prometheus-grafana-dashboard
+    description: Docker-compose plus Grafana dashboards for observing Convoy queue and consumer metrics.
+  - type: Integrations
+    name: Convoy Ingester
+    url: https://github.com/frain-dev/convoy-ingester
+    description: Serverless function for accepting incoming webhooks into Convoy.
+  - type: CodeExamples
+    name: convoy-playground
+    url: https://github.com/frain-dev/convoy-playground
+    description: Example/demo environment for Convoy.
+  - type: CodeExamples
+    name: webhooks-with-kafka-demo
+    url: https://github.com/frain-dev/webhooks-with-kafka-demo
+    description: Demo showing webhook ingestion from Kafka via Convoy.
+  - type: CodeExamples
+    name: convoy-paystack
+    url: https://github.com/frain-dev/convoy-paystack
+    description: Artifacts for the Paystack webinar on webhooks with Convoy.
+  - type: Features
+    title: Core Capabilities
+    data:
+      - Outbound (sending) webhook delivery
+      - Inbound (receiving) webhook ingestion
+      - HMAC payload signing (simple and advanced/timestamped signatures, hex or base64 encoding)
+      - Retry strategies (linear / constant time and exponential backoff with jitter)
+      - Batch retries and force-resend
+      - Fan-out routing by event type or payload structure
+      - Per-endpoint rate limiting
+      - Endpoint circuit breaking and pause/activate
+      - Rolling endpoint secrets
+      - Static IPs for restricted network environments (Cloud add-on)
+      - mTLS client certificate support for endpoints
+      - Webhook transformations with JavaScript
+      - Customer-facing dashboards via Portal Links (iframe embeddable)
+      - Email and Slack notifications for endpoint failures
+      - OAuth2 (client credentials, JWT client assertion) for outbound auth
+  - type: Features
+    title: Message Broker Ingest
+    data:
+      - Apache Kafka
+      - Google Cloud Pub/Sub
+      - AWS SQS
+      - RabbitMQ (AMQP)
+  - type: Features
+    title: Source Provider Types
+    data:
+      - GitHub
+      - Shopify
+      - Twitter/X
+      - Mono
+      - Generic HTTP (HMAC, Basic Auth, API Key, or Custom verification)
+  - type: Regions
+    data:
+      - US (https://us.getconvoy.cloud/api)
+      - EU (https://eu.getconvoy.cloud/api)
+  - type: UseCases
+    data:
+      - Webhook gateway between microservices and external consumers
+      - Receiving webhooks from third-party providers and routing to internal services
+      - Replacing in-house retry/signing/observability code for webhooks
+      - Customer-facing webhook dashboards via embeddable portal links
+      - Bridging message brokers to HTTP endpoints
+  - type: Customers
+    data:
+      - Neynar
+      - Spruce Health
+      - Marble
+      - Source.ag
+      - Maple
+      - Mono
+      - Xendit

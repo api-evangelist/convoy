@@ -1,0 +1,170 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Convoy
+providerId: convoy
+created: '2026-05-22'
+modified: '2026-05-22'
+reconciled: true
+tags:
+  - Webhooks
+  - Webhook Gateway
+  - Event Delivery
+  - API Infrastructure
+description: >-
+  Convoy offers a two-tier managed cloud (Pro and Enterprise) plus a
+  self-hostable open-source distribution under Elastic License v2.0. Pro is
+  flat-rate ($99/month) targeting small teams and startups with a fixed
+  rate-limit, 7-day webhook retention, 99.99% SLA, Google SSO, and RBAC.
+  Enterprise is custom-priced for scale-ups and large orgs, layering SAML,
+  SOC 2, VPC peering, response-time SLAs, and solutions engineering. Static
+  IPs are a $100/month add-on on Pro and built into Enterprise. Self-hosted
+  has no license fee but is governed by the Elastic License v2.0.
+sources:
+  - https://getconvoy.io/pricing
+  - https://getconvoy.io
+  - https://getconvoy.io/docs/
+  - https://github.com/frain-dev/convoy
+
+plans:
+  - id: convoy-self-hosted
+    name: Self-Hosted (Open Source)
+    type: freemium
+    description: >-
+      Run Convoy yourself under Elastic License v2.0. No license fee. Docker
+      and Helm charts provided. You operate the API server, workers,
+      scheduler, Postgres, and queue.
+    entries:
+      - label: License Fee
+        name: license_fee
+        type: flat
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$0'
+        userMultiplied: false
+    elements:
+      - name: Outgoing webhooks
+      - name: Incoming webhooks (sources)
+      - name: Retries (linear and exponential backoff)
+      - name: HMAC signing (simple and advanced)
+      - name: Fan-out routing
+      - name: Per-endpoint rate limiting
+      - name: Customer-facing portal links
+      - name: Message broker ingest (Kafka, Pub/Sub, SQS, AMQP)
+      - name: Webhook transformations (JavaScript)
+      - name: OAuth2 (client credentials, JWT client assertion)
+      - name: mTLS client certificate support
+      - name: Self-managed Postgres + queue
+      - name: Helm charts and Docker images
+
+  - id: convoy-cloud-pro
+    name: Pro
+    type: subscription
+    description: >-
+      Managed Convoy Cloud for small teams and startups. Flat $99/month with
+      a fixed 25 events/second rate limit, 7-day webhook retention, 99.99%
+      uptime SLA, Google SSO, RBAC, and email support.
+    entries:
+      - label: Base Subscription
+        name: base_subscription
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$99 per month'
+        userMultiplied: false
+      - label: Rate Limit
+        name: rate_limit
+        type: quota
+        metric: event
+        limit: 25
+        timeFrame: second
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Webhook Retention
+        name: webhook_retention_days
+        type: quota
+        metric: day
+        limit: 7
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: included
+        userMultiplied: false
+      - label: Static IPs Add-on
+        name: static_ips_addon
+        type: subscription
+        metric: month
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$100 per month'
+        userMultiplied: false
+    elements:
+      - name: Incoming & outgoing webhooks
+      - name: Retries (linear and exponential backoff)
+      - name: Portal links
+      - name: Message broker support
+      - name: Endpoint circuit breaking
+      - name: Webhook transformation with JavaScript
+      - name: Google SSO
+      - name: Role-based access control (RBAC)
+      - name: Email support
+      - name: 99.99% uptime SLA
+
+  - id: convoy-cloud-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Tailored Convoy Cloud for scale-ups and large organizations. Custom
+      pricing, custom rate limits, custom webhook retention, 99.999% uptime
+      SLA, included static IPs, SAML SSO, SOC 2 compliance, VPC peering and
+      private networking, response-time SLA, and solutions engineering.
+    entries:
+      - label: Base Subscription
+        name: base_subscription
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+      - label: Rate Limit
+        name: rate_limit
+        type: quota
+        metric: event
+        limit: -1
+        timeFrame: second
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+      - label: Webhook Retention
+        name: webhook_retention
+        type: quota
+        metric: day
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: All Pro features
+      - name: Static IPs included
+      - name: SAML SSO
+      - name: SOC 2 compliance
+      - name: VPC peering and private networking
+      - name: Response-time SLA
+      - name: Solutions engineering
+      - name: 99.999% uptime SLA

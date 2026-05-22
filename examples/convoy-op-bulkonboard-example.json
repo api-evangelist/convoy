@@ -1,0 +1,6 @@
+{
+  "operationId": "BulkOnboard",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/onboard",
+  "summary": "Bulk onboard endpoints with subscriptions"
+}

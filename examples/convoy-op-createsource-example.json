@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateSource",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/sources",
+  "summary": "Create a source"
+}

@@ -1,0 +1,23 @@
+{
+  "uid": "et_01HZ4F0J0G3Y2QH9N5T7AZBQ77",
+  "name": "invoice.paid",
+  "description": "Emitted when an invoice transitions to the paid state.",
+  "category": "billing",
+  "deprecated_at": null,
+  "json_schema": {
+    "type": "object",
+    "properties": {
+      "invoice_id": {
+        "type": "string"
+      },
+      "amount_cents": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "invoice_id"
+    ]
+  },
+  "created_at": "2026-04-10T12:00:00Z",
+  "updated_at": "2026-04-10T12:00:00Z"
+}

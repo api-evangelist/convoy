@@ -1,0 +1,396 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-subscription-schema.json",
+  "title": "Convoy Subscription",
+  "description": "Binds a source and/or filter to one or more endpoints, controlling which events flow where.",
+  "properties": {
+    "alert_config": {
+      "allOf": [
+        {
+          "properties": {
+            "count": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            },
+            "threshold": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "subscription config"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "delivery_mode": {
+      "enum": [
+        "at_least_once",
+        "at_most_once"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "AtLeastOnceDeliveryMode",
+        "AtMostOnceDeliveryMode"
+      ]
+    },
+    "device_metadata": {
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "endpoint_id": {
+          "type": "string"
+        },
+        "host_name": {
+          "type": "string"
+        },
+        "last_seen_at": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "endpoint_metadata": {
+      "properties": {
+        "advanced_signatures": {
+          "type": "boolean"
+        },
+        "authentication": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "content_type": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "events": {
+          "type": "integer"
+        },
+        "failure_rate": {
+          "type": "number"
+        },
+        "http_timeout": {
+          "type": "integer"
+        },
+        "mtls_client_cert": {
+          "allOf": [
+            {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          ],
+          "description": "mTLS client certificate configuration"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "rate_limit": {
+          "type": "integer"
+        },
+        "rate_limit_duration": {
+          "type": "integer"
+        },
+        "secrets": {
+          "items": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": "array"
+        },
+        "slack_webhook_url": {
+          "type": "string"
+        },
+        "status": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "support_email": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "filter_config": {
+      "properties": {
+        "event_types": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "filter": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "function": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "rate_limit_config": {
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "retry_config": {
+      "properties": {
+        "duration": {
+          "type": "integer"
+        },
+        "retry_count": {
+          "type": "integer"
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "source_metadata": {
+      "properties": {
+        "body_function": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "custom_response": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "forward_headers": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "header_function": {
+          "type": "string"
+        },
+        "idempotency_keys": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "is_disabled": {
+          "type": "boolean"
+        },
+        "mask_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "provider": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "provider_config": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "pub_sub": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "verifier": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "type": {
+      "enum": [
+        "cli",
+        "api"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "SubscriptionTypeCLI",
+        "SubscriptionTypeAPI"
+      ]
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "TestFilter",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/test/{eventType}",
+  "summary": "Test a filter"
+}

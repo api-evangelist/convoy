@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-endpoint-schema.json",
+  "title": "Convoy Endpoint",
+  "description": "A configured destination URL that receives webhook events from a Convoy project.",
+  "properties": {
+    "advanced_signatures": {
+      "type": "boolean"
+    },
+    "authentication": {
+      "properties": {
+        "api_key": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "basic_auth": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "oauth2": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "content_type": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "events": {
+      "type": "integer"
+    },
+    "failure_rate": {
+      "type": "number"
+    },
+    "http_timeout": {
+      "type": "integer"
+    },
+    "mtls_client_cert": {
+      "allOf": [
+        {
+          "properties": {
+            "client_cert": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            },
+            "client_key": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "mTLS client certificate configuration"
+    },
+    "name": {
+      "type": "string"
+    },
+    "owner_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "rate_limit": {
+      "type": "integer"
+    },
+    "rate_limit_duration": {
+      "type": "integer"
+    },
+    "secrets": {
+      "items": {
+        "properties": {
+          "created_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "deleted_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "expires_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "uid": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "updated_at": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "value": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "slack_webhook_url": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "paused"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "ActiveEndpointStatus",
+        "InactiveEndpointStatus",
+        "PausedEndpointStatus"
+      ]
+    },
+    "support_email": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

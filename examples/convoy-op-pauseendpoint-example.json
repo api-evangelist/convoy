@@ -1,0 +1,6 @@
+{
+  "operationId": "PauseEndpoint",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/endpoints/{endpointID}/pause",
+  "summary": "Pause endpoint"
+}

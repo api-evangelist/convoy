@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEndpointEvent",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/events/{eventID}",
+  "summary": "Retrieve an event"
+}

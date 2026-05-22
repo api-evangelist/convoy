@@ -1,0 +1,141 @@
+specification: API Commons FinOps
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/FinOps
+provider: Convoy
+providerId: convoy
+created: '2026-05-22'
+modified: '2026-05-22'
+reconciled: true
+tags:
+  - Webhooks
+  - Webhook Gateway
+  - FinOps
+  - FOCUS
+description: >-
+  Convoy's billing surface is intentionally simple compared to per-call cloud
+  APIs. The managed Convoy Cloud monetizes via two flat tiers — Pro at $99
+  per month and a custom-priced Enterprise tier — with one paid add-on
+  (Static IPs at $100/month). Self-hosted Convoy is free of license fees,
+  with infrastructure cost borne by the operator. As of December 2025 the
+  Convoy codebase shipped a "Billing module for usage tracking and
+  subscriptions," signaling a move toward more granular metering inside the
+  Cloud control plane, but the public-facing pricing page remains flat-rate.
+  This artifact aligns Convoy's commercial surface to the FinOps Foundation
+  Framework and the FOCUS billing-data spec so adopters can model Convoy
+  spend alongside other cloud services.
+sources:
+  - https://getconvoy.io/pricing
+  - https://getconvoy.io/changelog
+  - https://getconvoy.io
+  - https://github.com/frain-dev/convoy
+
+billingModel:
+  primary: subscription
+  secondary:
+    - addon-subscription
+  metering:
+    - event-delivery-rate-cap (Pro: 25 events/sec)
+    - webhook-retention-days (Pro: 7d)
+  invoicing:
+    cadence: monthly
+    methods: ['credit-card', 'invoice (Enterprise)']
+  currency: USD
+  freeTier: self-hosted-only
+
+focusMapping:
+  description: >-
+    Mapping of Convoy billing concepts to the FOCUS 1.x billing-data spec
+    columns. Use these when normalizing Convoy invoices into a unified
+    FinOps data lake.
+  columns:
+    - column: BilledCost
+      mapsTo: invoice line total (Pro base, Static IPs add-on, Enterprise contract)
+    - column: ListCost
+      mapsTo: '$99/month for Pro; $100/month for Static IPs; custom for Enterprise'
+    - column: EffectiveCost
+      mapsTo: same as BilledCost; no documented committed-use discounts
+    - column: ChargeCategory
+      mapsTo: Usage (for the subscription itself) and Purchase (for any reserved capacity)
+    - column: ChargeClass
+      mapsTo: not-applicable
+    - column: ChargeFrequency
+      mapsTo: Recurring (monthly)
+    - column: ServiceName
+      mapsTo: Convoy Cloud Pro / Convoy Cloud Enterprise / Static IPs Add-on
+    - column: ServiceCategory
+      mapsTo: Developer Tools / Integration / Webhooks
+    - column: ProviderName
+      mapsTo: Convoy (Frain Technologies)
+    - column: PublisherName
+      mapsTo: Convoy
+    - column: InvoiceIssuerName
+      mapsTo: Convoy
+    - column: BillingAccountId
+      mapsTo: Convoy organization ID
+    - column: SubAccountId
+      mapsTo: Convoy project ID
+    - column: SkuId
+      mapsTo: 'convoy-pro / convoy-enterprise / convoy-static-ips'
+    - column: Region
+      mapsTo: US or EU (Convoy Cloud is split into us.getconvoy.cloud and eu.getconvoy.cloud)
+    - column: UsageQuantity
+      mapsTo: months billed (subscription line); add-on months
+    - column: UsageUnit
+      mapsTo: month
+    - column: CommitmentDiscountType
+      mapsTo: none-documented
+
+costAllocationDimensions:
+  - dimension: project
+    description: Convoy resources are scoped to a project; align FinOps allocation tags at project level.
+  - dimension: region
+    description: US vs EU Cloud — relevant for data-residency and intra-region traffic costs.
+  - dimension: environment
+    description: Customers commonly split prod / staging projects; capture as a tag.
+  - dimension: tier
+    description: Pro vs Enterprise vs Self-Hosted — drives unit-economics modeling.
+
+unitEconomics:
+  approach: per-tenant-fixed
+  rationale: >-
+    Because Pro is a flat $99/month at a fixed 25 events/sec ceiling, the
+    cost per webhook delivered is highest at low volumes and asymptotes
+    toward zero as utilization approaches the rate cap. Customers
+    approaching the cap consistently should evaluate Enterprise (custom)
+    or self-hosting.
+  derivedMetrics:
+    - name: cost_per_delivered_event_usd
+      formula: 99 / (events_delivered_in_month)
+      notes: lower bound; ignores add-ons
+    - name: utilization_pct
+      formula: actual_events_per_second / 25
+      notes: Pro-tier headroom indicator
+
+discounts:
+  documented: none
+  notes: >-
+    The public pricing page lists no committed-use, annual-prepay, volume,
+    or non-profit discounts. Enterprise customers negotiate bespoke terms.
+
+freeTrial:
+  exists: referenced
+  details: >-
+    The marketing site shows "Get started for free" call-to-action buttons
+    on Pro and the FAQ references free trials; specific trial duration or
+    credit amount is not published on the pricing page.
+
+selfHostedConsiderations:
+  description: >-
+    Self-hosted Convoy carries no license fee but incurs infrastructure cost
+    that should be tracked separately under whichever cloud or on-prem
+    chargeback model the operator uses. Typical components to allocate:
+    Postgres database, queue/worker compute, scheduler, API server, dashboard
+    socket server, and observability stack (Prometheus + Grafana).
+  components:
+    - postgres-database
+    - redis-or-broker
+    - api-server
+    - workers
+    - scheduler
+    - socket-server
+    - prometheus-grafana

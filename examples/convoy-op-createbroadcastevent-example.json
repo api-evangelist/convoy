@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateBroadcastEvent",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/events/broadcast",
+  "summary": "Create a broadcast event"
+}

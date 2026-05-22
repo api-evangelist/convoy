@@ -1,0 +1,166 @@
+extends:
+  - spectral:oas
+documentationUrl: https://github.com/api-evangelist/convoy
+description: >-
+  Spectral ruleset enforcing Convoy API conventions, derived from the Convoy
+  OpenAPI 3.0.0 spec (Convoy API Reference, version 26.3.5). Convoy operations
+  are project-scoped, use Bearer API key auth, use PascalCase operation IDs,
+  and ship verbose Title-Case summaries.
+
+functions: []
+
+rules:
+  # === Naming & casing ===
+  convoy-operation-id-pascalcase:
+    description: All Convoy operationIds use PascalCase (e.g. GetEndpoints, CreateEventType).
+    severity: warn
+    given: $.paths.*[get,post,put,delete,patch].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][a-zA-Z0-9]+$'
+
+  convoy-operation-summary-title-case:
+    description: Operation summaries should use Title Case.
+    severity: warn
+    given: $.paths.*[get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z]'
+
+  convoy-tag-title-case:
+    description: Tags follow Title Case (Endpoints, Event Deliveries, Portal Links, Event Types).
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: '^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$'
+
+  # === Path scoping ===
+  convoy-paths-must-be-project-scoped:
+    description: >-
+      All Convoy resource paths must live under
+      /v1/projects/{projectID}/... to enforce project tenancy.
+    severity: error
+    given: $.paths
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^/v1/projects/\\{projectID\\}/.+$":
+              type: object
+          additionalProperties: false
+
+  convoy-snake-case-path-params:
+    description: Path parameter segments use snake_case where multi-word (e.g. event-deliveries, portal-links).
+    severity: hint
+    given: $.paths
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^/[a-z0-9\\-/{}_]+$'
+
+  # === Security ===
+  convoy-security-bearer-required:
+    description: Convoy uses Bearer API key authentication; every spec must declare ApiKeyAuth.
+    severity: error
+    given: $.components.securitySchemes
+    then:
+      field: ApiKeyAuth
+      function: truthy
+
+  convoy-security-header-name-authorization:
+    description: Convoy's ApiKeyAuth scheme MUST live on the Authorization header.
+    severity: error
+    given: $.components.securitySchemes.ApiKeyAuth
+    then:
+      - field: in
+        function: pattern
+        functionOptions:
+          match: '^header$'
+      - field: name
+        function: pattern
+        functionOptions:
+          match: '^Authorization$'
+
+  # === Responses & error contract ===
+  convoy-operations-have-2xx-response:
+    description: Every operation must declare a 2xx response.
+    severity: error
+    given: $.paths.*[get,post,put,delete,patch].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          patternProperties:
+            "^2[0-9]{2}$":
+              type: object
+
+  convoy-operations-tagged:
+    description: Every operation MUST have at least one tag (Endpoints, Events, Sources, Subscriptions, etc.).
+    severity: error
+    given: $.paths.*[get,post,put,delete,patch]
+    then:
+      field: tags
+      function: length
+      functionOptions:
+        min: 1
+
+  convoy-error-responses-documented:
+    description: Mutating operations should document 400 and 401 responses.
+    severity: warn
+    given: $.paths.*[post,put,delete,patch].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: ["400"]
+
+  # === Server URLs ===
+  convoy-servers-are-regional:
+    description: Servers list should expose both US and EU Convoy Cloud regions.
+    severity: warn
+    given: $.servers
+    then:
+      function: length
+      functionOptions:
+        min: 2
+
+  convoy-server-urls-getconvoy-cloud:
+    description: Server URLs must point at *.getconvoy.cloud/api.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://(us|eu)\\.getconvoy\\.cloud/api$'
+
+  # === Schemas ===
+  convoy-schemas-namespaced:
+    description: >-
+      Convoy schemas are namespaced (datastore.* or models.*) to mirror the Go
+      package layout. Names without a dot are discouraged for new additions.
+    severity: hint
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: pattern
+      functionOptions:
+        match: '^[a-z]+\\.[A-Z][a-zA-Z0-9]+$'
+
+  convoy-info-license-mpl:
+    description: The Convoy API spec is published under MPL 2.0.
+    severity: hint
+    given: $.info.license
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: 'Mozilla Public License'

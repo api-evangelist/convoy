@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-event-structure.json",
+  "title": "Convoy Event",
+  "description": "A webhook event ingested by Convoy.",
+  "type": "object",
+  "properties": {
+    "acknowledged_at": {
+      "description": "",
+      "type": "string"
+    },
+    "app_id": {
+      "description": "Deprecated",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "data": {
+      "description": "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "endpoint_metadata": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": {
+          "type": "object"
+        }
+      }
+    },
+    "endpoints": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "event_type": {
+      "description": "",
+      "type": "string"
+    },
+    "headers": {
+      "description": "",
+      "type": "object"
+    },
+    "idempotency_key": {
+      "description": "",
+      "type": "string"
+    },
+    "is_duplicate_event": {
+      "description": "",
+      "type": "boolean"
+    },
+    "metadata": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "raw": {
+      "description": "",
+      "type": "string"
+    },
+    "source_id": {
+      "description": "",
+      "type": "string"
+    },
+    "source_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "status": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url_query_params": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

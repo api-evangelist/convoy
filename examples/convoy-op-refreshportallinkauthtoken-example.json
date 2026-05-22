@@ -1,0 +1,6 @@
+{
+  "operationId": "RefreshPortalLinkAuthToken",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/portal-links/{portalLinkID}/refresh_token",
+  "summary": "Get a portal link auth token"
+}

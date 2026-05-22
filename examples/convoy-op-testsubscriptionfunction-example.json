@@ -1,0 +1,6 @@
+{
+  "operationId": "TestSubscriptionFunction",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions/test_function",
+  "summary": "Test a subscription function"
+}

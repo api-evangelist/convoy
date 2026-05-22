@@ -1,0 +1,6 @@
+{
+  "operationId": "UpdatePortalLink",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/portal-links/{portalLinkID}",
+  "summary": "Update a portal link"
+}

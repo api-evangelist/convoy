@@ -1,0 +1,6 @@
+{
+  "operationId": "UpdateEndpoint",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/endpoints/{endpointID}",
+  "summary": "Update an endpoint"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateSubscription",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions",
+  "summary": "Create a subscription"
+}

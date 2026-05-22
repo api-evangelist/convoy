@@ -1,0 +1,6 @@
+{
+  "operationId": "RevokePortalLink",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/portal-links/{portalLinkID}/revoke",
+  "summary": "Revoke a portal link"
+}

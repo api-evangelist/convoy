@@ -1,0 +1,6 @@
+{
+  "operationId": "BatchReplayEvents",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/events/batchreplay",
+  "summary": "Batch replay events"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateEndpointFanoutEvent",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/events/fanout",
+  "summary": "Fan out an event"
+}

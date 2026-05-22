@@ -1,0 +1,6 @@
+{
+  "operationId": "UpdateSource",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/sources/{sourceID}",
+  "summary": "Update a source"
+}

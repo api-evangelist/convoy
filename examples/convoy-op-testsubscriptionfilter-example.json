@@ -1,0 +1,6 @@
+{
+  "operationId": "TestSubscriptionFilter",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions/test_filter",
+  "summary": "Validate subscription filter"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "ReplayEndpointEvent",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/events/{eventID}/replay",
+  "summary": "Replay event"
+}

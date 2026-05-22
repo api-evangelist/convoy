@@ -1,0 +1,6 @@
+{
+  "operationId": "ForceResendEventDeliveries",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/eventdeliveries/forceresend",
+  "summary": "Force retry event delivery"
+}

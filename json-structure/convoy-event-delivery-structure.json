@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-event-delivery-structure.json",
+  "title": "Convoy EventDelivery",
+  "description": "A single attempted delivery of an event to one endpoint.",
+  "type": "object",
+  "properties": {
+    "acknowledged_at": {
+      "description": "",
+      "type": "string"
+    },
+    "cli_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "delivery_mode": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "description": {
+      "description": "",
+      "type": "string"
+    },
+    "device_id": {
+      "description": "",
+      "type": "string"
+    },
+    "device_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "endpoint_id": {
+      "description": "",
+      "type": "string"
+    },
+    "endpoint_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "event_id": {
+      "description": "",
+      "type": "string"
+    },
+    "event_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "event_type": {
+      "description": "",
+      "type": "string"
+    },
+    "headers": {
+      "description": "",
+      "type": "object"
+    },
+    "idempotency_key": {
+      "description": "",
+      "type": "string"
+    },
+    "latency": {
+      "description": "Deprecated: Latency is deprecated.",
+      "type": "string"
+    },
+    "latency_seconds": {
+      "description": "",
+      "type": "number"
+    },
+    "metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "source_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "status": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "subscription_id": {
+      "description": "",
+      "type": "string"
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url_query_params": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

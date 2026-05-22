@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-event-type-structure.json",
+  "title": "Convoy EventType",
+  "description": "A declared event type within a project.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "description": "",
+      "type": "string"
+    },
+    "deprecated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "description": {
+      "description": "",
+      "type": "string"
+    },
+    "json_schema": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

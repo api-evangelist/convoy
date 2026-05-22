@@ -1,0 +1,530 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-event-delivery-schema.json",
+  "title": "Convoy EventDelivery",
+  "description": "A single attempted delivery of an event to one endpoint, including status and delivery attempts.",
+  "properties": {
+    "acknowledged_at": {
+      "type": "string"
+    },
+    "cli_metadata": {
+      "properties": {
+        "event_type": {
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "delivery_mode": {
+      "enum": [
+        "at_least_once",
+        "at_most_once"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "AtLeastOnceDeliveryMode",
+        "AtMostOnceDeliveryMode"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "device_id": {
+      "type": "string"
+    },
+    "device_metadata": {
+      "properties": {
+        "created_at": {
+          "type": "string"
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "endpoint_id": {
+          "type": "string"
+        },
+        "host_name": {
+          "type": "string"
+        },
+        "last_seen_at": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "status": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "endpoint_id": {
+      "type": "string"
+    },
+    "endpoint_metadata": {
+      "properties": {
+        "advanced_signatures": {
+          "type": "boolean"
+        },
+        "authentication": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "content_type": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "events": {
+          "type": "integer"
+        },
+        "failure_rate": {
+          "type": "number"
+        },
+        "http_timeout": {
+          "type": "integer"
+        },
+        "mtls_client_cert": {
+          "allOf": [
+            {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          ],
+          "description": "mTLS client certificate configuration"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner_id": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "rate_limit": {
+          "type": "integer"
+        },
+        "rate_limit_duration": {
+          "type": "integer"
+        },
+        "secrets": {
+          "items": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": "array"
+        },
+        "slack_webhook_url": {
+          "type": "string"
+        },
+        "status": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "support_email": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "event_id": {
+      "type": "string"
+    },
+    "event_metadata": {
+      "properties": {
+        "acknowledged_at": {
+          "type": "string"
+        },
+        "app_id": {
+          "description": "Deprecated",
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "data": {
+          "description": "Data is an arbitrary JSON value that gets sent as the body of the\nwebhook to the endpoints",
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "endpoint_metadata": {
+          "items": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": "array"
+        },
+        "endpoints": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "headers": {
+          "additionalProperties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "idempotency_key": {
+          "type": "string"
+        },
+        "is_duplicate_event": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "raw": {
+          "type": "string"
+        },
+        "source_id": {
+          "type": "string"
+        },
+        "source_metadata": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "status": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "url_query_params": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "headers": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "type": "object"
+    },
+    "idempotency_key": {
+      "type": "string"
+    },
+    "latency": {
+      "description": "Deprecated: Latency is deprecated.",
+      "type": "string"
+    },
+    "latency_seconds": {
+      "type": "number"
+    },
+    "metadata": {
+      "properties": {
+        "data": {
+          "description": "Data to be sent to endpoint.",
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "interval_seconds": {
+          "type": "integer"
+        },
+        "max_retry_seconds": {
+          "type": "integer"
+        },
+        "next_send_time": {
+          "type": "string"
+        },
+        "num_trials": {
+          "description": "NumTrials: number of times we have tried to deliver this Event to\nan application",
+          "type": "integer"
+        },
+        "raw": {
+          "type": "string"
+        },
+        "retry_limit": {
+          "type": "integer"
+        },
+        "strategy": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "source_metadata": {
+      "properties": {
+        "body_function": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "custom_response": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "deleted_at": {
+          "type": "string"
+        },
+        "forward_headers": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "header_function": {
+          "type": "string"
+        },
+        "idempotency_keys": {
+          "items": {
+            "type": {
+              "type": "object",
+              "description": "deeply nested - truncated"
+            }
+          },
+          "type": "array"
+        },
+        "is_disabled": {
+          "type": "boolean"
+        },
+        "mask_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "project_id": {
+          "type": "string"
+        },
+        "provider": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "provider_config": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "pub_sub": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "type": {
+          "enum": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "x-enum-varnames": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        },
+        "uid": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "verifier": {
+          "properties": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          },
+          "type": {
+            "type": "object",
+            "description": "deeply nested - truncated"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "status": {
+      "enum": [
+        "Scheduled",
+        "Processing",
+        "Discarded",
+        "Failure",
+        "Success",
+        "Retry"
+      ],
+      "type": "string",
+      "x-enum-varnames": [
+        "ScheduledEventStatus",
+        "ProcessingEventStatus",
+        "DiscardedEventStatus",
+        "FailureEventStatus",
+        "SuccessEventStatus",
+        "RetryEventStatus"
+      ]
+    },
+    "subscription_id": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "url_query_params": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "uid": "pl_01HZ4F0J0G3Y2QH9N5T7AZBQ91",
+  "name": "Acme Customer Portal",
+  "url": "https://app.getconvoy.cloud/portal?token=tk_01HZ...redacted",
+  "token": "tk_01HZ...redacted",
+  "endpoints": [
+    "01HZ4F0J0G3Y2QH9N5T7AZBQ6V"
+  ],
+  "endpoint_count": 1,
+  "owner_id": "cust_acme_001",
+  "auth_key": "",
+  "can_manage_endpoint": true,
+  "created_at": "2026-04-12T16:00:00Z",
+  "updated_at": "2026-05-15T10:00:00Z"
+}

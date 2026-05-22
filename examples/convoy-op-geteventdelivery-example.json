@@ -1,0 +1,6 @@
+{
+  "operationId": "GetEventDelivery",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}",
+  "summary": "Retrieve an event delivery"
+}

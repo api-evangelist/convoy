@@ -1,0 +1,22 @@
+{
+  "uid": "att_01HZ51N5NJK4MQ7B0XE5P9R8TC",
+  "msg_id": "evd_01HZ51N5MS2K8R3X0Y9P6Q1T9V",
+  "url": "https://api.acme.example.com/webhooks/convoy",
+  "method": "POST",
+  "api_version": "26.3.5",
+  "ip_address": "10.0.4.18",
+  "request_http_header": {
+    "Content-Type": "application/json",
+    "X-Convoy-Signature": "t=1747900441,v1=2c8f...",
+    "User-Agent": "Convoy/26.3.5"
+  },
+  "response_http_header": {
+    "Content-Type": "application/json"
+  },
+  "http_status": "200",
+  "response_data": "{\"ok\":true}",
+  "error": "",
+  "status": "Success",
+  "created_at": "2026-05-22T10:14:02Z",
+  "updated_at": "2026-05-22T10:14:02Z"
+}

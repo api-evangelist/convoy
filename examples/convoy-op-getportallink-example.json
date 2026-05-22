@@ -1,0 +1,6 @@
+{
+  "operationId": "GetPortalLink",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/portal-links/{portalLinkID}",
+  "summary": "Retrieve a portal link"
+}

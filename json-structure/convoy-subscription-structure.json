@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-subscription-structure.json",
+  "title": "Convoy Subscription",
+  "description": "Binds a source and/or filter to one or more endpoints.",
+  "type": "object",
+  "properties": {
+    "alert_config": {
+      "description": "subscription config"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "delivery_mode": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "device_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "endpoint_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "filter_config": {
+      "description": "",
+      "type": "object"
+    },
+    "function": {
+      "description": "",
+      "type": "string"
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "rate_limit_config": {
+      "description": "",
+      "type": "object"
+    },
+    "retry_config": {
+      "description": "",
+      "type": "object"
+    },
+    "source_metadata": {
+      "description": "",
+      "type": "object"
+    },
+    "type": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

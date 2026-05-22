@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-portal-link-structure.json",
+  "title": "Convoy PortalLink",
+  "description": "An embeddable customer-facing dashboard link.",
+  "type": "object",
+  "properties": {
+    "auth_key": {
+      "description": "",
+      "type": "string"
+    },
+    "auth_type": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "can_manage_endpoint": {
+      "description": "",
+      "type": "boolean"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "endpoint_count": {
+      "description": "",
+      "type": "integer"
+    },
+    "endpoints": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "endpoints_metadata": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": {
+          "type": "object"
+        }
+      }
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    },
+    "owner_id": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "token": {
+      "description": "",
+      "type": "string"
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

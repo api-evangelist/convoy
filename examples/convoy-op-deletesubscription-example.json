@@ -1,0 +1,6 @@
+{
+  "operationId": "DeleteSubscription",
+  "method": "DELETE",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}",
+  "summary": "Delete subscription"
+}

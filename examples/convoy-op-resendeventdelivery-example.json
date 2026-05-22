@@ -1,0 +1,6 @@
+{
+  "operationId": "ResendEventDelivery",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}/resend",
+  "summary": "Retry event delivery"
+}

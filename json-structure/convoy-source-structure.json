@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-source-structure.json",
+  "title": "Convoy Source",
+  "description": "An ingest source emitting events into Convoy.",
+  "type": "object",
+  "properties": {
+    "body_function": {
+      "description": "",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "custom_response": {
+      "description": "",
+      "type": "object"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "forward_headers": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "header_function": {
+      "description": "",
+      "type": "string"
+    },
+    "idempotency_keys": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "is_disabled": {
+      "description": "",
+      "type": "boolean"
+    },
+    "mask_id": {
+      "description": "",
+      "type": "string"
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "provider": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "provider_config": {
+      "description": "",
+      "type": "object"
+    },
+    "pub_sub": {
+      "description": "",
+      "type": "object"
+    },
+    "type": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url": {
+      "description": "",
+      "type": "string"
+    },
+    "verifier": {
+      "description": "",
+      "type": "object"
+    }
+  }
+}

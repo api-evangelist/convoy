@@ -1,0 +1,6 @@
+{
+  "operationId": "UpdateEventType",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/event-types/{eventTypeId}",
+  "summary": "Updates an event type"
+}

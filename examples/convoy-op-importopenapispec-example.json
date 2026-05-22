@@ -1,0 +1,6 @@
+{
+  "operationId": "ImportOpenApiSpec",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/event-types/import",
+  "summary": "Import event types from OpenAPI spec"
+}

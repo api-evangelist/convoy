@@ -1,0 +1,6 @@
+{
+  "operationId": "ActivateEndpoint",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/endpoints/{endpointID}/activate",
+  "summary": "Activate endpoint"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateFilter",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters",
+  "summary": "Create a new filter"
+}

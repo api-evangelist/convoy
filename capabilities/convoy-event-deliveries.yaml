@@ -1,0 +1,452 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: "Convoy API \u2014 Event Deliveries"
+  description: "Convoy webhooks gateway \u2014 Event Deliveries. 5 operations. Lead operation: List all event deliveries.\
+    \ Self-contained Naftiko capability covering one Convoy business surface."
+  tags:
+  - Convoy
+  - Webhooks
+  - Event Deliveries
+  created: '2026-05-22'
+  modified: '2026-05-22'
+binds:
+- namespace: env
+  keys:
+    CONVOY_API_KEY: CONVOY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: convoy-event-deliveries
+    baseUri: https://us.getconvoy.cloud/api
+    description: "Convoy API \u2014 Event Deliveries business capability. Self-contained, no shared references."
+    authentication:
+      type: bearer
+      token: '{{env.CONVOY_API_KEY}}'
+    resources:
+    - name: v1-projects-project-id-eventdeliveries
+      path: /v1/projects/{projectID}/eventdeliveries
+      operations:
+      - name: GetEventDeliveriesPaged
+        method: GET
+        description: List all event deliveries
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: direction
+          in: query
+          type: string
+          required: false
+          description: query parameter direction
+        - name: endDate
+          in: query
+          type: string
+          required: false
+          description: The end date
+        - name: endpointId
+          in: query
+          type: array
+          required: false
+          description: A list of endpoint IDs to filter by
+        - name: eventId
+          in: query
+          type: string
+          required: false
+          description: Event ID to filter by
+        - name: event_type
+          in: query
+          type: string
+          required: false
+          description: EventType to filter by
+        - name: idempotencyKey
+          in: query
+          type: string
+          required: false
+          description: IdempotencyKey to filter by
+        - name: next_page_cursor
+          in: query
+          type: string
+          required: false
+          description: A pagination cursor to fetch the next page of a list
+        - name: perPage
+          in: query
+          type: integer
+          required: false
+          description: The number of items to return per page
+        - name: prev_page_cursor
+          in: query
+          type: string
+          required: false
+          description: A pagination cursor to fetch the previous page of a list
+        - name: sort
+          in: query
+          type: string
+          required: false
+          description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        - name: startDate
+          in: query
+          type: string
+          required: false
+          description: The start date
+        - name: status
+          in: query
+          type: array
+          required: false
+          description: A list of event delivery statuses to filter by
+        - name: subscriptionId
+          in: query
+          type: string
+          required: false
+          description: SubscriptionID to filter by
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-id-eventdeliveries-batchretry
+      path: /v1/projects/{projectID}/eventdeliveries/batchretry
+      operations:
+      - name: BatchRetryEventDelivery
+        method: POST
+        description: Batch retry event delivery
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: direction
+          in: query
+          type: string
+          required: false
+          description: query parameter direction
+        - name: endDate
+          in: query
+          type: string
+          required: false
+          description: The end date
+        - name: endpointId
+          in: query
+          type: array
+          required: false
+          description: A list of endpoint IDs to filter by
+        - name: eventId
+          in: query
+          type: string
+          required: false
+          description: Event ID to filter by
+        - name: event_type
+          in: query
+          type: string
+          required: false
+          description: EventType to filter by
+        - name: idempotencyKey
+          in: query
+          type: string
+          required: false
+          description: IdempotencyKey to filter by
+        - name: next_page_cursor
+          in: query
+          type: string
+          required: false
+          description: A pagination cursor to fetch the next page of a list
+        - name: perPage
+          in: query
+          type: integer
+          required: false
+          description: The number of items to return per page
+        - name: prev_page_cursor
+          in: query
+          type: string
+          required: false
+          description: A pagination cursor to fetch the previous page of a list
+        - name: sort
+          in: query
+          type: string
+          required: false
+          description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        - name: startDate
+          in: query
+          type: string
+          required: false
+          description: The start date
+        - name: status
+          in: query
+          type: array
+          required: false
+          description: A list of event delivery statuses to filter by
+        - name: subscriptionId
+          in: query
+          type: string
+          required: false
+          description: SubscriptionID to filter by
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-id-eventdeliveries-forceresend
+      path: /v1/projects/{projectID}/eventdeliveries/forceresend
+      operations:
+      - name: ForceResendEventDeliveries
+        method: POST
+        description: Force retry event delivery
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: Request body payload.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-id-eventdeliveries-event-delivery-id
+      path: /v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}
+      operations:
+      - name: GetEventDelivery
+        method: GET
+        description: Retrieve an event delivery
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: eventDeliveryID
+          in: path
+          type: string
+          required: true
+          description: event delivery id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-projects-project-id-eventdeliveries-event-delivery-id-resend
+      path: /v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}/resend
+      operations:
+      - name: ResendEventDelivery
+        method: PUT
+        description: Retry event delivery
+        inputParameters:
+        - name: projectID
+          in: path
+          type: string
+          required: true
+          description: Project ID
+        - name: eventDeliveryID
+          in: path
+          type: string
+          required: true
+          description: event delivery id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: convoy-event-deliveries-rest
+    port: 8080
+    description: "REST adapter for Convoy API \u2014 Event Deliveries. One Spectral-compliant resource per consumed operation,\
+      \ prefixed with /v1."
+    resources:
+    - path: /v1/projects/{project-id}/eventdeliveries
+      name: v1-projects-project-id-eventdeliveries
+      description: REST surface for /v1/projects/{project-id}/eventdeliveries.
+      operations:
+      - method: GET
+        name: GetEventDeliveriesPaged
+        description: List all event deliveries
+        call: convoy-event-deliveries.GetEventDeliveriesPaged
+        with:
+          projectID: rest.projectID
+          direction: rest.direction
+          endDate: rest.endDate
+          endpointId: rest.endpointId
+          eventId: rest.eventId
+          event_type: rest.event_type
+          idempotencyKey: rest.idempotencyKey
+          next_page_cursor: rest.next_page_cursor
+          perPage: rest.perPage
+          prev_page_cursor: rest.prev_page_cursor
+          sort: rest.sort
+          startDate: rest.startDate
+          status: rest.status
+          subscriptionId: rest.subscriptionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/eventdeliveries/batchretry
+      name: v1-projects-project-id-eventdeliveries-batchretry
+      description: REST surface for /v1/projects/{project-id}/eventdeliveries/batchretry.
+      operations:
+      - method: POST
+        name: BatchRetryEventDelivery
+        description: Batch retry event delivery
+        call: convoy-event-deliveries.BatchRetryEventDelivery
+        with:
+          projectID: rest.projectID
+          direction: rest.direction
+          endDate: rest.endDate
+          endpointId: rest.endpointId
+          eventId: rest.eventId
+          event_type: rest.event_type
+          idempotencyKey: rest.idempotencyKey
+          next_page_cursor: rest.next_page_cursor
+          perPage: rest.perPage
+          prev_page_cursor: rest.prev_page_cursor
+          sort: rest.sort
+          startDate: rest.startDate
+          status: rest.status
+          subscriptionId: rest.subscriptionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/eventdeliveries/forceresend
+      name: v1-projects-project-id-eventdeliveries-forceresend
+      description: REST surface for /v1/projects/{project-id}/eventdeliveries/forceresend.
+      operations:
+      - method: POST
+        name: ForceResendEventDeliveries
+        description: Force retry event delivery
+        call: convoy-event-deliveries.ForceResendEventDeliveries
+        with:
+          projectID: rest.projectID
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/eventdeliveries/{event-delivery-id}
+      name: v1-projects-project-id-eventdeliveries-event-delivery-id
+      description: REST surface for /v1/projects/{project-id}/eventdeliveries/{event-delivery-id}.
+      operations:
+      - method: GET
+        name: GetEventDelivery
+        description: Retrieve an event delivery
+        call: convoy-event-deliveries.GetEventDelivery
+        with:
+          projectID: rest.projectID
+          eventDeliveryID: rest.eventDeliveryID
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/projects/{project-id}/eventdeliveries/{event-delivery-id}/resend
+      name: v1-projects-project-id-eventdeliveries-event-delivery-id-resend
+      description: REST surface for /v1/projects/{project-id}/eventdeliveries/{event-delivery-id}/resend.
+      operations:
+      - method: PUT
+        name: ResendEventDelivery
+        description: Retry event delivery
+        call: convoy-event-deliveries.ResendEventDelivery
+        with:
+          projectID: rest.projectID
+          eventDeliveryID: rest.eventDeliveryID
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: convoy-event-deliveries-mcp
+    port: 9090
+    transport: http
+    description: "MCP adapter for Convoy API \u2014 Event Deliveries. One tool per consumed operation, routed inline through\
+      \ this capability's consumes block."
+    tools:
+    - name: list-event-deliveries
+      description: List all event deliveries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: convoy-event-deliveries.GetEventDeliveriesPaged
+      with:
+        projectID: tools.projectID
+        direction: tools.direction
+        endDate: tools.endDate
+        endpointId: tools.endpointId
+        eventId: tools.eventId
+        event_type: tools.event_type
+        idempotencyKey: tools.idempotencyKey
+        next_page_cursor: tools.next_page_cursor
+        perPage: tools.perPage
+        prev_page_cursor: tools.prev_page_cursor
+        sort: tools.sort
+        startDate: tools.startDate
+        status: tools.status
+        subscriptionId: tools.subscriptionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: batch-retry-event-delivery
+      description: Batch retry event delivery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: convoy-event-deliveries.BatchRetryEventDelivery
+      with:
+        projectID: tools.projectID
+        direction: tools.direction
+        endDate: tools.endDate
+        endpointId: tools.endpointId
+        eventId: tools.eventId
+        event_type: tools.event_type
+        idempotencyKey: tools.idempotencyKey
+        next_page_cursor: tools.next_page_cursor
+        perPage: tools.perPage
+        prev_page_cursor: tools.prev_page_cursor
+        sort: tools.sort
+        startDate: tools.startDate
+        status: tools.status
+        subscriptionId: tools.subscriptionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: force-retry-event-delivery
+      description: Force retry event delivery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: convoy-event-deliveries.ForceResendEventDeliveries
+      with:
+        projectID: tools.projectID
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-event-delivery
+      description: Retrieve an event delivery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: convoy-event-deliveries.GetEventDelivery
+      with:
+        projectID: tools.projectID
+        eventDeliveryID: tools.eventDeliveryID
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retry-event-delivery
+      description: Retry event delivery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: convoy-event-deliveries.ResendEventDelivery
+      with:
+        projectID: tools.projectID
+        eventDeliveryID: tools.eventDeliveryID
+      outputParameters:
+      - type: object
+        mapping: $.

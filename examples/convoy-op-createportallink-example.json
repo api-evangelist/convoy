@@ -1,0 +1,6 @@
+{
+  "operationId": "CreatePortalLink",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/portal-links",
+  "summary": "Create a portal link"
+}

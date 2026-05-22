@@ -1,0 +1,144 @@
+name: Convoy Vocabulary
+description: >-
+  Domain vocabulary for the Convoy webhooks gateway, mapping operational
+  (sending, receiving, retrying, signing, observing) and capability
+  (subscriptions, endpoints, sources, portal links, event types) dimensions
+  used across the Convoy API, SDKs, and OSS distribution. Derived from the
+  Convoy OpenAPI 3.0.0 spec (version 26.3.5) and the public Convoy
+  documentation.
+url: https://github.com/api-evangelist/convoy
+created: '2026-05-22'
+modified: '2026-05-22'
+
+operational:
+  description: Verbs and actions the Convoy platform performs.
+  terms:
+    - name: Ingest
+      definition: Accept an event from an HTTP source, REST call, or message broker (Kafka, AMQP, Pub/Sub, SQS) and persist it for delivery.
+    - name: Sign
+      definition: Compute an HMAC over the payload (simple or advanced timestamp+versioned format, hex or base64) and attach it to the outbound request.
+    - name: Verify
+      definition: Validate an inbound webhook's signature using HMAC, Basic Auth, API Key, or custom JS verification.
+    - name: Fan Out
+      definition: Route a single event to multiple matching subscriptions/endpoints based on event type or payload filter.
+    - name: Deliver
+      definition: Attempt the HTTP request against an endpoint, recording status, headers, and response body as a Delivery Attempt.
+    - name: Retry
+      definition: Re-attempt delivery using linear (constant-time) or exponential backoff with jitter, up to a configured retry limit (default 20).
+    - name: Batch Retry
+      definition: Replay or retry many event deliveries together via the batchretry / forceresend / batchreplay endpoints.
+    - name: Filter
+      definition: Match events against subscription criteria over headers and body before delivery.
+    - name: Transform
+      definition: Mutate the payload or headers with a user-supplied JavaScript function before signing and delivery.
+    - name: Throttle
+      definition: Enforce a per-endpoint rate limit (events per duration window).
+    - name: Pause
+      definition: Disable delivery for an endpoint while keeping its configuration intact.
+    - name: Roll Secret
+      definition: Expire an endpoint's current signing secret and generate a new one, supporting overlap windows for zero-downtime rotation.
+    - name: Onboard
+      definition: Bootstrap a project's first source, endpoint, and subscription in a single API call.
+
+capability:
+  description: Nouns — the resources Convoy manages.
+  terms:
+    - name: Project
+      definition: A tenant-scoped container holding endpoints, sources, subscriptions, event types, and portal links.
+    - name: Endpoint
+      definition: A destination URL that receives webhook deliveries, plus its signing secret, retry/rate-limit config, and authentication.
+    - name: Source
+      definition: An ingest channel (HTTP, REST API push, or a message broker — Kafka, AMQP, Google Pub/Sub, AWS SQS) that emits events into Convoy.
+    - name: SourceProvider
+      definition: A known third-party emitter shape (GitHub, Shopify, Twitter/X, Mono, generic) whose verification scheme Convoy understands.
+    - name: Subscription
+      definition: A binding from a source and/or filter to one or more endpoints, with retry, alert, and rate-limit configuration.
+    - name: Event
+      definition: A single message ingested by Convoy, carrying an event type, payload, headers, and idempotency key.
+    - name: EventType
+      definition: A declared event name in a project, optionally with a JSON Schema for payload validation, plus a deprecated flag.
+    - name: EventDelivery
+      definition: A single attempted delivery of an event to one endpoint, with delivery status and metadata.
+    - name: DeliveryAttempt
+      definition: A single HTTP attempt within an EventDelivery, capturing request/response headers, status, body, and timing.
+    - name: PortalLink
+      definition: A scoped, embeddable customer-facing dashboard link granting access to a subset of endpoints and event deliveries.
+    - name: Filter
+      definition: A reusable header/body matcher attached to a subscription, controlling which events fan out.
+    - name: MetaEvent
+      definition: A platform-emitted event describing lifecycle changes (e.g. endpoint.created, endpoint.failed).
+    - name: ApiKey
+      definition: A bearer token presented in the Authorization header that scopes access to Convoy resources.
+
+security:
+  description: Security and authentication concepts.
+  terms:
+    - name: HMAC
+      definition: Hash-based message authentication code used for signing outbound webhooks and verifying inbound ones.
+    - name: Advanced Signature
+      definition: A timestamp+versioned signature (t=...,v1=...) supporting replay protection and key rotation.
+    - name: Simple Signature
+      definition: A single-hash signature without timestamp, suitable for simpler consumers.
+    - name: Bearer Token
+      definition: "The Convoy API key, passed as `Authorization: Bearer {key}`."
+    - name: OAuth2 Client Credentials
+      definition: Outbound authentication mode where Convoy obtains a token from the destination service via shared secret or JWT client assertion.
+    - name: mTLS
+      definition: Mutual-TLS client certificate authentication for outbound delivery to endpoints that require it.
+    - name: Static IP
+      definition: A fixed source IP range Convoy delivers from, allowing destination services to allow-list traffic (Cloud paid add-on).
+    - name: Endpoint Secret
+      definition: The HMAC key bound to an endpoint, with expiration and rotation lifecycle.
+    - name: RBAC
+      definition: Role-based access control across organization members (five tiers as of 2025-10).
+
+retry:
+  description: Retry strategy vocabulary.
+  terms:
+    - name: Linear Retry
+      definition: Constant-time retries (default 1-hour spacing) up to the configured retry limit.
+    - name: Exponential Backoff
+      definition: Retry delay grows as min(delaySeconds * 2^attempt, maxRetrySeconds) with ±10% jitter; default cap 7200 seconds.
+    - name: Retry Limit
+      definition: Maximum number of delivery attempts before the delivery is marked failed (default 20).
+    - name: Circuit Breaking
+      definition: Per-endpoint failure detection that pauses delivery when error rates exceed threshold.
+
+observability:
+  description: Operational visibility concepts.
+  terms:
+    - name: Event Log
+      definition: The append-only record of every ingested event, queryable by date, source, event type, and idempotency key.
+    - name: Delivery Log
+      definition: The per-attempt log of HTTP calls Convoy made against endpoints, with status, latency, headers, and body.
+    - name: Failure Alert
+      definition: An email or Slack notification fired after consecutive endpoint failures cross an alert threshold.
+    - name: Meta Event
+      definition: A platform-level event describing internal lifecycle changes, deliverable to a meta-event endpoint.
+
+deployment:
+  description: Distribution and runtime modes.
+  terms:
+    - name: Self-Hosted
+      definition: Run the OSS Convoy distribution under Elastic License v2.0 on your own infrastructure (Docker, Kubernetes/Helm).
+    - name: Cloud
+      definition: Convoy's managed SaaS, served from us.getconvoy.cloud and eu.getconvoy.cloud, with Pro and Enterprise tiers.
+    - name: Region
+      definition: An isolated Cloud deployment (US or EU) with its own data plane.
+    - name: Control Plane
+      definition: The Cloud component responsible for dashboard, API, and configuration management.
+    - name: Data Plane
+      definition: The Cloud component responsible for ingest, queue, retries, and delivery.
+
+tags:
+  - Webhooks
+  - Webhook Gateway
+  - Event Delivery
+  - Eventing
+  - Messaging
+  - Integration
+  - API Infrastructure
+  - Observability
+  - HMAC
+  - Retries
+  - Convoy

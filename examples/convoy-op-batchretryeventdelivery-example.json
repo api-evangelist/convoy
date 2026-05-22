@@ -1,0 +1,6 @@
+{
+  "operationId": "BatchRetryEventDelivery",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/eventdeliveries/batchretry",
+  "summary": "Batch retry event delivery"
+}

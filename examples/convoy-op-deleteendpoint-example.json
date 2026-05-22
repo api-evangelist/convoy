@@ -1,0 +1,6 @@
+{
+  "operationId": "DeleteEndpoint",
+  "method": "DELETE",
+  "path": "/v1/projects/{projectID}/endpoints/{endpointID}",
+  "summary": "Delete endpoint"
+}

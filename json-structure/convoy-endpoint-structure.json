@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-structure.org/draft/2024-01/structure",
+  "$id": "https://api-evangelist.github.io/convoy/json-structure/convoy-endpoint-structure.json",
+  "title": "Convoy Endpoint",
+  "description": "A configured destination URL that receives webhook events from a Convoy project.",
+  "type": "object",
+  "properties": {
+    "advanced_signatures": {
+      "description": "",
+      "type": "boolean"
+    },
+    "authentication": {
+      "description": "",
+      "type": "object"
+    },
+    "content_type": {
+      "description": "",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "",
+      "type": "string"
+    },
+    "deleted_at": {
+      "description": "",
+      "type": "string"
+    },
+    "description": {
+      "description": "",
+      "type": "string"
+    },
+    "events": {
+      "description": "",
+      "type": "integer"
+    },
+    "failure_rate": {
+      "description": "",
+      "type": "number"
+    },
+    "http_timeout": {
+      "description": "",
+      "type": "integer"
+    },
+    "mtls_client_cert": {
+      "description": "mTLS client certificate configuration"
+    },
+    "name": {
+      "description": "",
+      "type": "string"
+    },
+    "owner_id": {
+      "description": "",
+      "type": "string"
+    },
+    "project_id": {
+      "description": "",
+      "type": "string"
+    },
+    "rate_limit": {
+      "description": "",
+      "type": "integer"
+    },
+    "rate_limit_duration": {
+      "description": "",
+      "type": "integer"
+    },
+    "secrets": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "type": {
+          "type": "object"
+        }
+      }
+    },
+    "slack_webhook_url": {
+      "description": "",
+      "type": "string"
+    },
+    "status": {
+      "description": "",
+      "type": "string",
+      "enum": [
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        },
+        {
+          "type": "object"
+        }
+      ]
+    },
+    "support_email": {
+      "description": "",
+      "type": "string"
+    },
+    "uid": {
+      "description": "",
+      "type": "string"
+    },
+    "updated_at": {
+      "description": "",
+      "type": "string"
+    },
+    "url": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}

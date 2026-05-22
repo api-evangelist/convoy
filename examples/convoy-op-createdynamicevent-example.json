@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateDynamicEvent",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/events/dynamic",
+  "summary": "Dynamic Events"
+}

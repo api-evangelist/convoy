@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/convoy/json-schema/convoy-delivery-attempt-schema.json",
+  "title": "Convoy DeliveryAttempt",
+  "description": "An individual HTTP attempt against a destination endpoint while delivering an event.",
+  "properties": {
+    "api_version": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "deleted_at": {
+      "type": "string"
+    },
+    "endpoint_id": {
+      "type": "string"
+    },
+    "error": {
+      "type": "string"
+    },
+    "http_status": {
+      "type": "string"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "msg_id": {
+      "type": "string"
+    },
+    "project_id": {
+      "type": "string"
+    },
+    "request_http_header": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "response_data": {
+      "type": "string"
+    },
+    "response_http_header": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "uid": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

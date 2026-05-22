@@ -1,0 +1,6 @@
+{
+  "operationId": "LoadSourcesPaged",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/sources",
+  "summary": "List all sources"
+}

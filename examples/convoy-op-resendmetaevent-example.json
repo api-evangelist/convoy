@@ -1,0 +1,6 @@
+{
+  "operationId": "ResendMetaEvent",
+  "method": "PUT",
+  "path": "/v1/projects/{projectID}/meta-events/{metaEventID}/resend",
+  "summary": "Retry meta event"
+}

@@ -1,0 +1,6 @@
+{
+  "operationId": "GetFilter",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/{filterID}",
+  "summary": "Get a filter"
+}

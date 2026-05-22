@@ -1,0 +1,80 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "naftiko": "https://naftiko.com/vocab/",
+    "convoy": "https://api-evangelist.github.io/convoy/json-ld/convoy-context.jsonld#",
+    "openapi": "https://spec.openapis.org/oas/3.0/",
+    "asyncapi": "https://www.asyncapi.com/definitions/",
+
+    "id": "@id",
+    "type": "@type",
+
+    "Endpoint": "convoy:Endpoint",
+    "Event": "convoy:Event",
+    "EventType": "convoy:EventType",
+    "EventDelivery": "convoy:EventDelivery",
+    "DeliveryAttempt": "convoy:DeliveryAttempt",
+    "Subscription": "convoy:Subscription",
+    "Source": "convoy:Source",
+    "PortalLink": "convoy:PortalLink",
+    "Project": "convoy:Project",
+    "Filter": "convoy:Filter",
+    "MetaEvent": "convoy:MetaEvent",
+
+    "uid": "schema:identifier",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": { "@id": "schema:url", "@type": "@id" },
+    "created_at": { "@id": "schema:dateCreated", "@type": "schema:DateTime" },
+    "updated_at": { "@id": "schema:dateModified", "@type": "schema:DateTime" },
+    "owner_id": "schema:owns",
+
+    "event_type": "convoy:eventType",
+    "data": "convoy:payload",
+    "headers": "convoy:headers",
+    "idempotency_key": "convoy:idempotencyKey",
+
+    "endpoint_id": { "@id": "convoy:endpoint", "@type": "@id" },
+    "subscription_id": { "@id": "convoy:subscription", "@type": "@id" },
+    "source_id": { "@id": "convoy:source", "@type": "@id" },
+    "event_id": { "@id": "convoy:event", "@type": "@id" },
+    "msg_id": { "@id": "convoy:message", "@type": "@id" },
+
+    "status": "convoy:status",
+    "metadata": "convoy:metadata",
+    "num_trials": "convoy:numTrials",
+    "retry_limit": "convoy:retryLimit",
+    "next_send_time": { "@id": "convoy:nextSendTime", "@type": "schema:DateTime" },
+
+    "rate_limit": "convoy:rateLimit",
+    "rate_limit_duration": "convoy:rateLimitDuration",
+    "http_timeout": "convoy:httpTimeout",
+    "advanced_signatures": "convoy:advancedSignatures",
+    "secrets": "convoy:secrets",
+
+    "filter_config": "convoy:filterConfig",
+    "alert_config": "convoy:alertConfig",
+    "retry_config": "convoy:retryConfig",
+    "rate_limit_config": "convoy:rateLimitConfig",
+
+    "verifier": "convoy:verifier",
+    "provider": "convoy:provider",
+    "type": "convoy:sourceType",
+    "is_disabled": "convoy:disabled",
+
+    "method": "schema:httpMethod",
+    "ip_address": "schema:Place",
+    "http_status": "convoy:httpStatus",
+    "api_version": "convoy:apiVersion",
+    "response_data": "convoy:responseBody",
+    "request_http_header": "convoy:requestHeaders",
+    "response_http_header": "convoy:responseHeaders",
+    "error": "schema:error",
+
+    "endpoints": { "@id": "convoy:endpoints", "@type": "@id", "@container": "@set" },
+    "token": "convoy:token",
+    "auth_key": "convoy:authKey",
+    "can_manage_endpoint": "convoy:canManageEndpoint"
+  }
+}

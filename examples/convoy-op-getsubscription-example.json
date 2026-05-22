@@ -1,0 +1,6 @@
+{
+  "operationId": "GetSubscription",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}",
+  "summary": "Retrieve a subscription"
+}

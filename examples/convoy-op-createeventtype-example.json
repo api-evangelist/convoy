@@ -1,0 +1,6 @@
+{
+  "operationId": "CreateEventType",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/event-types",
+  "summary": "Create an event type"
+}

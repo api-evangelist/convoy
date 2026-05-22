@@ -1,0 +1,6 @@
+{
+  "operationId": "GetSource",
+  "method": "GET",
+  "path": "/v1/projects/{projectID}/sources/{sourceID}",
+  "summary": "Retrieve a source"
+}

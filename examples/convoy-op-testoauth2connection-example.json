@@ -1,0 +1,6 @@
+{
+  "operationId": "TestOAuth2Connection",
+  "method": "POST",
+  "path": "/v1/projects/{projectID}/endpoints/oauth2/test",
+  "summary": "Test OAuth2 connection"
+}

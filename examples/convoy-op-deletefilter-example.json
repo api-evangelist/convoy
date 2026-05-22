@@ -1,0 +1,6 @@
+{
+  "operationId": "DeleteFilter",
+  "method": "DELETE",
+  "path": "/v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/{filterID}",
+  "summary": "Delete a filter"
+}
