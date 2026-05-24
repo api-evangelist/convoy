@@ -262,3 +262,5 @@ common:
       - Maple
       - Mono
       - Xendit
+  - type: LLMsTxt
+    url: https://eu.getconvoy.cloud/llms.txt
