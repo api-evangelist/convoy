@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Attach Filter to Subscription
+  summary: Create a subscription, attach a body-matching filter, and confirm the filter list.
+  description: >-
+    Adds fine-grained payload filtering on top of a subscription. The flow
+    creates a subscription bound to an endpoint, attaches a filter that matches
+    a specific event type with optional body criteria, and lists the filters on
+    the subscription to confirm the filter was stored. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: attach-filter-to-subscription
+  summary: Create a subscription, add an event-type filter, and list its filters.
+  description: >-
+    Creates a subscription bound to an endpoint, attaches a filter matching a
+    specific event type with optional body criteria, and lists the
+    subscription's filters to confirm the new filter.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - endpointId
+    - subscriptionName
+    - eventType
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      endpointId:
+        type: string
+        description: Existing destination endpoint the subscription routes events to.
+      subscriptionName:
+        type: string
+        description: Name for the new subscription.
+      eventType:
+        type: string
+        description: Event type the filter applies to (e.g. invoice.paid).
+      filterBody:
+        type: object
+        description: Optional body matching criteria for the filter.
+  steps:
+  - stepId: createSubscription
+    description: >-
+      Create a subscription bound to the supplied endpoint.
+    operationId: CreateSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.subscriptionName
+        endpoint_id: $inputs.endpointId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionId: $response.body#/data/uid
+  - stepId: createFilter
+    description: >-
+      Attach a filter matching the supplied event type with optional body
+      criteria to the subscription.
+    operationId: CreateFilter
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: subscriptionID
+      in: path
+      value: $steps.createSubscription.outputs.subscriptionId
+    requestBody:
+      contentType: application/json
+      payload:
+        event_type: $inputs.eventType
+        body: $inputs.filterBody
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      filterId: $response.body#/data/0/uid
+  - stepId: listFilters
+    description: >-
+      List the filters on the subscription to confirm the new filter was
+      stored.
+    operationId: GetFilters
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: subscriptionID
+      in: path
+      value: $steps.createSubscription.outputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstFilterEventType: $response.body#/data/0/event_type
+  outputs:
+    subscriptionId: $steps.createSubscription.outputs.subscriptionId
+    filterId: $steps.createFilter.outputs.filterId

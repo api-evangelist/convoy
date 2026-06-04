@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Retry a Failed Delivery
+  summary: Find a failed event delivery, retry it, and inspect the resulting delivery attempts.
+  description: >-
+    A targeted remediation flow for a single failed webhook delivery. It lists
+    failed event deliveries for the project, branches only when a failure
+    exists, retries the first matched delivery, and then reads the delivery
+    attempts to inspect the retry outcome. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: retry-failed-delivery
+  summary: Locate a failed delivery, retry it, and review its delivery attempts.
+  description: >-
+    Lists event deliveries filtered to the Failure status, branches when a
+    failed delivery is found, retries that delivery, and lists the delivery
+    attempts so the retry result can be inspected.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+  steps:
+  - stepId: findFailedDelivery
+    description: >-
+      List event deliveries filtered to the Failure status and branch only when
+      a failed delivery is found.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: status
+      in: query
+      value:
+      - Failure
+    - name: perPage
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failedDeliveryId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: failureFound
+      type: goto
+      stepId: retryDelivery
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: retryDelivery
+    description: >-
+      Retry the matched failed event delivery.
+    operationId: ResendEventDelivery
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $steps.findFailedDelivery.outputs.failedDeliveryId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deliveryStatus: $response.body#/data/status
+  - stepId: inspectAttempts
+    description: >-
+      List the delivery attempts for the retried delivery to inspect the
+      outcome of the retry.
+    operationId: GetDeliveryAttempts
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $steps.findFailedDelivery.outputs.failedDeliveryId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestAttemptStatus: $response.body#/data/0/status
+      latestAttemptHttpStatus: $response.body#/data/0/http_status
+  outputs:
+    failedDeliveryId: $steps.findFailedDelivery.outputs.failedDeliveryId
+    deliveryStatus: $steps.retryDelivery.outputs.deliveryStatus
+    latestAttemptHttpStatus: $steps.inspectAttempts.outputs.latestAttemptHttpStatus

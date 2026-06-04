@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Inspect Delivery Attempts
+  summary: Retrieve an event delivery, list its attempts, and drill into a single attempt.
+  description: >-
+    A read-only debugging flow for a single webhook delivery. It fetches an
+    event delivery to confirm it exists and read its status, lists every
+    delivery attempt made for it, and then retrieves the full detail of the
+    first attempt including request and response headers. Every step spells out
+    its request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inspect-delivery-attempts
+  summary: Fetch a delivery, list its attempts, and drill into the first attempt.
+  description: >-
+    Retrieves a specific event delivery and its status, lists the delivery
+    attempts made for it, and fetches the detail of the first attempt for
+    request and response inspection.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - eventDeliveryID
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      eventDeliveryID:
+        type: string
+        description: The event delivery to inspect.
+  steps:
+  - stepId: getDelivery
+    description: >-
+      Fetch the event delivery to confirm it exists and read its current
+      status.
+    operationId: GetEventDelivery
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $inputs.eventDeliveryID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deliveryStatus: $response.body#/data/status
+      eventId: $response.body#/data/event_id
+  - stepId: listAttempts
+    description: >-
+      List every delivery attempt recorded for the event delivery.
+    operationId: GetDeliveryAttempts
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $inputs.eventDeliveryID
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstAttemptId: $response.body#/data/0/uid
+  - stepId: getAttempt
+    description: >-
+      Retrieve the full detail of the first delivery attempt, including request
+      and response headers and the response body.
+    operationId: GetDeliveryAttempt
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $inputs.eventDeliveryID
+    - name: deliveryAttemptID
+      in: path
+      value: $steps.listAttempts.outputs.firstAttemptId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      attemptHttpStatus: $response.body#/data/http_status
+      attemptError: $response.body#/data/error
+  outputs:
+    deliveryStatus: $steps.getDelivery.outputs.deliveryStatus
+    firstAttemptId: $steps.listAttempts.outputs.firstAttemptId
+    attemptHttpStatus: $steps.getAttempt.outputs.attemptHttpStatus

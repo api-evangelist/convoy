@@ -1,0 +1,119 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Create Event and Trace Delivery
+  summary: Publish an event to an endpoint, find its delivery, and read the delivery attempts.
+  description: >-
+    A targeted observability flow for a single dispatched event. It publishes
+    an event addressed to a specific endpoint, lists the event deliveries
+    filtered to that event ID to find the resulting delivery, and reads the
+    delivery attempts to confirm the HTTP outcome at the destination. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-event-and-trace-delivery
+  summary: Create an event, locate its delivery, and read the delivery attempts.
+  description: >-
+    Publishes an event to a specific endpoint, lists the event deliveries
+    filtered to that event ID to locate the delivery, and reads its delivery
+    attempts to confirm the HTTP outcome.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - endpointId
+    - eventType
+    - eventData
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      endpointId:
+        type: string
+        description: The endpoint the event is addressed to.
+      eventType:
+        type: string
+        description: Event type used for filtering and debugging (e.g. invoice.paid).
+      eventData:
+        type: object
+        description: Arbitrary JSON payload sent as the webhook body.
+  steps:
+  - stepId: createEvent
+    description: >-
+      Publish an event addressed to the supplied endpoint.
+    operationId: CreateEndpointEvent
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        endpoint_id: $inputs.endpointId
+        event_type: $inputs.eventType
+        data: $inputs.eventData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      eventId: $response.body#/data/uid
+  - stepId: findDelivery
+    description: >-
+      List the event deliveries filtered to the new event ID to find the
+      resulting delivery, branching only when a delivery exists.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventId
+      in: query
+      value: $steps.createEvent.outputs.eventId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deliveryId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: deliveryFound
+      type: goto
+      stepId: readAttempts
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: readAttempts
+    description: >-
+      Read the delivery attempts for the located delivery to confirm the HTTP
+      outcome at the destination endpoint.
+    operationId: GetDeliveryAttempts
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventDeliveryID
+      in: path
+      value: $steps.findDelivery.outputs.deliveryId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstAttemptHttpStatus: $response.body#/data/0/http_status
+  outputs:
+    eventId: $steps.createEvent.outputs.eventId
+    deliveryId: $steps.findDelivery.outputs.deliveryId
+    firstAttemptHttpStatus: $steps.readAttempts.outputs.firstAttemptHttpStatus

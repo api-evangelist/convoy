@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Register Incoming Source
+  summary: Create an HMAC-verified incoming source and subscribe it to an endpoint.
+  description: >-
+    The standard pattern for an incoming webhooks project. It creates a source
+    that ingests and HMAC-verifies events from an upstream provider, attaches a
+    subscription that binds that source to a destination endpoint, and reads
+    the subscription back to confirm the binding. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: register-incoming-source
+  summary: Create a verified source, subscribe it to an endpoint, and confirm the binding.
+  description: >-
+    Registers an HMAC-verified HTTP source for ingesting upstream webhooks,
+    creates a subscription that connects the source to a destination endpoint,
+    and retrieves the subscription to confirm the source binding.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - sourceName
+    - hmacSecret
+    - hmacHeader
+    - endpointId
+    - subscriptionName
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier the source belongs to.
+      sourceName:
+        type: string
+        description: Human-readable name for the incoming source.
+      hmacSecret:
+        type: string
+        description: Shared secret used to HMAC-verify inbound webhook requests.
+      hmacHeader:
+        type: string
+        description: Request header carrying the HMAC signature (e.g. X-Hub-Signature).
+      endpointId:
+        type: string
+        description: Existing destination endpoint the source should route events to.
+      subscriptionName:
+        type: string
+        description: Name for the subscription binding the source to the endpoint.
+  steps:
+  - stepId: createSource
+    description: >-
+      Create an HTTP source with an HMAC verifier so inbound webhook requests
+      are authenticated before ingestion.
+    operationId: CreateSource
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.sourceName
+        type: http
+        verifier:
+          type: hmac
+          hmac:
+            encoding: hex
+            hash: SHA256
+            header: $inputs.hmacHeader
+            secret: $inputs.hmacSecret
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      sourceId: $response.body#/data/uid
+      maskId: $response.body#/data/mask_id
+  - stepId: subscribeSource
+    description: >-
+      Create a subscription that connects the verified source to the supplied
+      destination endpoint.
+    operationId: CreateSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.subscriptionName
+        source_id: $steps.createSource.outputs.sourceId
+        endpoint_id: $inputs.endpointId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionId: $response.body#/data/uid
+  - stepId: confirmSubscription
+    description: >-
+      Retrieve the subscription to confirm the source binding and endpoint
+      routing were stored correctly.
+    operationId: GetSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: subscriptionID
+      in: path
+      value: $steps.subscribeSource.outputs.subscriptionId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscriptionName: $response.body#/data/name
+  outputs:
+    sourceId: $steps.createSource.outputs.sourceId
+    maskId: $steps.createSource.outputs.maskId
+    subscriptionId: $steps.subscribeSource.outputs.subscriptionId

@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Define Event Type and Subscribe
+  summary: Define a project event type, create an endpoint, and subscribe filtered to that type.
+  description: >-
+    Establishes a typed webhook pipeline. It defines a new event type for the
+    project, registers a destination endpoint, and creates a subscription whose
+    filter configuration only routes events of the new type to that endpoint.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: define-event-type-and-subscribe
+  summary: Create an event type, an endpoint, and a subscription filtered to that type.
+  description: >-
+    Creates a project event type, registers a destination endpoint, and creates
+    a subscription whose filter configuration matches only the new event type,
+    routing those events to the endpoint.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - eventTypeName
+    - endpointName
+    - endpointUrl
+    - subscriptionName
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      eventTypeName:
+        type: string
+        description: The event type name to define (e.g. invoice.created).
+      endpointName:
+        type: string
+        description: Human-readable name for the new webhook endpoint.
+      endpointUrl:
+        type: string
+        description: HTTPS URL Convoy will deliver webhooks to.
+      subscriptionName:
+        type: string
+        description: Name for the subscription filtered to the new event type.
+  steps:
+  - stepId: createEventType
+    description: >-
+      Define a new event type for the project so subscriptions can filter on
+      it.
+    operationId: CreateEventType
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      eventTypeId: $response.body#/data/uid
+      eventTypeName: $response.body#/data/name
+  - stepId: createEndpoint
+    description: >-
+      Register the destination endpoint that will receive events of the new
+      type.
+    operationId: CreateEndpoint
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.endpointName
+        url: $inputs.endpointUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      endpointId: $response.body#/data/uid
+  - stepId: createTypedSubscription
+    description: >-
+      Create a subscription whose filter configuration routes only events of
+      the new type to the endpoint.
+    operationId: CreateSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.subscriptionName
+        endpoint_id: $steps.createEndpoint.outputs.endpointId
+        filter_config:
+          event_types:
+          - $steps.createEventType.outputs.eventTypeName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionId: $response.body#/data/uid
+  outputs:
+    eventTypeId: $steps.createEventType.outputs.eventTypeId
+    endpointId: $steps.createEndpoint.outputs.endpointId
+    subscriptionId: $steps.createTypedSubscription.outputs.subscriptionId

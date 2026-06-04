@@ -1,0 +1,117 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Fan Out Event to Owner
+  summary: Confirm endpoints exist for an owner, fan out an event to them, and verify it landed.
+  description: >-
+    Convoy groups endpoints under a shared owner ID to support fanout. This
+    flow first lists the endpoints registered against an owner ID, fans out a
+    single event to every endpoint owned by that ID, and then lists recent
+    events to confirm the broadcast was accepted. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: fanout-event-to-owner
+  summary: List an owner's endpoints, fan out an event to them, and confirm it.
+  description: >-
+    Verifies that at least one endpoint is registered against the supplied
+    owner ID, fans out an event to all endpoints sharing that owner ID, and
+    lists recent events to confirm the fanout was accepted.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - ownerId
+    - eventType
+    - eventData
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      ownerId:
+        type: string
+        description: The owner ID grouping the endpoints that should receive the fanout.
+      eventType:
+        type: string
+        description: Event type used for filtering and debugging (e.g. invoice.paid).
+      eventData:
+        type: object
+        description: Arbitrary JSON payload sent as the webhook body to every endpoint.
+  steps:
+  - stepId: listOwnerEndpoints
+    description: >-
+      List the endpoints registered against the owner ID, branching only when
+      at least one endpoint exists to receive the fanout.
+    operationId: GetEndpoints
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: ownerId
+      in: query
+      value: $inputs.ownerId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstEndpointId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: endpointsExist
+      type: goto
+      stepId: fanoutEvent
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: fanoutEvent
+    description: >-
+      Fan out a single event to all endpoints that share the supplied owner ID.
+    operationId: CreateEndpointFanoutEvent
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        owner_id: $inputs.ownerId
+        event_type: $inputs.eventType
+        data: $inputs.eventData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      message: $response.body#/message
+  - stepId: confirmEvents
+    description: >-
+      List recent events for the project to confirm the fanout produced events.
+    operationId: GetEventsPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: perPage
+      in: query
+      value: 20
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestEventId: $response.body#/data/content/0/uid
+  outputs:
+    firstEndpointId: $steps.listOwnerEndpoints.outputs.firstEndpointId
+    latestEventId: $steps.confirmEvents.outputs.latestEventId

@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Replay Event
+  summary: Pick a recent event, replay it as a fresh event, and trace the new deliveries.
+  description: >-
+    Replays a previously ingested event as though it were brand new, generating
+    a fresh set of deliveries to its matching subscriptions. The flow lists
+    recent events to choose one, replays it, and then lists the event
+    deliveries filtered to that event ID to trace the replay. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: replay-event
+  summary: List recent events, replay the latest, and trace its new deliveries.
+  description: >-
+    Lists recent events, replays the most recent event as a fresh event, and
+    lists the event deliveries filtered to that event ID to trace the resulting
+    deliveries.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+  steps:
+  - stepId: listEvents
+    description: >-
+      List recent events for the project and branch only when at least one
+      event exists to replay.
+    operationId: GetEventsPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: perPage
+      in: query
+      value: 1
+    - name: sort
+      in: query
+      value: DESC
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      eventId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: eventFound
+      type: goto
+      stepId: replayEvent
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: replayEvent
+    description: >-
+      Replay the selected event as a fresh event, regenerating deliveries to
+      its matching subscriptions.
+    operationId: ReplayEndpointEvent
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventID
+      in: path
+      value: $steps.listEvents.outputs.eventId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      replayedEventId: $response.body#/data/uid
+  - stepId: traceDeliveries
+    description: >-
+      List the event deliveries filtered to the original event ID to trace the
+      deliveries produced by the replay.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: eventId
+      in: query
+      value: $steps.listEvents.outputs.eventId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestDeliveryId: $response.body#/data/content/0/uid
+  outputs:
+    eventId: $steps.listEvents.outputs.eventId
+    replayedEventId: $steps.replayEvent.outputs.replayedEventId
+    latestDeliveryId: $steps.traceDeliveries.outputs.latestDeliveryId

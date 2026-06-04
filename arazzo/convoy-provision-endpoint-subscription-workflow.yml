@@ -1,0 +1,144 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Provision Endpoint and Subscription
+  summary: Stand up a webhook endpoint, subscribe it, send a first event, and confirm delivery.
+  description: >-
+    The core onboarding flow for an outgoing webhooks project in Convoy. It
+    creates a destination endpoint, attaches an API subscription that routes
+    events to that endpoint, publishes a first event scoped to the endpoint,
+    and then lists the resulting event deliveries so the integration can be
+    confirmed end to end. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-endpoint-subscription
+  summary: Create an endpoint, subscribe it, publish an event, and verify delivery.
+  description: >-
+    Registers a new webhook endpoint in the project, creates a subscription
+    that forwards events to it, sends a single event to that endpoint, and
+    lists the event deliveries generated for the endpoint.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - endpointName
+    - endpointUrl
+    - subscriptionName
+    - eventType
+    - eventData
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier the endpoint belongs to.
+      endpointName:
+        type: string
+        description: Human-readable name for the new webhook endpoint.
+      endpointUrl:
+        type: string
+        description: HTTPS URL Convoy will deliver webhooks to.
+      subscriptionName:
+        type: string
+        description: Name for the subscription that routes events to the endpoint.
+      eventType:
+        type: string
+        description: Event type used for filtering and debugging (e.g. invoice.paid).
+      eventData:
+        type: object
+        description: Arbitrary JSON payload sent as the webhook body.
+  steps:
+  - stepId: createEndpoint
+    description: >-
+      Register a new outgoing webhook endpoint in the project with the supplied
+      name and HTTPS URL.
+    operationId: CreateEndpoint
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.endpointName
+        url: $inputs.endpointUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      endpointId: $response.body#/data/uid
+  - stepId: createSubscription
+    description: >-
+      Create an API subscription that forwards matching events to the newly
+      created endpoint.
+    operationId: CreateSubscription
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.subscriptionName
+        endpoint_id: $steps.createEndpoint.outputs.endpointId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionId: $response.body#/data/uid
+  - stepId: createEvent
+    description: >-
+      Publish a first event addressed to the new endpoint so the subscription
+      can route it.
+    operationId: CreateEndpointEvent
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        endpoint_id: $steps.createEndpoint.outputs.endpointId
+        event_type: $inputs.eventType
+        data: $inputs.eventData
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      eventId: $response.body#/data/uid
+  - stepId: listDeliveries
+    description: >-
+      List the event deliveries generated for the endpoint to confirm the event
+      was dispatched.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: endpointId
+      in: query
+      value: $steps.createEndpoint.outputs.endpointId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deliveryId: $response.body#/data/content/0/uid
+  outputs:
+    endpointId: $steps.createEndpoint.outputs.endpointId
+    subscriptionId: $steps.createSubscription.outputs.subscriptionId
+    eventId: $steps.createEvent.outputs.eventId
+    deliveryId: $steps.listDeliveries.outputs.deliveryId

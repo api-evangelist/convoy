@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Force Resend Successful Deliveries
+  summary: Find a recent successful delivery for an endpoint and force resend it by ID.
+  description: >-
+    Force resend re-fires a previously successful event delivery, which is
+    useful when a downstream consumer lost data despite an earlier success.
+    This flow lists successful deliveries for an endpoint, branches only when
+    one is found, and force resends that specific delivery by its ID. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: force-resend-deliveries
+  summary: Locate a successful delivery for an endpoint and force resend it by ID.
+  description: >-
+    Lists successful event deliveries for an endpoint, branches when one is
+    present, and force resends that delivery by passing its ID to the force
+    resend endpoint.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - endpointId
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      endpointId:
+        type: string
+        description: The endpoint whose successful delivery should be force resent.
+  steps:
+  - stepId: findSuccess
+    description: >-
+      List successful event deliveries for the endpoint and branch only when at
+      least one is found.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: endpointId
+      in: query
+      value:
+      - $inputs.endpointId
+    - name: status
+      in: query
+      value:
+      - Success
+    - name: perPage
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      successDeliveryId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: successFound
+      type: goto
+      stepId: forceResend
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: forceResend
+    description: >-
+      Force resend the matched successful delivery by supplying its ID in the
+      ids array.
+    operationId: ForceResendEventDeliveries
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    requestBody:
+      contentType: application/json
+      payload:
+        ids:
+        - $steps.findSuccess.outputs.successDeliveryId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      message: $response.body#/message
+  outputs:
+    successDeliveryId: $steps.findSuccess.outputs.successDeliveryId
+    forceResendMessage: $steps.forceResend.outputs.message

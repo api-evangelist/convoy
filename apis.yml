@@ -117,6 +117,45 @@ apis:
         url: https://getconvoy.io/docs
 
 common:
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+    - url: arazzo/convoy-attach-filter-to-subscription-workflow.yml
+      name: Convoy Attach Filter to Subscription
+      summary: Create a subscription, attach a body-matching filter, and confirm the filter list.
+    - url: arazzo/convoy-batch-retry-failed-deliveries-workflow.yml
+      name: Convoy Batch Retry Failed Deliveries
+      summary: Detect failed deliveries for an endpoint and batch retry them in one call.
+    - url: arazzo/convoy-broadcast-event-and-track-workflow.yml
+      name: Convoy Broadcast Event and Track
+      summary: Broadcast an event to all matching subscriptions and trace the resulting event.
+    - url: arazzo/convoy-create-event-and-trace-delivery-workflow.yml
+      name: Convoy Create Event and Trace Delivery
+      summary: Publish an event to an endpoint, find its delivery, and read the delivery attempts.
+    - url: arazzo/convoy-define-event-type-and-subscribe-workflow.yml
+      name: Convoy Define Event Type and Subscribe
+      summary: Define a project event type, create an endpoint, and subscribe filtered to that type.
+    - url: arazzo/convoy-fanout-event-to-owner-workflow.yml
+      name: Convoy Fan Out Event to Owner
+      summary: Confirm endpoints exist for an owner, fan out an event to them, and verify it landed.
+    - url: arazzo/convoy-force-resend-deliveries-workflow.yml
+      name: Convoy Force Resend Successful Deliveries
+      summary: Find a recent successful delivery for an endpoint and force resend it by ID.
+    - url: arazzo/convoy-inspect-delivery-attempts-workflow.yml
+      name: Convoy Inspect Delivery Attempts
+      summary: Retrieve an event delivery, list its attempts, and drill into a single attempt.
+    - url: arazzo/convoy-provision-endpoint-subscription-workflow.yml
+      name: Convoy Provision Endpoint and Subscription
+      summary: Stand up a webhook endpoint, subscribe it, send a first event, and confirm delivery.
+    - url: arazzo/convoy-register-incoming-source-workflow.yml
+      name: Convoy Register Incoming Source
+      summary: Create an HMAC-verified incoming source and subscribe it to an endpoint.
+    - url: arazzo/convoy-replay-event-workflow.yml
+      name: Convoy Replay Event
+      summary: Pick a recent event, replay it as a fresh event, and trace the new deliveries.
+    - url: arazzo/convoy-retry-failed-delivery-workflow.yml
+      name: Convoy Retry a Failed Delivery
+      summary: Find a failed event delivery, retry it, and inspect the resulting delivery attempts.
   - type: Portal
     url: https://getconvoy.io
   - type: DeveloperPortal

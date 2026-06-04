@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: Convoy Batch Retry Failed Deliveries
+  summary: Detect failed deliveries for an endpoint and batch retry them in one call.
+  description: >-
+    A bulk remediation flow for an endpoint that has accumulated failed
+    deliveries. It lists failed event deliveries scoped to a single endpoint,
+    branches only when failures exist, and then issues a batch retry that
+    reprocesses every delivery matching the same endpoint and Failure status
+    filter. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: convoyApi
+  url: ../openapi/convoy-openapi.yml
+  type: openapi
+workflows:
+- workflowId: batch-retry-failed-deliveries
+  summary: Find failed deliveries for an endpoint and batch retry them.
+  description: >-
+    Lists failed event deliveries for a single endpoint, branches when at least
+    one failure is present, and batch retries all deliveries matching that
+    endpoint and the Failure status.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - projectID
+    - endpointId
+    properties:
+      apiKey:
+        type: string
+        description: Convoy API key used as the Bearer token on the Authorization header.
+      projectID:
+        type: string
+        description: The Convoy project identifier.
+      endpointId:
+        type: string
+        description: The endpoint whose failed deliveries should be batch retried.
+  steps:
+  - stepId: findFailures
+    description: >-
+      List failed event deliveries for the endpoint and branch only when at
+      least one failure is found.
+    operationId: GetEventDeliveriesPaged
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: endpointId
+      in: query
+      value:
+      - $inputs.endpointId
+    - name: status
+      in: query
+      value:
+      - Failure
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstFailedId: $response.body#/data/content/0/uid
+    onSuccess:
+    - name: failuresFound
+      type: goto
+      stepId: batchRetry
+      criteria:
+      - context: $response.body
+        condition: $.data.content.length > 0
+        type: jsonpath
+  - stepId: batchRetry
+    description: >-
+      Batch retry every event delivery matching the endpoint and the Failure
+      status filter.
+    operationId: BatchRetryEventDelivery
+    parameters:
+    - name: Authorization
+      in: header
+      value: Bearer $inputs.apiKey
+    - name: projectID
+      in: path
+      value: $inputs.projectID
+    - name: endpointId
+      in: query
+      value:
+      - $inputs.endpointId
+    - name: status
+      in: query
+      value:
+      - Failure
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      message: $response.body#/message
+  outputs:
+    firstFailedId: $steps.findFailures.outputs.firstFailedId
+    batchRetryMessage: $steps.batchRetry.outputs.message
