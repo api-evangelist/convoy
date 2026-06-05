@@ -1,162 +1,110 @@
-# Convoy
+# Convoy (convoy)
 
-> The Cloud Native Webhooks Gateway — open-source plus managed Cloud.
+Convoy is an open-source, cloud-native webhooks gateway used to securely ingest, persist, debug, deliver, and manage events. It positions itself as "the complete solution for secure, scalable, and reliable webhook delivery," covering both outbound (sending) and inbound (receiving) webhooks with retries, payload signing, fan-out, rate limiting, message broker ingestion, and customer-facing portals. Convoy is offered as a self-hosted open-source project (Elastic License v2.0, with the OpenAPI spec under MPL 2.0) and a fully managed cloud service in US and EU regions.
 
-[Convoy](https://getconvoy.io) is an open-source, cloud-native **webhooks gateway** for both sending and receiving webhooks. It positions itself as "the complete solution for secure, scalable, and reliable webhook delivery" and is used in production by Neynar, Spruce Health, Marble, Source.ag, Maple, Mono, Xendit, and others. This API Evangelist repository profiles the Convoy provider — its API surface, SDKs, OSS distribution, cloud pricing, rate-limit policy, and FinOps alignment.
+**APIs.json:** [https://github.com/api-evangelist/convoy](https://github.com/api-evangelist/convoy)
 
-The upstream Convoy project lives at [`github.com/frain-dev/convoy`](https://github.com/frain-dev/convoy) (Go, Elastic License v2.0, 2,805+ stars). The Convoy REST API spec itself is published under MPL 2.0.
+## Scope
 
-## At a Glance
+- **Type:** Index
 
-| Field | Value |
-|---|---|
-| Provider | Convoy (Frain Technologies) |
-| Type | Company — OSS + managed Cloud |
-| API style | REST, OpenAPI 3.0.0 |
-| Spec version | 26.3.5 |
-| Operations | 44 across 11 tags |
-| Regions | US (`us.getconvoy.cloud`), EU (`eu.getconvoy.cloud`) |
-| Authentication | Bearer API key in `Authorization` header |
-| OSS license | Elastic License v2.0 |
-| API spec license | Mozilla Public License 2.0 |
-| Status page | <https://status.getconvoy.io> |
-| Changelog | <https://getconvoy.io/changelog> |
+## Tags
 
-## What's in this Repo
+- Webhooks
+- Webhook Gateway
+- Event Delivery
+- Eventing
+- Messaging
+- Integration
+- API Infrastructure
 
-| Path | Purpose |
-|---|---|
-| [`apis.yml`](./apis.yml) | API Evangelist index of the Convoy API and all common provider properties. |
-| [`openapi/convoy-openapi.yml`](./openapi/convoy-openapi.yml) | Title-cased copy of the Convoy OpenAPI 3.0.0 spec (44 paths, 123 schemas). |
-| [`capabilities/`](./capabilities/) | 11 self-contained Naftiko capability files — one per OpenAPI tag. |
-| [`json-schema/`](./json-schema/) | 8 standalone JSON Schemas for the core Convoy entities. |
-| [`json-structure/`](./json-structure/) | 8 JSON Structure docs for the same entities. |
-| [`json-ld/convoy-context.jsonld`](./json-ld/convoy-context.jsonld) | JSON-LD context aligning Convoy nouns with schema.org. |
-| [`examples/`](./examples/) | 68 JSON examples: 8 entity examples + 60 operation examples. |
-| [`rules/convoy-rules.yml`](./rules/convoy-rules.yml) | Spectral ruleset enforcing Convoy's API conventions. |
-| [`vocabulary/convoy-vocabulary.yml`](./vocabulary/convoy-vocabulary.yml) | Operational + capability vocabulary for the Convoy domain. |
-| [`plans/convoy-plans-pricing.yml`](./plans/convoy-plans-pricing.yml) | API Commons Plans 0.1 description of Self-Hosted, Pro, and Enterprise tiers. |
-| [`rate-limits/convoy-rate-limits.yml`](./rate-limits/convoy-rate-limits.yml) | API Commons Rate Limits 0.1 — Pro cap, endpoint and subscription throttles, retry backoff. |
-| [`finops/convoy-finops.yml`](./finops/convoy-finops.yml) | FOCUS-aligned FinOps mapping of the Convoy billing surface. |
+## Timestamps
 
-## The Convoy API
+- **Created:** 2026-05-22
+- **Modified:** 2026-05-22
 
-Convoy exposes a single project-scoped REST API at `/v1/projects/{projectID}/...`. The OpenAPI spec lists **44 operations across 11 tags**:
+## APIs
 
-| Tag | Operations | What it does |
-|---|---:|---|
-| Endpoints | 9 | Create / list / update / delete / activate / pause endpoints; roll signing secrets; test OAuth2. |
-| Events | 8 | Ingest events; fan-out, broadcast, dynamic, replay, batch replay. |
-| Subscriptions | 8 | Wire sources/filters to endpoints; test filter and transform functions. |
-| Filters | 8 | Per-subscription header/body filter CRUD plus bulk + test. |
-| Portal Links | 6 | Issue, refresh, and revoke embeddable customer-facing dashboard links. |
-| Sources | 5 | Manage HTTP/REST/broker ingest sources; test verification function. |
-| Event Types | 5 | Declare event types, import from OpenAPI, deprecate. |
-| Event Deliveries | 5 | List/retrieve deliveries, batch retry, force resend, single retry. |
-| Meta Events | 3 | Read and resend platform meta-events. |
-| Delivery Attempts | 2 | List and retrieve raw HTTP attempts behind a delivery. |
-| Onboard | 1 | Bootstrap project source + endpoint + subscription. |
+### Convoy API
 
-Servers are split into two independently-deployed regions:
+The Convoy REST API, version 26.3.5, exposes 44 operations across 11 resource groups for managing webhook delivery infrastructure: Subscriptions, Endpoints, Events, Sources, Event Deliveries, Delivery Attempts, Portal Links, Meta Events, Event Types, Filters, and Onboard. All operations are scoped to a project (`/v1/projects/{projectID}/...`) and authenticated via Bearer API key in the Authorization header. The managed cloud is split into independently-deployed US and EU regions.
 
-```
-https://us.getconvoy.cloud/api    # US Region
-https://eu.getconvoy.cloud/api    # EU Region
-```
+- **Human URL:** [https://getconvoy.io/docs/api-reference/welcome](https://getconvoy.io/docs/api-reference/welcome)
+- **Base URL:** `https://us.getconvoy.cloud/api`
 
-Authentication is a Bearer API key:
+#### Tags
 
-```
-Authorization: Bearer {your_convoy_api_key}
-```
+- Webhooks
+- Event Delivery
+- API Gateway
+- Subscriptions
+- Endpoints
 
-## Core Capabilities
+#### Properties
 
-From the Convoy README and product docs:
+- [OpenAPI](https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [OpenAPI](./openapi/convoy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/convoy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/convoy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [API Reference](https://getconvoy.io/docs/api-reference/welcome)
+- [Documentation](https://getconvoy.io/docs/)
+- [Authentication](https://getconvoy.io/docs/api-reference/authentication)
+- [Getting Started](https://getconvoy.io/docs/quickstart)
+- [Regions](https://getconvoy.io/docs)
+- [GitHub Repository](https://github.com/frain-dev/convoy)
+- [Terms of Service](https://getconvoy.io/terms)
+- [JSON Schema](./json-schema/convoy-endpoint-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-event-delivery-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-delivery-attempt-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-subscription-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-source-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-portal-link-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](./json-schema/convoy-event-type-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](./json-ld/convoy-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Spectral Rules](./rules/convoy-rules.yml)
+- [Vocabulary](./vocabulary/convoy-vocabulary.yml)
+- [Examples](./examples/)
 
-- **Outbound and inbound webhooks** in one gateway.
-- **HMAC signing** — simple and advanced (timestamp + versioned) formats, header `X-Convoy-Signature`, hex or base64 encoding, rolling secrets.
-- **Retries** — linear (constant time) or **exponential backoff with jitter**: `min(delaySeconds * 2^attempt, maxRetrySeconds) + jitter`, default cap 7200s, default 20 attempts.
-- **Fan-out routing** by event type or payload structure, with per-endpoint and per-subscription rate limits.
-- **Message broker ingest** — Apache Kafka, Google Cloud Pub/Sub, AWS SQS, and RabbitMQ (AMQP).
-- **Source providers** — GitHub, Shopify, Twitter/X, Mono, and generic HTTP with HMAC, Basic Auth, API Key, or custom JS verification.
-- **OAuth2** (client credentials, JWT client assertion) and **mTLS** client certs for authenticated delivery.
-- **Customer-facing portal links** — iframe-embeddable dashboards scoped to a subset of endpoints.
-- **Observability** — Prometheus + Grafana dashboards published in [`frain-dev/prometheus-grafana-dashboard`](https://github.com/frain-dev/prometheus-grafana-dashboard).
+## Common Properties
 
-## SDKs, CLI, and Tools
-
-Convoy publishes official SDKs in **five languages** under the [frain-dev GitHub org](https://github.com/frain-dev):
-
-| SDK | Repo |
-|---|---|
-| Go | [`convoy-go`](https://github.com/frain-dev/convoy-go) |
-| JavaScript / TypeScript | [`convoy.js`](https://github.com/frain-dev/convoy.js) |
-| Python | [`convoy-python`](https://github.com/frain-dev/convoy-python) |
-| PHP | [`convoy-php`](https://github.com/frain-dev/convoy-php) |
-| Ruby | [`convoy.rb`](https://github.com/frain-dev/convoy.rb) |
-
-Plus:
-
-- [`convoy-cli`](https://github.com/frain-dev/convoy-cli) — debug Convoy events locally.
-- [`homebrew-tools`](https://github.com/frain-dev/homebrew-tools) — Homebrew formulas for Convoy binaries.
-- [`helm-charts`](https://github.com/frain-dev/helm-charts) — Kubernetes Helm charts.
-- [`convoy-ingester`](https://github.com/frain-dev/convoy-ingester) — serverless ingestion function.
-
-## Naftiko Capabilities
-
-One self-contained Naftiko capability file per OpenAPI tag. Each includes its own `consumes` block, REST exposer, and MCP exposer.
-
-| File | Operations |
-|---|---:|
-| [`capabilities/convoy-endpoints.yaml`](./capabilities/convoy-endpoints.yaml) | 9 |
-| [`capabilities/convoy-events.yaml`](./capabilities/convoy-events.yaml) | 8 |
-| [`capabilities/convoy-subscriptions.yaml`](./capabilities/convoy-subscriptions.yaml) | 8 |
-| [`capabilities/convoy-filters.yaml`](./capabilities/convoy-filters.yaml) | 8 |
-| [`capabilities/convoy-portal-links.yaml`](./capabilities/convoy-portal-links.yaml) | 6 |
-| [`capabilities/convoy-sources.yaml`](./capabilities/convoy-sources.yaml) | 5 |
-| [`capabilities/convoy-event-types.yaml`](./capabilities/convoy-event-types.yaml) | 5 |
-| [`capabilities/convoy-event-deliveries.yaml`](./capabilities/convoy-event-deliveries.yaml) | 5 |
-| [`capabilities/convoy-meta-events.yaml`](./capabilities/convoy-meta-events.yaml) | 3 |
-| [`capabilities/convoy-delivery-attempts.yaml`](./capabilities/convoy-delivery-attempts.yaml) | 2 |
-| [`capabilities/convoy-onboard.yaml`](./capabilities/convoy-onboard.yaml) | 1 |
-
-## Cloud Pricing (Reconciled to <https://getconvoy.io/pricing>)
-
-| Plan | Price | Rate | Retention | SLA | Static IPs |
-|---|---|---|---|---|---|
-| **Self-Hosted** | $0 (Elastic License v2.0) | configurable | configurable | self-managed | self-managed |
-| **Pro** | $99 / month | 25 events/sec | 7 days | 99.99% | $100/mo add-on |
-| **Enterprise** | custom | custom | custom | 99.999% | included |
-
-Enterprise adds SAML SSO, SOC 2, VPC peering and private networking, response-time SLA, and solutions engineering. See [`plans/convoy-plans-pricing.yml`](./plans/convoy-plans-pricing.yml) for the API-Commons-formatted artifact.
-
-## Positioning
-
-Among modern webhook-infrastructure providers, Convoy occupies an unusually broad slice:
-
-- **Versus Svix** — both target outbound webhook sending with signing, retries, and portals, but Convoy is the only one of the two that is open-source under a permissive(-ish) Elastic License v2.0 and that also handles inbound webhooks.
-- **Versus Hookdeck** — both handle inbound ingestion with broker fan-out, but Convoy bundles outbound delivery into the same gateway, and offers an OSS distribution.
-- **Versus rolling-your-own** — Convoy ships the parts most teams build poorly: HMAC schemes (advanced with timestamps), retry backoff with jitter, circuit breaking, portal links, and broker bridges.
-
-## Sources
-
-Every claim in this profile traces back to a fetched URL:
-
-- <https://getconvoy.io>
-- <https://getconvoy.io/docs/>
-- <https://getconvoy.io/docs/api-reference/welcome>
-- <https://getconvoy.io/docs/api-reference/authentication>
-- <https://getconvoy.io/docs/product-manual/signatures>
-- <https://getconvoy.io/docs/product-manual/sources>
-- <https://getconvoy.io/docs/webhook-guides/webhook-retries>
-- <https://getconvoy.io/pricing>
-- <https://getconvoy.io/changelog>
-- <https://status.getconvoy.io>
-- <https://github.com/frain-dev>
-- <https://github.com/frain-dev/convoy>
-- <https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json>
-
----
-
-Maintained as part of the [API Evangelist Network](https://github.com/api-evangelist). Last regenerated 2026-05-22 via the API Evangelist `run-pipeline` skill.
+- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
+- [Portal](https://getconvoy.io)
+- [Developer Portal](https://getconvoy.io/docs/)
+- [Documentation](https://getconvoy.io/docs/)
+- [API Reference](https://getconvoy.io/docs/api-reference/welcome)
+- [Getting Started](https://getconvoy.io/docs/quickstart)
+- [Sign Up](https://dashboard.getconvoy.io/signup)
+- [Login](https://dashboard.getconvoy.io/login)
+- [Pricing](https://getconvoy.io/pricing)
+- [Plans](./plans/convoy-plans-pricing.yml)
+- [Rate Limits](./rate-limits/convoy-rate-limits.yml)
+- [Changelog](https://getconvoy.io/changelog)
+- [Blog](https://getconvoy.io/blog)
+- [Status Page](https://status.getconvoy.io)
+- [Security](https://getconvoy.io/docs/product-manual/signatures)
+- [Compliance](https://getconvoy.io/pricing)
+- [Support](mailto:support@getconvoy.io)
+- [Contact](https://getconvoy.io)
+- [GitHub Organization](https://github.com/frain-dev)
+- [GitHub Repository](https://github.com/frain-dev/convoy)
+- [SDK](https://github.com/frain-dev/convoy-go)
+- [SDK](https://github.com/frain-dev/convoy.js)
+- [SDK](https://github.com/frain-dev/convoy-python)
+- [SDK](https://github.com/frain-dev/convoy-php)
+- [SDK](https://github.com/frain-dev/convoy.rb)
+- [C L I](https://github.com/frain-dev/convoy-cli)
+- [C L I](https://github.com/frain-dev/homebrew-tools)
+- [Integrations](https://github.com/frain-dev/helm-charts)
+- [Integrations](https://github.com/frain-dev/prometheus-grafana-dashboard)
+- [Integrations](https://github.com/frain-dev/convoy-ingester)
+- [Code Examples](https://github.com/frain-dev/convoy-playground)
+- [Code Examples](https://github.com/frain-dev/webhooks-with-kafka-demo)
+- [Code Examples](https://github.com/frain-dev/convoy-paystack)
+- [Features](undefined)
+- [Features](undefined)
+- [Features](undefined)
+- [Regions](undefined)
+- [Use Cases](undefined)
+- [Customers](undefined)
+- [L L Ms Txt](https://eu.getconvoy.cloud/llms.txt)
