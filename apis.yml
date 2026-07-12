@@ -88,6 +88,10 @@ apis:
         email: support@getconvoy.io
         url: https://getconvoy.io/docs
 common:
+  - type: DomainSecurity
+    url: security/convoy-domain-security.yml
+  - type: Authentication
+    url: authentication/convoy-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/convoy/overview
   - type: Arazzo
