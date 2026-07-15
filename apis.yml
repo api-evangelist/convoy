@@ -88,6 +88,8 @@ apis:
         email: support@getconvoy.io
         url: https://getconvoy.io/docs
 common:
+  - type: AgenticAccess
+    url: agentic-access/convoy-agentic-access.yml
   - type: DomainSecurity
     url: security/convoy-domain-security.yml
   - type: Authentication
