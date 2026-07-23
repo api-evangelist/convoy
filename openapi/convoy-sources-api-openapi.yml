@@ -1,0 +1,959 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Sources API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Source related APIs
+  name: Sources
+paths:
+  /v1/projects/{projectID}/sources:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: direction
+        schema:
+          enum:
+          - next
+          - prev
+          type: string
+        x-enum-varnames:
+        - Next
+        - Prev
+      - description: A pagination cursor to fetch the next page of a list
+        example: 01H0JA5MEES38RRK3HTEJC647K
+        in: query
+        name: next_page_cursor
+        schema:
+          type: string
+      - description: The number of items to return per page
+        example: 20
+        in: query
+        name: perPage
+        schema:
+          type: integer
+      - description: A pagination cursor to fetch the previous page of a list
+        example: 01H0JATTVCXZK8FRDX1M1JN3QY
+        in: query
+        name: prev_page_cursor
+        schema:
+          type: string
+      - description: The custom source provider e.g. twitter, shopify
+        example: twitter
+        in: query
+        name: provider
+        schema:
+          type: string
+      - description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        example: ASC | DESC
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: The source type e.g. http, pub_sub
+        example: http
+        in: query
+        name: type
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      allOf:
+                      - $ref: '#/components/schemas/models.PagedResponse'
+                      - properties:
+                          content:
+                            items:
+                              $ref: '#/components/schemas/models.SourceResponse'
+                            type: array
+                        type: object
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Sources
+      description: This endpoint fetches multiple sources
+      operationId: LoadSourcesPaged
+      summary: List All Sources
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SourceResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Sources
+      description: This endpoint creates a source
+      operationId: CreateSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.CreateSource'
+        description: Source Details
+        required: true
+      summary: Create a Source
+  /v1/projects/{projectID}/sources/{sourceID}:
+    delete:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: source id
+        in: path
+        name: sourceID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Sources
+      description: This endpoint deletes a source
+      operationId: DeleteSource
+      summary: Delete a Source
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Source ID
+        in: path
+        name: sourceID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SourceResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Sources
+      description: This endpoint retrieves a source by its id
+      operationId: GetSource
+      summary: Retrieve a Source
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: source id
+        in: path
+        name: sourceID
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SourceResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Sources
+      description: This endpoint updates a source
+      operationId: UpdateSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.UpdateSource'
+        description: Source Details
+        required: true
+      summary: Update a Source
+components:
+  schemas:
+    models.HMac:
+      properties:
+        encoding:
+          $ref: '#/components/schemas/datastore.EncodingType'
+        hash:
+          type: string
+        header:
+          type: string
+        secret:
+          type: string
+      required:
+      - encoding
+      - hash
+      - header
+      - secret
+      type: object
+    models.KafkaPubSubConfig:
+      properties:
+        auth:
+          $ref: '#/components/schemas/models.KafkaAuth'
+        brokers:
+          items:
+            type: string
+          type: array
+        consumer_group_id:
+          type: string
+        topic_name:
+          type: string
+      type: object
+    datastore.KafkaPubSubConfig:
+      properties:
+        auth:
+          $ref: '#/components/schemas/datastore.KafkaAuth'
+        brokers:
+          items:
+            type: string
+          type: array
+        consumer_group_id:
+          type: string
+        topic_name:
+          type: string
+      type: object
+    models.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    models.CreateSource:
+      properties:
+        body_function:
+          description: 'Function is a javascript function used to mutate the payload
+
+            immediately after ingesting an event'
+          type: string
+        custom_response:
+          allOf:
+          - $ref: '#/components/schemas/models.CustomResponse'
+          description: 'Custom response is used to define a custom response for incoming
+
+            webhooks project sources only.'
+        header_function:
+          description: 'Function is a javascript function used to mutate the headers
+
+            immediately after ingesting an event'
+          type: string
+        idempotency_keys:
+          description: 'IdempotencyKeys are used to specify parts of a webhook request to uniquely
+
+            identify the event in an incoming webhooks project.'
+          items:
+            type: string
+          type: array
+        name:
+          description: Source name.
+          type: string
+        provider:
+          allOf:
+          - $ref: '#/components/schemas/datastore.SourceProvider'
+          description: Use this to specify one of our predefined source types.
+        pub_sub:
+          allOf:
+          - $ref: '#/components/schemas/models.PubSubConfig'
+          description: 'PubSub are used to specify message broker sources for outgoing
+
+            webhooks projects.'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/datastore.SourceType'
+          description: Source Type.
+        verifier:
+          allOf:
+          - $ref: '#/components/schemas/models.VerifierConfig'
+          description: 'Verifiers are used to verify webhook events ingested in incoming
+
+            webhooks projects. If set, type is required and match the verifier
+
+            type object you choose.'
+      type: object
+    datastore.ProviderConfig:
+      properties:
+        twitter:
+          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
+      type: object
+    datastore.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
+        google:
+          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    datastore.KafkaAuth:
+      properties:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
+          type: boolean
+        type:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.SourceProvider:
+      enum:
+      - github
+      - twitter
+      - shopify
+      type: string
+      x-enum-varnames:
+      - GithubSourceProvider
+      - TwitterSourceProvider
+      - ShopifySourceProvider
+    datastore.EncodingType:
+      enum:
+      - base64
+      - hex
+      type: string
+      x-enum-varnames:
+      - Base64Encoding
+      - HexEncoding
+    datastore.PubSubType:
+      enum:
+      - sqs
+      - google
+      - kafka
+      - amqp
+      type: string
+      x-enum-varnames:
+      - SqsPubSub
+      - GooglePubSub
+      - KafkaPubSub
+      - AmqpPubSub
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.HMac:
+      properties:
+        encoding:
+          $ref: '#/components/schemas/datastore.EncodingType'
+        hash:
+          type: string
+        header:
+          type: string
+        secret:
+          type: string
+      type: object
+    datastore.AmqpCredentials:
+      properties:
+        password:
+          type: string
+        user:
+          type: string
+      type: object
+    datastore.VerifierType:
+      enum:
+      - noop
+      - hmac
+      - basic_auth
+      - api_key
+      type: string
+      x-enum-varnames:
+      - NoopVerifier
+      - HMacVerifier
+      - BasicAuthVerifier
+      - APIKeyVerifier
+    models.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/models.AmqpPubSubconfig'
+        google:
+          $ref: '#/components/schemas/models.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/models.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/models.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.UpdateSource:
+      properties:
+        body_function:
+          description: 'Function is a javascript function used to mutate the payload
+
+            immediately after ingesting an event'
+          type: string
+        custom_response:
+          allOf:
+          - $ref: '#/components/schemas/models.UpdateCustomResponse'
+          description: 'Custom response is used to define a custom response for incoming
+
+            webhooks project sources only.'
+        forward_headers:
+          description: Soecfy header you want convoy to save from the ingest request and forward to your endpoints when the event is dispatched.
+          items:
+            type: string
+          type: array
+        header_function:
+          description: 'Function is a javascript function used to mutate the headers
+
+            immediately after ingesting an event'
+          type: string
+        idempotency_keys:
+          description: 'IdempotencyKeys are used to specify parts of a webhook request to uniquely
+
+            identify the event in an incoming webhooks project.'
+          items:
+            type: string
+          type: array
+        is_disabled:
+          description: This is used to manually enable/disable the source.
+          type: boolean
+        name:
+          description: Source name.
+          type: string
+        pub_sub:
+          allOf:
+          - $ref: '#/components/schemas/models.PubSubConfig'
+          description: 'PubSub are used to specify message broker sources for outgoing
+
+            webhooks projects, you only need to specify this when the source type is `pub_sub`.'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/datastore.SourceType'
+          description: Source Type.
+        verifier:
+          allOf:
+          - $ref: '#/components/schemas/models.VerifierConfig'
+          description: 'Verifiers are used to verify webhook events ingested in incoming
+
+            webhooks projects.  If set, type is required and match the verifier
+
+            type object you choose.'
+      type: object
+    datastore.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    models.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    models.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    models.AmqpAuth:
+      properties:
+        password:
+          type: string
+        user:
+          type: string
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    models.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      required:
+      - header_name
+      - header_value
+      type: object
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+          nullable: true
+      type: object
+    datastore.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    models.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    models.VerifierConfig:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/models.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/models.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/models.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
+      required:
+      - type
+      type: object
+    models.SourceResponse:
+      properties:
+        body_function:
+          type: string
+        created_at:
+          type: string
+        custom_response:
+          $ref: '#/components/schemas/datastore.CustomResponse'
+        deleted_at:
+          type: string
+        forward_headers:
+          items:
+            type: string
+          type: array
+        header_function:
+          type: string
+        idempotency_keys:
+          items:
+            type: string
+          type: array
+        is_disabled:
+          type: boolean
+        mask_id:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        provider:
+          $ref: '#/components/schemas/datastore.SourceProvider'
+        provider_config:
+          $ref: '#/components/schemas/datastore.ProviderConfig'
+        pub_sub:
+          $ref: '#/components/schemas/datastore.PubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.SourceType'
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+        verifier:
+          $ref: '#/components/schemas/datastore.VerifierConfig'
+      type: object
+    datastore.SourceType:
+      enum:
+      - http
+      - rest_api
+      - pub_sub
+      - db_change_stream
+      type: string
+      x-enum-varnames:
+      - HTTPSource
+      - RestApiSource
+      - PubSubSource
+      - DBChangeStream
+    models.AmqpExchange:
+      properties:
+        exchange:
+          type: string
+        routingKey:
+          type: string
+      type: object
+    models.KafkaAuth:
+      properties:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
+          type: boolean
+        type:
+          type: string
+        username:
+          type: string
+      type: object
+    models.UpdateCustomResponse:
+      properties:
+        body:
+          nullable: true
+          type: string
+        content_type:
+          nullable: true
+          type: string
+      type: object
+    datastore.VerifierConfig:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/datastore.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
+      type: object
+    models.AmqpPubSubconfig:
+      properties:
+        host:
+          type: string
+        auth:
+          $ref: '#/components/schemas/models.AmqpAuth'
+        bindExchange:
+          $ref: '#/components/schemas/models.AmqpExchange'
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+    datastore.TwitterProviderConfig:
+      properties:
+        crc_verified_at:
+          type: string
+      type: object
+    datastore.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        endpoint:
+          description: 'Optional: for LocalStack testing'
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.AmqpPubSubConfig:
+      properties:
+        host:
+          type: string
+        auth:
+          $ref: '#/components/schemas/datastore.AmqpCredentials'
+        bindedExchange:
+          type: string
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        routingKey:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

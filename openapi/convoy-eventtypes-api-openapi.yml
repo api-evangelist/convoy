@@ -1,0 +1,424 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts EventTypes API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Event Types related APIs
+  name: EventTypes
+paths:
+  /v1/projects/{projectID}/event-types:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/models.EventTypeResponse'
+                      type: array
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - EventTypes
+      description: This endpoint fetches the project's event types
+      operationId: GetEventTypes
+      summary: Retrieves a Project's Event Types
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EventTypeResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - EventTypes
+      description: This endpoint creates an event type
+      operationId: CreateEventType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.CreateEventType'
+        description: Event Type Details
+        required: true
+      summary: Create an Event Type
+  /v1/projects/{projectID}/event-types/import:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/models.EventTypeResponse'
+                      type: array
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - EventTypes
+      description: This endpoint imports event types from an OpenAPI specification
+      operationId: ImportOpenApiSpec
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.ImportOpenAPISpec'
+        description: OpenAPI specification
+        required: true
+      summary: Import Event Types From OpenAPI Spec
+  /v1/projects/{projectID}/event-types/{eventTypeId}:
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EventTypeResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - EventTypes
+      description: This endpoint updates an event type
+      operationId: UpdateEventType
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.UpdateEventType'
+        description: Event Type Details
+        required: true
+      summary: Updates an Event Type
+  /v1/projects/{projectID}/event-types/{eventTypeId}/deprecate:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Event Type ID
+        in: path
+        name: eventTypeId
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EventTypeResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - EventTypes
+      description: This endpoint deprecates an event type
+      operationId: DeprecateEventType
+      summary: Deprecates an Event Type
+components:
+  schemas:
+    models.CreateEventType:
+      properties:
+        category:
+          description: Category is a product-specific grouping for the event type
+          type: string
+        description:
+          description: Description is used to describe what the event type does
+          type: string
+        json_schema:
+          additionalProperties: true
+          description: JSONSchema is the JSON structure of the event type
+          type: object
+        name:
+          description: Name is the event type name. E.g., invoice.created
+          type: string
+      type: object
+    models.ImportOpenAPISpec:
+      properties:
+        spec:
+          type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.EventTypeResponse:
+      properties:
+        category:
+          type: string
+        deprecated_at:
+          type: string
+        description:
+          type: string
+        json_schema:
+          items:
+            type: integer
+          type: array
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    models.UpdateEventType:
+      properties:
+        category:
+          description: Category is a product-specific grouping for the event type
+          type: string
+        description:
+          description: Description is used to describe what the event type does
+          type: string
+        json_schema:
+          additionalProperties: true
+          description: JSONSchema is the JSON structure of the event type
+          type: object
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

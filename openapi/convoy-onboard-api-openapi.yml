@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Onboard API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Onboard related APIs
+  name: Onboard
+paths:
+  /v1/projects/{projectID}/onboard:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Validate without creating
+        in: query
+        name: dry_run
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.BulkOnboardDryRunResponse'
+                  type: object
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.BulkOnboardAcceptedResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Onboard
+      description: This endpoint accepts a CSV file or JSON body to bulk-create endpoints with subscriptions
+      operationId: BulkOnboard
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+              type: string
+        description: Onboard Details (JSON)
+      summary: Bulk Onboard Endpoints with Subscriptions
+components:
+  schemas:
+    models.OnboardValidationError:
+      properties:
+        field:
+          type: string
+        message:
+          type: string
+        row:
+          type: integer
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    handlers.Stub:
+      type: object
+    models.BulkOnboardAcceptedResponse:
+      properties:
+        batch_count:
+          type: integer
+        message:
+          type: string
+        total_items:
+          type: integer
+      type: object
+    models.BulkOnboardDryRunResponse:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/models.OnboardValidationError'
+          type: array
+        total_rows:
+          type: integer
+        valid_count:
+          type: integer
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

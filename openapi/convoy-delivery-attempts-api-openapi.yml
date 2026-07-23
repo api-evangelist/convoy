@@ -1,0 +1,221 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Delivery Attempt related APIs
+  name: Delivery Attempts
+paths:
+  /v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}/deliveryattempts:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: event delivery id
+        in: path
+        name: eventDeliveryID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/datastore.DeliveryAttempt'
+                      type: array
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Delivery Attempts
+      description: This endpoint fetches an app message's delivery attempts
+      operationId: GetDeliveryAttempts
+      summary: List Delivery Attempts
+  /v1/projects/{projectID}/eventdeliveries/{eventDeliveryID}/deliveryattempts/{deliveryAttemptID}:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: event delivery id
+        in: path
+        name: eventDeliveryID
+        required: true
+        schema:
+          type: string
+      - description: delivery attempt id
+        in: path
+        name: deliveryAttemptID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/datastore.DeliveryAttempt'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Delivery Attempts
+      description: This endpoint fetches an app event delivery attempt
+      operationId: GetDeliveryAttempt
+      summary: Retrieve a Delivery Attempt
+components:
+  schemas:
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.HttpHeader:
+      additionalProperties:
+        type: string
+      type: object
+    handlers.Stub:
+      type: object
+    datastore.DeliveryAttempt:
+      properties:
+        api_version:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        endpoint_id:
+          type: string
+        error:
+          type: string
+        http_status:
+          type: string
+        ip_address:
+          type: string
+        method:
+          type: string
+        msg_id:
+          type: string
+        project_id:
+          type: string
+        request_http_header:
+          $ref: '#/components/schemas/datastore.HttpHeader'
+        response_data:
+          type: string
+        response_http_header:
+          $ref: '#/components/schemas/datastore.HttpHeader'
+        status:
+          type: boolean
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

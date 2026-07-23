@@ -1,0 +1,390 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Meta Events API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Meta Events related APIs
+  name: Meta Events
+paths:
+  /v1/projects/{projectID}/meta-events:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: direction
+        schema:
+          enum:
+          - next
+          - prev
+          type: string
+        x-enum-varnames:
+        - Next
+        - Prev
+      - description: The end date
+        example: '2008-05-02T15:04:05'
+        in: query
+        name: endDate
+        schema:
+          type: string
+      - description: A pagination cursor to fetch the next page of a list
+        example: 01H0JA5MEES38RRK3HTEJC647K
+        in: query
+        name: next_page_cursor
+        schema:
+          type: string
+      - description: The number of items to return per page
+        example: 20
+        in: query
+        name: perPage
+        schema:
+          type: integer
+      - description: A pagination cursor to fetch the previous page of a list
+        example: 01H0JATTVCXZK8FRDX1M1JN3QY
+        in: query
+        name: prev_page_cursor
+        schema:
+          type: string
+      - description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        example: ASC | DESC
+        in: query
+        name: sort
+        schema:
+          type: string
+      - description: The start date
+        example: '2006-01-02T15:04:05'
+        in: query
+        name: startDate
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      allOf:
+                      - $ref: '#/components/schemas/models.PagedResponse'
+                      - properties:
+                          content:
+                            items:
+                              $ref: '#/components/schemas/models.MetaEventResponse'
+                            type: array
+                        type: object
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Meta Events
+      description: This endpoint fetches meta events with pagination
+      operationId: GetMetaEventsPaged
+      summary: List All Meta Events
+  /v1/projects/{projectID}/meta-events/{metaEventID}:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: meta event id
+        in: path
+        name: metaEventID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.MetaEventResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Meta Events
+      description: This endpoint retrieves a meta event
+      operationId: GetMetaEvent
+      summary: Retrieve a Meta Event
+  /v1/projects/{projectID}/meta-events/{metaEventID}/resend:
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: meta event id
+        in: path
+        name: metaEventID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.MetaEventResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Meta Events
+      description: This endpoint retries a meta event
+      operationId: ResendMetaEvent
+      summary: Retry Meta Event
+components:
+  schemas:
+    datastore.StrategyProvider:
+      enum:
+      - linear
+      - exponential
+      type: string
+      x-enum-varnames:
+      - LinearStrategyProvider
+      - ExponentialStrategyProvider
+    datastore.HttpHeader:
+      additionalProperties:
+        type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    datastore.MetaEventAttempt:
+      properties:
+        request_http_header:
+          $ref: '#/components/schemas/datastore.HttpHeader'
+        response_data:
+          type: string
+        response_http_header:
+          $ref: '#/components/schemas/datastore.HttpHeader'
+      type: object
+    datastore.Metadata:
+      properties:
+        data:
+          description: Data to be sent to endpoint.
+          items:
+            type: integer
+          type: array
+        interval_seconds:
+          type: integer
+        max_retry_seconds:
+          type: integer
+        next_send_time:
+          type: string
+        num_trials:
+          description: 'NumTrials: number of times we have tried to deliver this Event to
+
+            an application'
+          type: integer
+        raw:
+          type: string
+        retry_limit:
+          type: integer
+        strategy:
+          $ref: '#/components/schemas/datastore.StrategyProvider'
+      type: object
+    models.MetaEventResponse:
+      properties:
+        attempt:
+          $ref: '#/components/schemas/datastore.MetaEventAttempt'
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        event_type:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/datastore.Metadata'
+        project_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EventDeliveryStatus'
+        uid:
+          type: string
+        updated_at:
+          type: string
+      type: object
+    datastore.EventDeliveryStatus:
+      enum:
+      - Scheduled
+      - Processing
+      - Discarded
+      - Failure
+      - Success
+      - Retry
+      type: string
+      x-enum-varnames:
+      - ScheduledEventStatus
+      - ProcessingEventStatus
+      - DiscardedEventStatus
+      - FailureEventStatus
+      - SuccessEventStatus
+      - RetryEventStatus
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+          nullable: true
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

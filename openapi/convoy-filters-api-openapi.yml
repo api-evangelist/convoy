@@ -1,0 +1,721 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Filters API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Filters related APIs
+  name: Filters
+paths:
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}/filters:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/models.FilterResponse'
+                      type: array
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint fetches all filters for a subscription
+      operationId: GetFilters
+      summary: List All Filters
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.FilterResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint creates a new filter for a subscription
+      operationId: CreateFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.CreateFilterRequest'
+        description: Filter to create
+        required: true
+      summary: Create a New Filter
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/bulk:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/models.FilterResponse'
+                      type: array
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint creates multiple filters for a subscription
+      operationId: BulkCreateFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/models.CreateFilterRequest'
+              type: array
+        description: Filters to create
+        required: true
+      summary: Create Multiple Subscription Filters
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/bulk_update:
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      items:
+                        $ref: '#/components/schemas/models.FilterResponse'
+                      type: array
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint updates multiple filters for a subscription
+      operationId: BulkUpdateFilters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/models.BulkUpdateFilterRequest'
+              type: array
+        description: Filters to update
+        required: true
+      summary: Update Multiple Subscription Filters
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/test/{eventType}:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      - description: Event Type
+        in: path
+        name: eventType
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.TestFilterResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint tests a filter against a payload
+      operationId: TestFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.TestFilterRequest'
+        description: Payload to test
+        required: true
+      summary: Test a Filter
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}/filters/{filterID}:
+    delete:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      - description: Filter ID
+        in: path
+        name: filterID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint deletes a filter
+      operationId: DeleteFilter
+      summary: Delete a Filter
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      - description: Filter ID
+        in: path
+        name: filterID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.FilterResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint retrieves a single filter
+      operationId: GetFilter
+      summary: Get a Filter
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Subscription ID
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      - description: Filter ID
+        in: path
+        name: filterID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.FilterResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Filters
+      description: This endpoint updates an existing filter
+      operationId: UpdateFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.UpdateFilterRequest'
+        description: Updated filter
+        required: true
+      summary: Update a Filter
+components:
+  schemas:
+    models.UpdateFilterRequest:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Body matching criteria (optional)
+        event_type:
+          description: Type of event this filter applies to (optional)
+          type: string
+        headers:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Header matching criteria (optional)
+        is_flattened:
+          description: Whether the filter uses flattened JSON paths (optional)
+          type: boolean
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.TestFilterRequest:
+      properties:
+        payload:
+          description: Sample payload to test against the filter (required)
+      required:
+      - payload
+      type: object
+    handlers.Stub:
+      type: object
+    datastore.M:
+      additionalProperties: true
+      type: object
+    models.CreateFilterRequest:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Body matching criteria (optional)
+        event_type:
+          description: Type of event this filter applies to (required)
+          type: string
+        headers:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Header matching criteria (optional)
+      required:
+      - event_type
+      type: object
+    models.TestFilterResponse:
+      properties:
+        is_match:
+          description: Whether the payload matches the filter criteria
+          type: boolean
+      type: object
+    models.BulkUpdateFilterRequest:
+      properties:
+        body:
+          additionalProperties: true
+          type: object
+        event_type:
+          type: string
+        headers:
+          additionalProperties: true
+          type: object
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    models.FilterResponse:
+      properties:
+        body:
+          $ref: '#/components/schemas/datastore.M'
+        event_type:
+          type: string
+        headers:
+          $ref: '#/components/schemas/datastore.M'
+        raw_body:
+          $ref: '#/components/schemas/datastore.M'
+        raw_headers:
+          $ref: '#/components/schemas/datastore.M'
+        subscription_id:
+          type: string
+        uid:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

@@ -1,0 +1,1409 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Subscriptions API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Subscription related APIs
+  name: Subscriptions
+paths:
+  /v1/projects/{projectID}/sources/test_function:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.FunctionResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint validates that a filter will match a certain payload structure.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.FunctionRequest'
+        description: Function Details
+        required: true
+      summary: Validate Source Function
+  /v1/projects/{projectID}/subscriptions:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: direction
+        schema:
+          enum:
+          - next
+          - prev
+          type: string
+        x-enum-varnames:
+        - Next
+        - Prev
+      - description: A list of endpointIDs to filter by
+        in: query
+        name: endpointId
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Subscription name to filter by
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: A pagination cursor to fetch the next page of a list
+        example: 01H0JA5MEES38RRK3HTEJC647K
+        in: query
+        name: next_page_cursor
+        schema:
+          type: string
+      - description: The number of items to return per page
+        example: 20
+        in: query
+        name: perPage
+        schema:
+          type: integer
+      - description: A pagination cursor to fetch the previous page of a list
+        example: 01H0JATTVCXZK8FRDX1M1JN3QY
+        in: query
+        name: prev_page_cursor
+        schema:
+          type: string
+      - description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        example: ASC | DESC
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      allOf:
+                      - $ref: '#/components/schemas/models.PagedResponse'
+                      - properties:
+                          content:
+                            items:
+                              $ref: '#/components/schemas/models.SubscriptionResponse'
+                            type: array
+                        type: object
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint fetches all the subscriptions
+      operationId: GetSubscriptions
+      summary: List All Subscriptions
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SubscriptionResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint creates a subscriptions
+      operationId: CreateSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.CreateSubscription'
+        description: Subscription details
+        required: true
+      summary: Create a Subscription
+  /v1/projects/{projectID}/subscriptions/test_filter:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      type: boolean
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint validates that a filter will match a certain payload structure.
+      operationId: TestSubscriptionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.TestFilter'
+        description: Filter Details
+        required: true
+      summary: Validate Subscription Filter
+  /v1/projects/{projectID}/subscriptions/test_function:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.FunctionResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint test runs a transform function against a payload.
+      operationId: TestSubscriptionFunction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.FunctionRequest'
+        description: Function Details
+        required: true
+      summary: Test a Subscription Function
+  /v1/projects/{projectID}/subscriptions/{subscriptionID}:
+    delete:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: subscription id
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint deletes a subscription
+      operationId: DeleteSubscription
+      summary: Delete Subscription
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: subscription id
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SubscriptionResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint retrieves a single subscription
+      operationId: GetSubscription
+      summary: Retrieve a Subscription
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: subscription id
+        in: path
+        name: subscriptionID
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.SubscriptionResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Subscriptions
+      description: This endpoint updates a subscription
+      operationId: UpdateSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.UpdateSubscription'
+        description: Subscription Details
+        required: true
+      summary: Update a Subscription
+components:
+  schemas:
+    models.RetryConfiguration:
+      properties:
+        duration:
+          description: Used to specify a valid Go time duration e.g 10s, 1h3m for how long to wait between event delivery retries
+          type: string
+        interval_seconds:
+          description: Used to specify a time in seconds for how long to wait between event delivery retries,
+          type: integer
+        retry_count:
+          description: Used to specify the max number of retries
+          type: integer
+        type:
+          allOf:
+          - $ref: '#/components/schemas/datastore.StrategyProvider'
+          description: Retry Strategy type
+      type: object
+    models.FS:
+      properties:
+        body:
+          $ref: '#/components/schemas/datastore.M'
+        headers:
+          $ref: '#/components/schemas/datastore.M'
+      type: object
+    datastore.KafkaPubSubConfig:
+      properties:
+        auth:
+          $ref: '#/components/schemas/datastore.KafkaAuth'
+        brokers:
+          items:
+            type: string
+          type: array
+        consumer_group_id:
+          type: string
+        topic_name:
+          type: string
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    datastore.RetryConfiguration:
+      properties:
+        duration:
+          type: integer
+        retry_count:
+          type: integer
+        type:
+          $ref: '#/components/schemas/datastore.StrategyProvider'
+      type: object
+    datastore.M:
+      additionalProperties: true
+      type: object
+    datastore.ProviderConfig:
+      properties:
+        twitter:
+          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
+      type: object
+    datastore.Secret:
+      properties:
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        expires_at:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        value:
+          type: string
+      type: object
+    datastore.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
+        google:
+          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    datastore.KafkaAuth:
+      properties:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
+          type: boolean
+        type:
+          type: string
+        username:
+          type: string
+      type: object
+    models.CreateSubscription:
+      properties:
+        alert_config:
+          allOf:
+          - $ref: '#/components/schemas/models.AlertConfiguration'
+          description: Alert configuration
+        app_id:
+          description: Deprecated but necessary for backward compatibility
+          type: string
+        delivery_mode:
+          allOf:
+          - $ref: '#/components/schemas/datastore.DeliveryMode'
+          description: Delivery mode configuration
+        endpoint_id:
+          description: Destination endpoint ID
+          type: string
+        filter_config:
+          allOf:
+          - $ref: '#/components/schemas/models.FilterConfiguration'
+          description: Filter configuration
+        function:
+          description: 'Convoy supports mutating your request payload using a js function. Use this field
+
+            to specify a `transform` function for this purpose. See this[https://docs.getconvoy.io/product-manual/subscriptions#functions] for more'
+          type: string
+        name:
+          description: Subscription Nme
+          type: string
+        rate_limit_config:
+          allOf:
+          - $ref: '#/components/schemas/models.RateLimitConfiguration'
+          description: Rate limit configuration
+        source_id:
+          description: Source Id
+          type: string
+      type: object
+    datastore.DeliveryMode:
+      enum:
+      - at_least_once
+      - at_most_once
+      type: string
+      x-enum-varnames:
+      - AtLeastOnceDeliveryMode
+      - AtMostOnceDeliveryMode
+    datastore.SourceProvider:
+      enum:
+      - github
+      - twitter
+      - shopify
+      type: string
+      x-enum-varnames:
+      - GithubSourceProvider
+      - TwitterSourceProvider
+      - ShopifySourceProvider
+    datastore.EncodingType:
+      enum:
+      - base64
+      - hex
+      type: string
+      x-enum-varnames:
+      - Base64Encoding
+      - HexEncoding
+    datastore.PubSubType:
+      enum:
+      - sqs
+      - google
+      - kafka
+      - amqp
+      type: string
+      x-enum-varnames:
+      - SqsPubSub
+      - GooglePubSub
+      - KafkaPubSub
+      - AmqpPubSub
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.HMac:
+      properties:
+        encoding:
+          $ref: '#/components/schemas/datastore.EncodingType'
+        hash:
+          type: string
+        header:
+          type: string
+        secret:
+          type: string
+      type: object
+    datastore.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    models.FilterConfiguration:
+      properties:
+        event_types:
+          description: List of event types that the subscription should match
+          items:
+            type: string
+          type: array
+        filter:
+          allOf:
+          - $ref: '#/components/schemas/models.FS'
+          description: Body & Header filters
+      type: object
+    models.SubscriptionResponse:
+      properties:
+        alert_config:
+          allOf:
+          - $ref: '#/components/schemas/datastore.AlertConfiguration'
+          description: subscription config
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        delivery_mode:
+          $ref: '#/components/schemas/datastore.DeliveryMode'
+        device_metadata:
+          $ref: '#/components/schemas/datastore.Device'
+        endpoint_metadata:
+          $ref: '#/components/schemas/datastore.Endpoint'
+        filter_config:
+          $ref: '#/components/schemas/datastore.FilterConfiguration'
+        function:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        rate_limit_config:
+          $ref: '#/components/schemas/datastore.RateLimitConfiguration'
+        retry_config:
+          $ref: '#/components/schemas/datastore.RetryConfiguration'
+        source_metadata:
+          $ref: '#/components/schemas/datastore.Source'
+        type:
+          $ref: '#/components/schemas/datastore.SubscriptionType'
+        uid:
+          type: string
+        updated_at:
+          type: string
+      type: object
+    datastore.AmqpCredentials:
+      properties:
+        password:
+          type: string
+        user:
+          type: string
+      type: object
+    datastore.VerifierType:
+      enum:
+      - noop
+      - hmac
+      - basic_auth
+      - api_key
+      type: string
+      x-enum-varnames:
+      - NoopVerifier
+      - HMacVerifier
+      - BasicAuthVerifier
+      - APIKeyVerifier
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    models.AlertConfiguration:
+      properties:
+        count:
+          description: Count
+          type: integer
+        threshold:
+          description: Threshold
+          type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.RateLimitConfiguration:
+      properties:
+        count:
+          type: integer
+        duration:
+          type: integer
+      type: object
+    datastore.Device:
+      properties:
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        endpoint_id:
+          type: string
+        host_name:
+          type: string
+        last_seen_at:
+          type: string
+        project_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.DeviceStatus'
+        uid:
+          type: string
+        updated_at:
+          type: string
+      type: object
+    datastore.DeviceStatus:
+      enum:
+      - offline
+      - online
+      - disabled
+      type: string
+      x-enum-varnames:
+      - DeviceStatusOffline
+      - DeviceStatusOnline
+      - DeviceStatusDisabled
+    datastore.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    datastore.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC only)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    datastore.OAuth2AuthenticationType:
+      enum:
+      - shared_secret
+      - client_assertion
+      type: string
+      x-enum-varnames:
+      - SharedSecretAuth
+      - ClientAssertionAuth
+    datastore.EndpointAuthentication:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/datastore.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.RateLimitConfiguration:
+      properties:
+        count:
+          type: integer
+        duration:
+          type: integer
+      type: object
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+          nullable: true
+      type: object
+    datastore.Endpoint:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    models.FunctionRequest:
+      properties:
+        function:
+          type: string
+        payload:
+          additionalProperties: {}
+          type: object
+        type:
+          type: string
+      type: object
+    datastore.SubscriptionType:
+      enum:
+      - cli
+      - api
+      type: string
+      x-enum-varnames:
+      - SubscriptionTypeCLI
+      - SubscriptionTypeAPI
+    datastore.AlertConfiguration:
+      properties:
+        count:
+          type: integer
+        threshold:
+          type: string
+      type: object
+    models.TestFilter:
+      properties:
+        request:
+          allOf:
+          - $ref: '#/components/schemas/models.FilterSchema'
+          description: Same Request & Headers
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/models.FilterSchema'
+          description: Sample test schema
+      type: object
+    datastore.SourceType:
+      enum:
+      - http
+      - rest_api
+      - pub_sub
+      - db_change_stream
+      type: string
+      x-enum-varnames:
+      - HTTPSource
+      - RestApiSource
+      - PubSubSource
+      - DBChangeStream
+    datastore.Source:
+      properties:
+        body_function:
+          type: string
+        created_at:
+          type: string
+        custom_response:
+          $ref: '#/components/schemas/datastore.CustomResponse'
+        deleted_at:
+          type: string
+        forward_headers:
+          items:
+            type: string
+          type: array
+        header_function:
+          type: string
+        idempotency_keys:
+          items:
+            type: string
+          type: array
+        is_disabled:
+          type: boolean
+        mask_id:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        provider:
+          $ref: '#/components/schemas/datastore.SourceProvider'
+        provider_config:
+          $ref: '#/components/schemas/datastore.ProviderConfig'
+        pub_sub:
+          $ref: '#/components/schemas/datastore.PubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.SourceType'
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+        verifier:
+          $ref: '#/components/schemas/datastore.VerifierConfig'
+      type: object
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
+    models.FunctionResponse:
+      properties:
+        log:
+          items:
+            type: string
+          type: array
+        payload: {}
+      type: object
+    datastore.StrategyProvider:
+      enum:
+      - linear
+      - exponential
+      type: string
+      x-enum-varnames:
+      - LinearStrategyProvider
+      - ExponentialStrategyProvider
+    models.UpdateSubscription:
+      properties:
+        alert_config:
+          allOf:
+          - $ref: '#/components/schemas/models.AlertConfiguration'
+          description: Alert configuration
+        app_id:
+          description: Deprecated but necessary for backward compatibility
+          type: string
+        delivery_mode:
+          allOf:
+          - $ref: '#/components/schemas/datastore.DeliveryMode'
+          description: Delivery mode configuration
+        endpoint_id:
+          description: Destination endpoint ID
+          type: string
+        filter_config:
+          allOf:
+          - $ref: '#/components/schemas/models.FilterConfiguration'
+          description: Filter configuration
+        function:
+          description: 'Convoy supports mutating your request payload using a js function. Use this field
+
+            to specify a `transform` function for this purpose. See this[https://docs.getconvoy.io/product-manual/subscriptions#functions] for more'
+          type: string
+        name:
+          description: Subscription Nme
+          type: string
+        rate_limit_config:
+          allOf:
+          - $ref: '#/components/schemas/models.RateLimitConfiguration'
+          description: Rate limit configuration
+        retry_config:
+          allOf:
+          - $ref: '#/components/schemas/models.RetryConfiguration'
+          description: Retry configuration
+        source_id:
+          description: Source Id
+          type: string
+      type: object
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    datastore.VerifierConfig:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/datastore.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
+      type: object
+    models.FilterSchema:
+      properties:
+        body: {}
+        header: {}
+      type: object
+    datastore.TwitterProviderConfig:
+      properties:
+        crc_verified_at:
+          type: string
+      type: object
+    datastore.FilterConfiguration:
+      properties:
+        event_types:
+          items:
+            type: string
+          type: array
+        filter:
+          $ref: '#/components/schemas/datastore.FilterSchema'
+      type: object
+    datastore.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        endpoint:
+          description: 'Optional: for LocalStack testing'
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.AmqpPubSubConfig:
+      properties:
+        host:
+          type: string
+        auth:
+          $ref: '#/components/schemas/datastore.AmqpCredentials'
+        bindedExchange:
+          type: string
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        routingKey:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+    datastore.FilterSchema:
+      properties:
+        body:
+          $ref: '#/components/schemas/datastore.M'
+        headers:
+          $ref: '#/components/schemas/datastore.M'
+        is_flattened:
+          type: boolean
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey

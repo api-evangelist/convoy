@@ -1,0 +1,1249 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@getconvoy.io
+    name: Convoy Support
+    url: https://getconvoy.io/docs
+  description: Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.
+  license:
+    name: Mozilla Public License 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  termsOfService: https://getconvoy.io/terms
+  title: Convoy API Reference Delivery Attempts Endpoints API
+  version: 26.3.5
+servers:
+- url: https://us.getconvoy.cloud/api
+  description: US Region
+- url: https://eu.getconvoy.cloud/api
+  description: EU Region
+tags:
+- description: Endpoint related APIs
+  name: Endpoints
+paths:
+  /v1/projects/{projectID}/endpoints:
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: direction
+        schema:
+          enum:
+          - next
+          - prev
+          type: string
+        x-enum-varnames:
+        - Next
+        - Prev
+      - description: A pagination cursor to fetch the next page of a list
+        example: 01H0JA5MEES38RRK3HTEJC647K
+        in: query
+        name: next_page_cursor
+        schema:
+          type: string
+      - description: The owner ID of the endpoint
+        example: 01H0JA5MEES38RRK3HTEJC647K
+        in: query
+        name: ownerId
+        schema:
+          type: string
+      - description: The number of items to return per page
+        example: 20
+        in: query
+        name: perPage
+        schema:
+          type: integer
+      - description: A pagination cursor to fetch the previous page of a list
+        example: 01H0JATTVCXZK8FRDX1M1JN3QY
+        in: query
+        name: prev_page_cursor
+        schema:
+          type: string
+      - description: The name of the endpoint
+        example: endpoint-1
+        in: query
+        name: q
+        schema:
+          type: string
+      - description: Sort order, values are `ASC` or `DESC`, defaults to `DESC`
+        example: ASC | DESC
+        in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      allOf:
+                      - $ref: '#/components/schemas/models.PagedResponse'
+                      - properties:
+                          content:
+                            items:
+                              $ref: '#/components/schemas/models.EndpointResponse'
+                            type: array
+                        type: object
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint fetches an endpoints
+      operationId: GetEndpoints
+      summary: List All Endpoints
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint creates an endpoint
+      operationId: CreateEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.CreateEndpoint'
+        description: Endpoint Details
+        required: true
+      summary: Create an Endpoint
+  /v1/projects/{projectID}/endpoints/oauth2/test:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.TestOAuth2Response'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint tests the OAuth2 connection by attempting to exchange a token
+      operationId: TestOAuth2Connection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.TestOAuth2Request'
+        description: OAuth2 Configuration
+        required: true
+      summary: Test OAuth2 Connection
+  /v1/projects/{projectID}/endpoints/{endpointID}:
+    delete:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint deletes an endpoint
+      operationId: DeleteEndpoint
+      summary: Delete Endpoint
+    get:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint fetches an endpoint
+      operationId: GetEndpoint
+      summary: Retrieve Endpoint
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint updates an endpoint
+      operationId: UpdateEndpoint
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.UpdateEndpoint'
+        description: Endpoint Details
+        required: true
+      summary: Update an Endpoint
+  /v1/projects/{projectID}/endpoints/{endpointID}/activate:
+    post:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: Activated an inactive endpoint
+      operationId: ActivateEndpoint
+      summary: Activate Endpoint
+  /v1/projects/{projectID}/endpoints/{endpointID}/expire_secret:
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: This endpoint expires and re-generates the endpoint secret.
+      operationId: ExpireSecret
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/models.ExpireSecret'
+        description: Expire Secret Body Parameters
+        required: true
+      summary: Roll Endpoint Secret
+  /v1/projects/{projectID}/endpoints/{endpointID}/pause:
+    put:
+      parameters:
+      - description: Project ID
+        in: path
+        name: projectID
+        required: true
+        schema:
+          type: string
+      - description: Endpoint ID
+        in: path
+        name: endpointID
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/models.EndpointResponse'
+                  type: object
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/util.ServerResponse'
+                - properties:
+                    data:
+                      $ref: '#/components/schemas/handlers.Stub'
+                  type: object
+          description: Not Found
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Endpoints
+      description: Toggles an endpoint's status between active and paused states
+      operationId: PauseEndpoint
+      summary: Pause Endpoint
+components:
+  schemas:
+    models.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    models.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    datastore.Secret:
+      properties:
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        expires_at:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        value:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    models.CreateEndpoint:
+      properties:
+        advanced_signatures:
+          description: 'Convoy supports two [signature formats](https://getconvoy.io/docs/product-manual/signatures)
+
+            -- simple or advanced. If left unspecified, we default to false.'
+          type: boolean
+        appID:
+          description: Deprecated but necessary for backward compatibility
+          type: string
+        authentication:
+          allOf:
+          - $ref: '#/components/schemas/models.EndpointAuthentication'
+          description: 'This is used to define any custom authentication required by the endpoint. This
+
+            shouldn''t be needed often because webhook endpoints usually should be exposed to
+
+            the internet.'
+        content_type:
+          description: Content type for the endpoint. Defaults to application/json if not specified.
+          type: string
+        description:
+          description: 'Human-readable description of the endpoint. Think of this as metadata describing
+
+            the endpoint'
+          type: string
+        http_timeout:
+          description: Define endpoint http timeout in seconds.
+          type: integer
+        is_disabled:
+          description: This is used to manually enable/disable the endpoint.
+          type: boolean
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/models.MtlsClientCert'
+          description: mTLS client certificate configuration for the endpoint
+        name:
+          description: Endpoint name.
+          type: string
+        owner_id:
+          description: 'The OwnerID is used to group more than one endpoint together to achieve
+
+            [fanout](https://getconvoy.io/docs/manual/endpoints#Endpoint%20Owner%20ID)'
+          type: string
+        rate_limit:
+          description: 'Rate limit is the total number of requests to be sent to an endpoint in
+
+            the time duration specified in RateLimitDuration'
+          type: integer
+        rate_limit_duration:
+          description: Rate limit duration specifies the time range for the rate limit.
+          type: integer
+        secret:
+          description: Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.
+          type: string
+        slack_webhook_url:
+          description: 'Slack webhook URL is an alternative method to support email where endpoint developers
+
+            can receive failure notifications on a slack channel.'
+          type: string
+        support_email:
+          description: 'Endpoint developers support email. This is used for communicating endpoint state
+
+            changes. You should always turn this on when disabling endpoints are enabled.'
+          type: string
+        url:
+          description: 'URL is the endpoint''s URL prefixed with https. non-https urls are currently
+
+            not supported.'
+          type: string
+      type: object
+    models.UpdateEndpoint:
+      properties:
+        advanced_signatures:
+          description: 'Convoy supports two [signature formats](https://getconvoy.io/docs/product-manual/signatures)
+
+            -- simple or advanced. If left unspecified, we default to false.'
+          type: boolean
+        authentication:
+          allOf:
+          - $ref: '#/components/schemas/models.EndpointAuthentication'
+          description: 'This is used to define any custom authentication required by the endpoint. This
+
+            shouldn''t be needed often because webhook endpoints usually should be exposed to
+
+            the internet.'
+        content_type:
+          description: Content type for the endpoint. Defaults to application/json if not specified.
+          type: string
+        description:
+          description: 'Human-readable description of the endpoint. Think of this as metadata describing
+
+            the endpoint'
+          type: string
+        http_timeout:
+          description: Define endpoint http timeout in seconds.
+          type: integer
+        is_disabled:
+          description: This is used to manually enable/disable the endpoint.
+          type: boolean
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/models.MtlsClientCert'
+          description: mTLS client certificate configuration for the endpoint
+        name:
+          type: string
+        owner_id:
+          description: 'The OwnerID is used to group more than one endpoint together to achieve
+
+            [fanout](https://getconvoy.io/docs/manual/endpoints#Endpoint%20Owner%20ID)'
+          type: string
+        rate_limit:
+          description: 'Rate limit is the total number of requests to be sent to an endpoint in
+
+            the time duration specified in RateLimitDuration'
+          type: integer
+        rate_limit_duration:
+          description: Rate limit duration specifies the time range for the rate limit.
+          type: integer
+        secret:
+          description: Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.
+          type: string
+        slack_webhook_url:
+          description: 'Slack webhook URL is an alternative method to support email where endpoint developers
+
+            can receive failure notifications on a slack channel.'
+          type: string
+        support_email:
+          description: 'Endpoint developers support email. This is used for communicating endpoint state
+
+            changes. You should always turn this on when disabling endpoints are enabled.'
+          type: string
+        url:
+          description: 'URL is the endpoint''s URL prefixed with https. non-https urls are currently
+
+            not supported.'
+          type: string
+      type: object
+    datastore.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    models.TestOAuth2Request:
+      properties:
+        oauth2:
+          $ref: '#/components/schemas/models.OAuth2'
+      type: object
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    models.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC) or private exponent (RSA)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    datastore.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC only)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    models.ExpireSecret:
+      properties:
+        expiration:
+          description: 'Amount of time to wait before expiring the old endpoint secret.
+
+            If AdvancedSignatures is turned on for the project, signatures for both secrets will be generated up until
+
+            the old signature is expired.'
+          type: integer
+        secret:
+          description: New Endpoint secret value.
+          type: string
+      type: object
+    datastore.OAuth2AuthenticationType:
+      enum:
+      - shared_secret
+      - client_assertion
+      type: string
+      x-enum-varnames:
+      - SharedSecretAuth
+      - ClientAssertionAuth
+    datastore.EndpointAuthentication:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/datastore.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    models.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      required:
+      - header_name
+      - header_value
+      type: object
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+          nullable: true
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    models.EndpointAuthentication:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/models.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/models.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/models.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+      type: object
+    models.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        expiry_time_unit:
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+          type: string
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/models.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          $ref: '#/components/schemas/models.OAuth2SigningKey'
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    models.EndpointResponse:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    models.TestOAuth2Response:
+      properties:
+        access_token:
+          type: string
+        error:
+          type: string
+        expires_at:
+          type: string
+        message:
+          type: string
+        success:
+          type: boolean
+        token_type:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKeyAuth:
+      in: header
+      name: Authorization
+      type: apiKey
