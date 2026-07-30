@@ -8,6 +8,19 @@ description: >-
 url: https://github.com/api-evangelist/convoy
 humanURL: https://getconvoy.io
 baseURL: https://us.getconvoy.cloud/api
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://avatars.githubusercontent.com/u/64033435?s=200&v=4
 created: '2026-05-22'
 modified: '2026-05-22'
@@ -23,70 +36,534 @@ tags:
   - Integration
   - API Infrastructure
 apis:
-  - name: Convoy API
-    description: >-
-      The Convoy REST API, version 26.3.5, exposes 44 operations across 11 resource groups for managing webhook delivery
-      infrastructure: Subscriptions, Endpoints, Events, Sources, Event Deliveries, Delivery Attempts, Portal Links, Meta
-      Events, Event Types, Filters, and Onboard. All operations are scoped to a project (`/v1/projects/{projectID}/...`)
-      and authenticated via Bearer API key in the Authorization header. The managed cloud is split into
-      independently-deployed US and EU regions.
-    humanURL: https://getconvoy.io/docs/api-reference/welcome
-    baseURL: https://us.getconvoy.cloud/api
-    image: https://avatars.githubusercontent.com/u/64033435?s=200&v=4
-    aid: convoy:convoy-api
-    tags:
-      - Webhooks
-      - Event Delivery
-      - API Gateway
-      - Subscriptions
-      - Endpoints
-    properties:
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json
-      - type: OpenAPI
-        url: ./openapi/convoy-openapi.yml
-      - type: APIReference
-        url: https://getconvoy.io/docs/api-reference/welcome
-      - type: Documentation
-        url: https://getconvoy.io/docs/
-      - type: Authentication
-        url: https://getconvoy.io/docs/api-reference/authentication
-      - type: GettingStarted
-        url: https://getconvoy.io/docs/quickstart
-      - type: Regions
-        url: https://getconvoy.io/docs
-      - type: GitHubRepository
-        url: https://github.com/frain-dev/convoy
-      - type: TermsOfService
-        url: https://getconvoy.io/terms
-      - type: JSONSchema
-        url: ./json-schema/convoy-endpoint-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-event-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-event-delivery-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-delivery-attempt-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-subscription-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-source-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-portal-link-schema.json
-      - type: JSONSchema
-        url: ./json-schema/convoy-event-type-schema.json
-      - type: JSONLD
-        url: ./json-ld/convoy-context.jsonld
-      - type: SpectralRules
-        url: ./rules/convoy-rules.yml
-      - type: Vocabulary
-        url: ./vocabulary/convoy-vocabulary.yml
-      - type: Examples
-        url: ./examples/
-    contact:
-      - FN: Convoy Support
-        email: support@getconvoy.io
-        url: https://getconvoy.io/docs
+- aid: convoy:convoy-delivery-attempts-api
+  name: Convoy Delivery Attempts API
+  description: Delivery Attempt related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Delivery Attempts
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-delivery-attempts-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-endpoints-api
+  name: Convoy Endpoints API
+  description: Endpoint related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-endpoints-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-event-deliveries-api
+  name: Convoy Event Deliveries API
+  description: EventDelivery related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Event Deliveries
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-event-deliveries-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-events-api
+  name: Convoy Events API
+  description: Event related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-events-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-eventtypes-api
+  name: Convoy EventTypes API
+  description: Event Types related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - EventTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-eventtypes-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-filters-api
+  name: Convoy Filters API
+  description: Filters related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Filters
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-filters-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-meta-events-api
+  name: Convoy Meta Events API
+  description: Meta Events related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Meta Events
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-meta-events-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-onboard-api
+  name: Convoy Onboard API
+  description: Onboard related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Onboard
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-onboard-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-portal-links-api
+  name: Convoy Portal Links API
+  description: Portal Links related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Portal Links
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-portal-links-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-sources-api
+  name: Convoy Sources API
+  description: Source related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-sources-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
+- aid: convoy:convoy-subscriptions-api
+  name: Convoy Subscriptions API
+  description: Subscription related APIs
+  humanURL: https://getconvoy.io/docs/api-reference/welcome
+  baseURL: https://us.getconvoy.cloud/api
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/convoy-subscriptions-api-openapi.yml
+  - type: APIReference
+    url: https://getconvoy.io/docs/api-reference/welcome
+  - type: Documentation
+    url: https://getconvoy.io/docs/
+  - type: Authentication
+    url: https://getconvoy.io/docs/api-reference/authentication
+  - type: GettingStarted
+    url: https://getconvoy.io/docs/quickstart
+  - type: Regions
+    url: https://getconvoy.io/docs
+  - type: GitHubRepository
+    url: https://github.com/frain-dev/convoy
+  - type: TermsOfService
+    url: https://getconvoy.io/terms
+  - type: JSONSchema
+    url: ./json-schema/convoy-endpoint-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-delivery-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-delivery-attempt-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-subscription-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-source-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-portal-link-schema.json
+  - type: JSONSchema
+    url: ./json-schema/convoy-event-type-schema.json
+  - type: JSONLD
+    url: ./json-ld/convoy-context.jsonld
+  - type: SpectralRules
+    url: ./rules/convoy-rules.yml
+  - type: Vocabulary
+    url: ./vocabulary/convoy-vocabulary.yml
+  - type: Examples
+    url: ./examples/
 common:
   - type: AgenticAccess
     url: agentic-access/convoy-agentic-access.yml
