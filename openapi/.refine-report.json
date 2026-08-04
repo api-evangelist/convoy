@@ -1,0 +1,34 @@
+{
+  "provider": "convoy",
+  "sources": [
+    "convoy-delivery-attempts-api-openapi.yml",
+    "convoy-endpoints-api-openapi.yml",
+    "convoy-event-deliveries-api-openapi.yml",
+    "convoy-events-api-openapi.yml",
+    "convoy-eventtypes-api-openapi.yml",
+    "convoy-filters-api-openapi.yml",
+    "convoy-meta-events-api-openapi.yml",
+    "convoy-onboard-api-openapi.yml",
+    "convoy-portal-links-api-openapi.yml",
+    "convoy-sources-api-openapi.yml",
+    "convoy-subscriptions-api-openapi.yml"
+  ],
+  "outputs": [
+    "convoy-delivery-attempts-api-openapi.yml",
+    "convoy-endpoints-api-openapi.yml",
+    "convoy-event-deliveries-api-openapi.yml",
+    "convoy-events-api-openapi.yml",
+    "convoy-eventtypes-api-openapi.yml",
+    "convoy-filters-api-openapi.yml",
+    "convoy-meta-events-api-openapi.yml",
+    "convoy-onboard-api-openapi.yml",
+    "convoy-portal-links-api-openapi.yml",
+    "convoy-sources-api-openapi.yml",
+    "convoy-subscriptions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
