@@ -565,6 +565,12 @@ apis:
   - type: Examples
     url: ./examples/
 common:
+  - type: IssueTracker
+    url: https://github.com/frain-dev/convoy/issues
+  - type: Releases
+    url: https://github.com/frain-dev/convoy/releases
+  - type: ContributionGuide
+    url: https://github.com/frain-dev/convoy/blob/main/CONTRIBUTING.md
   - type: AgenticAccess
     url: agentic-access/convoy-agentic-access.yml
   - type: DomainSecurity
