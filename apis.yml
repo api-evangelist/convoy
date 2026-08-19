@@ -24,7 +24,7 @@ accessModel:
 image: https://avatars.githubusercontent.com/u/64033435?s=200&v=4
 created: '2026-05-22'
 modified: '2026-05-22'
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 type: Index
 aid: convoy
 tags:
