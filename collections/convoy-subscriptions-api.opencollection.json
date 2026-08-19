@@ -1,0 +1,297 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Subscriptions API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate Source Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources/test_function",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint validates that a filter will match a certain payload structure."
+        },
+        {
+          "info": {
+            "name": "List All Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "A list of endpointIDs to filter by"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Subscription name to filter by"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches all the subscriptions"
+        },
+        {
+          "info": {
+            "name": "Create a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a subscriptions"
+        },
+        {
+          "info": {
+            "name": "Validate Subscription Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/test_filter",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint validates that a filter will match a certain payload structure."
+        },
+        {
+          "info": {
+            "name": "Test a Subscription Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/test_function",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint test runs a transform function against a payload."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "subscription id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a single subscription"
+        },
+        {
+          "info": {
+            "name": "Update a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "subscription id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates a subscription"
+        },
+        {
+          "info": {
+            "name": "Delete Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "subscription id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

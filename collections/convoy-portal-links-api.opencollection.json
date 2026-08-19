@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Portal Links API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Portal Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Portal Links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "ownerId",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "The owner ID of the endpoint"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "q",
+                "value": "endpoint-1",
+                "type": "query",
+                "description": "The name of the endpoint"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches multiple portal links"
+        },
+        {
+          "info": {
+            "name": "Create a Portal Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a portal link"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Portal Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links/:portalLinkID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "portalLinkID",
+                "value": "",
+                "type": "path",
+                "description": "portal link id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a portal link by its id."
+        },
+        {
+          "info": {
+            "name": "Update a Portal Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links/:portalLinkID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "portalLinkID",
+                "value": "",
+                "type": "path",
+                "description": "portal link id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates a portal link"
+        },
+        {
+          "info": {
+            "name": "Get a Portal Link Auth Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links/:portalLinkID/refresh_token",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "portalLinkID",
+                "value": "",
+                "type": "path",
+                "description": "portal link id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a portal link auth token"
+        },
+        {
+          "info": {
+            "name": "Revoke a Portal Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/portal-links/:portalLinkID/revoke",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "portalLinkID",
+                "value": "",
+                "type": "path",
+                "description": "portal link id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint revokes a portal link"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

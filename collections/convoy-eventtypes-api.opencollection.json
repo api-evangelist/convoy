@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts EventTypes API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EventTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a Project's Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/event-types",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches the project's event types"
+        },
+        {
+          "info": {
+            "name": "Create an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/event-types",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates an event type"
+        },
+        {
+          "info": {
+            "name": "Import Event Types From OpenAPI Spec",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/event-types/import",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint imports event types from an OpenAPI specification"
+        },
+        {
+          "info": {
+            "name": "Updates an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/event-types/:eventTypeId",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates an event type"
+        },
+        {
+          "info": {
+            "name": "Deprecates an Event Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/event-types/:eventTypeId/deprecate",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventTypeId",
+                "value": "",
+                "type": "path",
+                "description": "Event Type ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deprecates an event type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,310 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Filters API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches all filters for a subscription"
+        },
+        {
+          "info": {
+            "name": "Create a New Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a new filter for a subscription"
+        },
+        {
+          "info": {
+            "name": "Create Multiple Subscription Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/bulk",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates multiple filters for a subscription"
+        },
+        {
+          "info": {
+            "name": "Update Multiple Subscription Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/bulk_update",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates multiple filters for a subscription"
+        },
+        {
+          "info": {
+            "name": "Test a Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/test/:eventType",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              },
+              {
+                "name": "eventType",
+                "value": "",
+                "type": "path",
+                "description": "Event Type"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint tests a filter against a payload"
+        },
+        {
+          "info": {
+            "name": "Get a Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/:filterID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              },
+              {
+                "name": "filterID",
+                "value": "",
+                "type": "path",
+                "description": "Filter ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a single filter"
+        },
+        {
+          "info": {
+            "name": "Update a Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/:filterID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              },
+              {
+                "name": "filterID",
+                "value": "",
+                "type": "path",
+                "description": "Filter ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates an existing filter"
+        },
+        {
+          "info": {
+            "name": "Delete a Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/subscriptions/:subscriptionID/filters/:filterID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "subscriptionID",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              },
+              {
+                "name": "filterID",
+                "value": "",
+                "type": "path",
+                "description": "Filter ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a filter"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

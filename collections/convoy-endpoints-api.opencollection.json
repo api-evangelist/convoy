@@ -1,0 +1,336 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Endpoints API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "ownerId",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "The owner ID of the endpoint"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "q",
+                "value": "endpoint-1",
+                "type": "query",
+                "description": "The name of the endpoint"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches an endpoints"
+        },
+        {
+          "info": {
+            "name": "Create an Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates an endpoint"
+        },
+        {
+          "info": {
+            "name": "Test OAuth2 Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/oauth2/test",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint tests the OAuth2 connection by attempting to exchange a token"
+        },
+        {
+          "info": {
+            "name": "Retrieve Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches an endpoint"
+        },
+        {
+          "info": {
+            "name": "Update an Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates an endpoint"
+        },
+        {
+          "info": {
+            "name": "Delete Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes an endpoint"
+        },
+        {
+          "info": {
+            "name": "Activate Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID/activate",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Activated an inactive endpoint"
+        },
+        {
+          "info": {
+            "name": "Roll Endpoint Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID/expire_secret",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint expires and re-generates the endpoint secret."
+        },
+        {
+          "info": {
+            "name": "Pause Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/endpoints/:endpointID/pause",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "endpointID",
+                "value": "",
+                "type": "path",
+                "description": "Endpoint ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Toggles an endpoint's status between active and paused states"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

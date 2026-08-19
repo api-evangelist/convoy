@@ -1,0 +1,3137 @@
+{
+  "item": [
+    {
+      "id": "80f0453f-c52c-417b-848e-be3abd44fa0d",
+      "name": "Endpoints",
+      "description": {
+        "content": "Endpoint related APIs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a99ee661-ea8e-49dd-9621-90abfd5182df",
+          "name": "List All Endpoints",
+          "request": {
+            "name": "List All Endpoints",
+            "description": {
+              "content": "This endpoint fetches an endpoints",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_page_cursor",
+                  "value": "<string>",
+                  "description": "A pagination cursor to fetch the next page of a list"
+                },
+                {
+                  "disabled": false,
+                  "key": "ownerId",
+                  "value": "<string>",
+                  "description": "The owner ID of the endpoint"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>",
+                  "description": "The number of items to return per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "prev_page_cursor",
+                  "value": "<string>",
+                  "description": "A pagination cursor to fetch the previous page of a list"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The name of the endpoint"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5c7855a6-d624-420b-9a47-49751989b906",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_page_cursor",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "ownerId",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "20"
+                    },
+                    {
+                      "key": "prev_page_cursor",
+                      "value": "01H0JATTVCXZK8FRDX1M1JN3QY"
+                    },
+                    {
+                      "key": "q",
+                      "value": "endpoint-1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "ASC | DESC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"content\": [\n      {\n        \"advanced_signatures\": true,\n        \"authentication\": {\n          \"api_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"basic_auth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"oauth2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"content_type\": \"string\",\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"description\": \"string\",\n        \"events\": 2203,\n        \"failure_rate\": 4260.0358679818155,\n        \"http_timeout\": 9393,\n        \"mtls_client_cert\": {\n          \"client_cert\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"client_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"owner_id\": \"string\",\n        \"project_id\": \"string\",\n        \"rate_limit\": 8,\n        \"rate_limit_duration\": 8929,\n        \"secrets\": [\n          {\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expires_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expires_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"slack_webhook_url\": \"string\",\n        \"status\": \"paused\",\n        \"support_email\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"advanced_signatures\": true,\n        \"authentication\": {\n          \"api_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"basic_auth\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"oauth2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"content_type\": \"string\",\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"description\": \"string\",\n        \"events\": 7566,\n        \"failure_rate\": 8522.937813256936,\n        \"http_timeout\": 1764,\n        \"mtls_client_cert\": {\n          \"client_cert\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"client_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"owner_id\": \"string\",\n        \"project_id\": \"string\",\n        \"rate_limit\": 2269,\n        \"rate_limit_duration\": 8287,\n        \"secrets\": [\n          {\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expires_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"created_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"expires_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"updated_at\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"slack_webhook_url\": \"string\",\n        \"status\": \"paused\",\n        \"support_email\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"pagination\": {\n      \"has_next_page\": false,\n      \"has_prev_page\": true,\n      \"next_page_cursor\": \"string\",\n      \"per_page\": 2127,\n      \"prev_page_cursor\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da7507e7-a07f-48b1-957c-81a523dfd472",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_page_cursor",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "ownerId",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "20"
+                    },
+                    {
+                      "key": "prev_page_cursor",
+                      "value": "01H0JATTVCXZK8FRDX1M1JN3QY"
+                    },
+                    {
+                      "key": "q",
+                      "value": "endpoint-1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "ASC | DESC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f30a9d29-d36a-4f87-aa9f-629f220e1994",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_page_cursor",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "ownerId",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "20"
+                    },
+                    {
+                      "key": "prev_page_cursor",
+                      "value": "01H0JATTVCXZK8FRDX1M1JN3QY"
+                    },
+                    {
+                      "key": "q",
+                      "value": "endpoint-1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "ASC | DESC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0f8351e-3ca1-4087-8663-a8ac308dcd74",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "next_page_cursor",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "ownerId",
+                      "value": "01H0JA5MEES38RRK3HTEJC647K"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "20"
+                    },
+                    {
+                      "key": "prev_page_cursor",
+                      "value": "01H0JATTVCXZK8FRDX1M1JN3QY"
+                    },
+                    {
+                      "key": "q",
+                      "value": "endpoint-1"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "ASC | DESC"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bddce2d-2dd9-4fd8-8539-60c1e0c287c9",
+          "name": "Create an Endpoint",
+          "request": {
+            "name": "Create an Endpoint",
+            "description": {
+              "content": "This endpoint creates an endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"appID\": \"<string>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f60b95d-aac4-4ef1-88ca-91ea6d2b3577",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"appID\": \"<string>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5885ed1f-5fbb-4feb-b553-9423689e8994",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"appID\": \"<string>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e70c4bf5-b98e-4e69-bf00-8f07b5b98299",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"appID\": \"<string>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcc8af51-5aa5-4436-b7da-f4493aa7abd3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"appID\": \"<string>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ceb7851-f886-423a-b933-dfb8512e1f3b",
+          "name": "Test OAuth2 Connection",
+          "request": {
+            "name": "Test OAuth2 Connection",
+            "description": {
+              "content": "This endpoint tests the OAuth2 connection by attempting to exchange a token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                "oauth2",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oauth2\": {\n    \"audience\": \"<string>\",\n    \"authentication_type\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"client_secret\": \"<string>\",\n    \"expiry_time_unit\": \"<string>\",\n    \"field_mapping\": {\n      \"access_token\": \"<string>\",\n      \"expires_in\": \"<string>\",\n      \"token_type\": \"<string>\"\n    },\n    \"grant_type\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"scope\": \"<string>\",\n    \"signing_algorithm\": \"<string>\",\n    \"signing_key\": {\n      \"crv\": \"<string>\",\n      \"d\": \"<string>\",\n      \"dp\": \"<string>\",\n      \"dq\": \"<string>\",\n      \"e\": \"<string>\",\n      \"kid\": \"<string>\",\n      \"kty\": \"<string>\",\n      \"n\": \"<string>\",\n      \"p\": \"<string>\",\n      \"q\": \"<string>\",\n      \"qi\": \"<string>\",\n      \"x\": \"<string>\",\n      \"y\": \"<string>\"\n    },\n    \"subject\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44492601-9de2-4dfe-8d54-80190ad0da99",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    "oauth2",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oauth2\": {\n    \"audience\": \"<string>\",\n    \"authentication_type\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"client_secret\": \"<string>\",\n    \"expiry_time_unit\": \"<string>\",\n    \"field_mapping\": {\n      \"access_token\": \"<string>\",\n      \"expires_in\": \"<string>\",\n      \"token_type\": \"<string>\"\n    },\n    \"grant_type\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"scope\": \"<string>\",\n    \"signing_algorithm\": \"<string>\",\n    \"signing_key\": {\n      \"crv\": \"<string>\",\n      \"d\": \"<string>\",\n      \"dp\": \"<string>\",\n      \"dq\": \"<string>\",\n      \"e\": \"<string>\",\n      \"kid\": \"<string>\",\n      \"kty\": \"<string>\",\n      \"n\": \"<string>\",\n      \"p\": \"<string>\",\n      \"q\": \"<string>\",\n      \"qi\": \"<string>\",\n      \"x\": \"<string>\",\n      \"y\": \"<string>\"\n    },\n    \"subject\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": true,\n  \"data\": {\n    \"access_token\": \"string\",\n    \"error\": \"string\",\n    \"expires_at\": \"string\",\n    \"message\": \"string\",\n    \"success\": true,\n    \"token_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8be828a6-4ab5-4a1c-80d8-2fc3706e4e01",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    "oauth2",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oauth2\": {\n    \"audience\": \"<string>\",\n    \"authentication_type\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"client_secret\": \"<string>\",\n    \"expiry_time_unit\": \"<string>\",\n    \"field_mapping\": {\n      \"access_token\": \"<string>\",\n      \"expires_in\": \"<string>\",\n      \"token_type\": \"<string>\"\n    },\n    \"grant_type\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"scope\": \"<string>\",\n    \"signing_algorithm\": \"<string>\",\n    \"signing_key\": {\n      \"crv\": \"<string>\",\n      \"d\": \"<string>\",\n      \"dp\": \"<string>\",\n      \"dq\": \"<string>\",\n      \"e\": \"<string>\",\n      \"kid\": \"<string>\",\n      \"kty\": \"<string>\",\n      \"n\": \"<string>\",\n      \"p\": \"<string>\",\n      \"q\": \"<string>\",\n      \"qi\": \"<string>\",\n      \"x\": \"<string>\",\n      \"y\": \"<string>\"\n    },\n    \"subject\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86758794-4b27-4b82-9e83-68bda31771cd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    "oauth2",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oauth2\": {\n    \"audience\": \"<string>\",\n    \"authentication_type\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"client_secret\": \"<string>\",\n    \"expiry_time_unit\": \"<string>\",\n    \"field_mapping\": {\n      \"access_token\": \"<string>\",\n      \"expires_in\": \"<string>\",\n      \"token_type\": \"<string>\"\n    },\n    \"grant_type\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"scope\": \"<string>\",\n    \"signing_algorithm\": \"<string>\",\n    \"signing_key\": {\n      \"crv\": \"<string>\",\n      \"d\": \"<string>\",\n      \"dp\": \"<string>\",\n      \"dq\": \"<string>\",\n      \"e\": \"<string>\",\n      \"kid\": \"<string>\",\n      \"kty\": \"<string>\",\n      \"n\": \"<string>\",\n      \"p\": \"<string>\",\n      \"q\": \"<string>\",\n      \"qi\": \"<string>\",\n      \"x\": \"<string>\",\n      \"y\": \"<string>\"\n    },\n    \"subject\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3469e159-2009-4f95-ae04-eff40498fb21",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    "oauth2",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oauth2\": {\n    \"audience\": \"<string>\",\n    \"authentication_type\": \"<string>\",\n    \"client_id\": \"<string>\",\n    \"client_secret\": \"<string>\",\n    \"expiry_time_unit\": \"<string>\",\n    \"field_mapping\": {\n      \"access_token\": \"<string>\",\n      \"expires_in\": \"<string>\",\n      \"token_type\": \"<string>\"\n    },\n    \"grant_type\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"scope\": \"<string>\",\n    \"signing_algorithm\": \"<string>\",\n    \"signing_key\": {\n      \"crv\": \"<string>\",\n      \"d\": \"<string>\",\n      \"dp\": \"<string>\",\n      \"dq\": \"<string>\",\n      \"e\": \"<string>\",\n      \"kid\": \"<string>\",\n      \"kty\": \"<string>\",\n      \"n\": \"<string>\",\n      \"p\": \"<string>\",\n      \"q\": \"<string>\",\n      \"qi\": \"<string>\",\n      \"x\": \"<string>\",\n      \"y\": \"<string>\"\n    },\n    \"subject\": \"<string>\",\n    \"url\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a825a98-b56c-4a20-accb-fb50a736876a",
+          "name": "Delete Endpoint",
+          "request": {
+            "name": "Delete Endpoint",
+            "description": {
+              "content": "This endpoint deletes an endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea36b3d7-9f92-4ed7-929a-af05a0d22c6b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "405dcfb8-5ca7-4103-b961-3a6228a38a26",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed8f0268-e093-49f5-a7ea-ae208d123211",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bde0790-73ff-4162-bf17-3b0463bb2984",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f92bc5c1-cb46-4b95-971a-f9ff98cb8f29",
+          "name": "Retrieve Endpoint",
+          "request": {
+            "name": "Retrieve Endpoint",
+            "description": {
+              "content": "This endpoint fetches an endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a9fb879-24bd-476f-8985-c16979eb12b1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6574c5e5-f727-496c-b925-abb3f23b899d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a640f53-1c05-4eae-aab6-c840bb28a25a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28b63631-dd53-49a7-81c9-fe01b95612cb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83008424-c8e1-45b4-b061-105a3258bf71",
+          "name": "Update an Endpoint",
+          "request": {
+            "name": "Update an Endpoint",
+            "description": {
+              "content": "This endpoint updates an endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "00ed8b36-2fee-489c-9184-015f4bbc3739",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30ae54b3-af72-481a-966b-b4ed6f29dca0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cd969f1-bbe0-422e-bd57-38765eb33dae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4df79a9-b235-45af-91f2-c74ea49dfa2e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"advanced_signatures\": \"<boolean>\",\n  \"authentication\": {\n    \"api_key\": {\n      \"header_name\": \"<string>\",\n      \"header_value\": \"<string>\"\n    },\n    \"basic_auth\": {\n      \"password\": \"<string>\",\n      \"username\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"audience\": \"<string>\",\n      \"authentication_type\": \"<string>\",\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"expiry_time_unit\": \"<string>\",\n      \"field_mapping\": {\n        \"access_token\": \"<string>\",\n        \"expires_in\": \"<string>\",\n        \"token_type\": \"<string>\"\n      },\n      \"grant_type\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"scope\": \"<string>\",\n      \"signing_algorithm\": \"<string>\",\n      \"signing_key\": {\n        \"crv\": \"<string>\",\n        \"d\": \"<string>\",\n        \"dp\": \"<string>\",\n        \"dq\": \"<string>\",\n        \"e\": \"<string>\",\n        \"kid\": \"<string>\",\n        \"kty\": \"<string>\",\n        \"n\": \"<string>\",\n        \"p\": \"<string>\",\n        \"q\": \"<string>\",\n        \"qi\": \"<string>\",\n        \"x\": \"<string>\",\n        \"y\": \"<string>\"\n      },\n      \"subject\": \"<string>\",\n      \"url\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"content_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"http_timeout\": \"<integer>\",\n  \"is_disabled\": \"<boolean>\",\n  \"mtls_client_cert\": {\n    \"client_cert\": \"<string>\",\n    \"client_key\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"owner_id\": \"<string>\",\n  \"rate_limit\": \"<integer>\",\n  \"rate_limit_duration\": \"<integer>\",\n  \"secret\": \"<string>\",\n  \"slack_webhook_url\": \"<string>\",\n  \"support_email\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "016422c5-8f70-4b64-8ac8-2166970f45a1",
+          "name": "Activate Endpoint",
+          "request": {
+            "name": "Activate Endpoint",
+            "description": {
+              "content": "Activated an inactive endpoint",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "715e886d-af75-45a2-999b-0ba0dccee05d",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dad743e3-7966-4097-a45d-74a05fa403a0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00b21a4d-e37f-45b2-a567-16de58bb4ebe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "586d0646-e3bf-4b6e-96d9-b8b9ab9a538d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b9bda4a-0be8-4804-b90e-98ac4fcf3487",
+          "name": "Roll Endpoint Secret",
+          "request": {
+            "name": "Roll Endpoint Secret",
+            "description": {
+              "content": "This endpoint expires and re-generates the endpoint secret.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID",
+                "expire_secret"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expiration\": \"<integer>\",\n  \"secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17a404de-6666-4eca-83bd-d247fb1b26d3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "expire_secret"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiration\": \"<integer>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "070d902c-b9ed-42d1-9573-01b8d905ebd9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "expire_secret"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiration\": \"<integer>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "949203f8-6262-4063-8b0c-e2badfa247e6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "expire_secret"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiration\": \"<integer>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09bc42a8-3346-4656-bf3e-b6e5a0645870",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "expire_secret"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiration\": \"<integer>\",\n  \"secret\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f17f2709-a082-44e7-8aa5-f8612b444d52",
+          "name": "Pause Endpoint",
+          "request": {
+            "name": "Pause Endpoint",
+            "description": {
+              "content": "Toggles an endpoint's status between active and paused states",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":projectID",
+                "endpoints",
+                ":endpointID",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectID",
+                  "description": "(Required) Project ID"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "endpointID",
+                  "description": "(Required) Endpoint ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7a871279-793c-4d34-bdbd-a2667e778425",
+              "name": "Accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {\n    \"advanced_signatures\": true,\n    \"authentication\": {\n      \"api_key\": {\n        \"header_name\": \"string\",\n        \"header_value\": \"string\"\n      },\n      \"basic_auth\": {\n        \"password\": \"string\",\n        \"username\": \"string\"\n      },\n      \"oauth2\": {\n        \"audience\": \"string\",\n        \"authentication_type\": \"client_assertion\",\n        \"client_id\": \"string\",\n        \"client_secret\": \"string\",\n        \"expiry_time_unit\": {\n          \"description\": \"Expiry time unit (seconds, milliseconds, minutes, hours)\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field_mapping\": {\n          \"description\": \"Field mapping for flexible token response parsing\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grant_type\": \"string\",\n        \"issuer\": \"string\",\n        \"scope\": \"string\",\n        \"signing_algorithm\": \"string\",\n        \"signing_key\": {\n          \"description\": \"Encrypted at rest\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"subject\": \"string\",\n        \"url\": \"string\"\n      },\n      \"type\": \"<string>\"\n    },\n    \"content_type\": \"string\",\n    \"created_at\": \"string\",\n    \"deleted_at\": \"string\",\n    \"description\": \"string\",\n    \"events\": 313,\n    \"failure_rate\": 8698.188633110258,\n    \"http_timeout\": 8494,\n    \"mtls_client_cert\": {\n      \"client_cert\": \"string\",\n      \"client_key\": \"string\"\n    },\n    \"name\": \"string\",\n    \"owner_id\": \"string\",\n    \"project_id\": \"string\",\n    \"rate_limit\": 1008,\n    \"rate_limit_duration\": 3563,\n    \"secrets\": [\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"created_at\": \"string\",\n        \"deleted_at\": \"string\",\n        \"expires_at\": \"string\",\n        \"uid\": \"string\",\n        \"updated_at\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"slack_webhook_url\": \"string\",\n    \"status\": \"paused\",\n    \"support_email\": \"string\",\n    \"uid\": \"string\",\n    \"updated_at\": \"string\",\n    \"url\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c50b1fad-d512-4bab-bad5-624230d20e48",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc657610-64e3-4577-9478-f5de237c51fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10d37882-8ec0-44d0-9670-2654580cc446",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":projectID",
+                    "endpoints",
+                    ":endpointID",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectID",
+                      "description": "(Required) Project ID"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "endpointID",
+                      "description": "(Required) Endpoint ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"status\": false,\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us.getconvoy.cloud/api",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aad613a3-8cbd-4630-a0f1-6048a2723adb",
+    "name": "Convoy API Reference Delivery Attempts Endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Convoy is a fast and secure webhooks proxy. This document contains datastore's API specification.\n\nContact Support:\n Name: Convoy Support\n Email: support@getconvoy.io",
+      "type": "text/plain"
+    }
+  }
+}

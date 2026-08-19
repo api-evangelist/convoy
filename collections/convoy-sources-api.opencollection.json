@@ -1,0 +1,210 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Sources API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "provider",
+                "value": "twitter",
+                "type": "query",
+                "description": "The custom source provider e.g. twitter, shopify"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              },
+              {
+                "name": "type",
+                "value": "http",
+                "type": "query",
+                "description": "The source type e.g. http, pub_sub"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches multiple sources"
+        },
+        {
+          "info": {
+            "name": "Create a Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a source"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources/:sourceID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "sourceID",
+                "value": "",
+                "type": "path",
+                "description": "Source ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves a source by its id"
+        },
+        {
+          "info": {
+            "name": "Update a Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources/:sourceID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "sourceID",
+                "value": "",
+                "type": "path",
+                "description": "source id"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint updates a source"
+        },
+        {
+          "info": {
+            "name": "Delete a Source",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/sources/:sourceID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "sourceID",
+                "value": "",
+                "type": "path",
+                "description": "source id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint deletes a source"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

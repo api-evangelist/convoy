@@ -1,0 +1,376 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Events API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "2008-05-02T15:04:05",
+                "type": "query",
+                "description": "The end date"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "A list of endpoint ids to filter by"
+              },
+              {
+                "name": "idempotencyKey",
+                "value": "",
+                "type": "query",
+                "description": "IdempotencyKey to filter by"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Any arbitrary value to filter the events payload"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "A list of Source IDs to filter the events by."
+              },
+              {
+                "name": "startDate",
+                "value": "2006-01-02T15:04:05",
+                "type": "query",
+                "description": "The start date"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches app events with pagination"
+        },
+        {
+          "info": {
+            "name": "Create an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates an endpoint event"
+        },
+        {
+          "info": {
+            "name": "Batch Replay Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/batchreplay",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "2008-05-02T15:04:05",
+                "type": "query",
+                "description": "The end date"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "A list of endpoint ids to filter by"
+              },
+              {
+                "name": "idempotencyKey",
+                "value": "",
+                "type": "query",
+                "description": "IdempotencyKey to filter by"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Any arbitrary value to filter the events payload"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              },
+              {
+                "name": "sourceId",
+                "value": "",
+                "type": "query",
+                "description": "A list of Source IDs to filter the events by."
+              },
+              {
+                "name": "startDate",
+                "value": "2006-01-02T15:04:05",
+                "type": "query",
+                "description": "The start date"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint replays multiple events at once."
+        },
+        {
+          "info": {
+            "name": "Create a Broadcast Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/broadcast",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates a event that is broadcast to every endpoint whose subscription matches the given event type."
+        },
+        {
+          "info": {
+            "name": "Dynamic Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/dynamic",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint does not require creating endpoint and subscriptions ahead of time. Instead, you supply the endpoint and the payload, and Convoy delivers the events"
+        },
+        {
+          "info": {
+            "name": "Fan Out an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/fanout",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint uses the owner_id to fan out an event to multiple endpoints."
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/:eventID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventID",
+                "value": "",
+                "type": "path",
+                "description": "event id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves an event"
+        },
+        {
+          "info": {
+            "name": "Replay Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/events/:eventID/replay",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventID",
+                "value": "",
+                "type": "path",
+                "description": "event id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint replays an event afresh assuming it is a new event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

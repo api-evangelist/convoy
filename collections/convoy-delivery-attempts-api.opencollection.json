@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delivery Attempts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Delivery Attempts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/:eventDeliveryID/deliveryattempts",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventDeliveryID",
+                "value": "",
+                "type": "path",
+                "description": "event delivery id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches an app message's delivery attempts"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Delivery Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/:eventDeliveryID/deliveryattempts/:deliveryAttemptID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventDeliveryID",
+                "value": "",
+                "type": "path",
+                "description": "event delivery id"
+              },
+              {
+                "name": "deliveryAttemptID",
+                "value": "",
+                "type": "path",
+                "description": "delivery attempt id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches an app event delivery attempt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Convoy API Reference Delivery Attempts Event Deliveries API",
+    "version": "26.3.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Deliveries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Event Deliveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "2008-05-02T15:04:05",
+                "type": "query",
+                "description": "The end date"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "A list of endpoint IDs to filter by"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Event ID to filter by"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "EventType to filter by"
+              },
+              {
+                "name": "idempotencyKey",
+                "value": "",
+                "type": "query",
+                "description": "IdempotencyKey to filter by"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              },
+              {
+                "name": "startDate",
+                "value": "2006-01-02T15:04:05",
+                "type": "query",
+                "description": "The start date"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "A list of event delivery statuses to filter by"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "SubscriptionID to filter by"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retrieves all event deliveries paginated."
+        },
+        {
+          "info": {
+            "name": "Batch Retry Event Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/batchretry",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endDate",
+                "value": "2008-05-02T15:04:05",
+                "type": "query",
+                "description": "The end date"
+              },
+              {
+                "name": "endpointId",
+                "value": "",
+                "type": "query",
+                "description": "A list of endpoint IDs to filter by"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "query",
+                "description": "Event ID to filter by"
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "EventType to filter by"
+              },
+              {
+                "name": "idempotencyKey",
+                "value": "",
+                "type": "query",
+                "description": "IdempotencyKey to filter by"
+              },
+              {
+                "name": "next_page_cursor",
+                "value": "01H0JA5MEES38RRK3HTEJC647K",
+                "type": "query",
+                "description": "A pagination cursor to fetch the next page of a list"
+              },
+              {
+                "name": "perPage",
+                "value": "20",
+                "type": "query",
+                "description": "The number of items to return per page"
+              },
+              {
+                "name": "prev_page_cursor",
+                "value": "01H0JATTVCXZK8FRDX1M1JN3QY",
+                "type": "query",
+                "description": "A pagination cursor to fetch the previous page of a list"
+              },
+              {
+                "name": "sort",
+                "value": "ASC | DESC",
+                "type": "query",
+                "description": "Sort order, values are `ASC` or `DESC`, defaults to `DESC`"
+              },
+              {
+                "name": "startDate",
+                "value": "2006-01-02T15:04:05",
+                "type": "query",
+                "description": "The start date"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "A list of event delivery statuses to filter by"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "SubscriptionID to filter by"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint batch retries multiple event deliveries at once."
+        },
+        {
+          "info": {
+            "name": "Force Retry Event Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/forceresend",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint enables you retry a previously successful event delivery"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Event Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/:eventDeliveryID",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventDeliveryID",
+                "value": "",
+                "type": "path",
+                "description": "event delivery id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint fetches an event delivery."
+        },
+        {
+          "info": {
+            "name": "Retry Event Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://us.getconvoy.cloud/api/v1/projects/:projectID/eventdeliveries/:eventDeliveryID/resend",
+            "params": [
+              {
+                "name": "projectID",
+                "value": "",
+                "type": "path",
+                "description": "Project ID"
+              },
+              {
+                "name": "eventDeliveryID",
+                "value": "",
+                "type": "path",
+                "description": "event delivery id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint retries an event delivery."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
