@@ -28,6 +28,14 @@ specificationVersion: '0.23'
 type: Index
 aid: convoy
 tags:
+  - Webhook
+  - Webhook Gateway
+  - Event Delivery
+  - Eventing
+  - Messaging
+  - Integration
+  - API Infrastructure
+tags_raw:
   - Webhooks
   - Webhook Gateway
   - Event Delivery
@@ -89,7 +97,8 @@ apis:
   description: Endpoint related APIs
   humanURL: https://getconvoy.io/docs/api-reference/welcome
   baseURL: https://us.getconvoy.cloud/api
-  tags:
+  tags: []
+  tags_raw:
   - Endpoints
   properties:
   - type: OpenAPI
@@ -186,6 +195,8 @@ apis:
   humanURL: https://getconvoy.io/docs/api-reference/welcome
   baseURL: https://us.getconvoy.cloud/api
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -234,6 +245,8 @@ apis:
   humanURL: https://getconvoy.io/docs/api-reference/welcome
   baseURL: https://us.getconvoy.cloud/api
   tags:
+  - Event Types
+  tags_raw:
   - EventTypes
   properties:
   - type: OpenAPI
@@ -522,6 +535,8 @@ apis:
   humanURL: https://getconvoy.io/docs/api-reference/welcome
   baseURL: https://us.getconvoy.cloud/api
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
