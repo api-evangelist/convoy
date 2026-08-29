@@ -593,6 +593,9 @@ apis:
   - type: Examples
     url: ./examples/
 common:
+  - type: CapabilityMap
+    url: capabilities/convoy-capability-edges.yml
+    name: Convoy Business Capability Map
   - type: IssueTracker
     url: https://github.com/frain-dev/convoy/issues
   - type: Releases
