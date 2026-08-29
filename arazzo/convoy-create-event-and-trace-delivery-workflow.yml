@@ -11,8 +11,14 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convoyApi
-  url: ../openapi/convoy-openapi.yml
+- name: deliveryAttemptsApi
+  url: ../openapi/convoy-delivery-attempts-api-openapi.yml
+  type: openapi
+- name: eventDeliveriesApi
+  url: ../openapi/convoy-event-deliveries-api-openapi.yml
+  type: openapi
+- name: eventsApi
+  url: ../openapi/convoy-events-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: create-event-and-trace-delivery

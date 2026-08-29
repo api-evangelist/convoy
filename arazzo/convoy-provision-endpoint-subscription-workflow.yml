@@ -11,8 +11,17 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convoyApi
-  url: ../openapi/convoy-openapi.yml
+- name: endpointsApi
+  url: ../openapi/convoy-endpoints-api-openapi.yml
+  type: openapi
+- name: eventDeliveriesApi
+  url: ../openapi/convoy-event-deliveries-api-openapi.yml
+  type: openapi
+- name: eventsApi
+  url: ../openapi/convoy-events-api-openapi.yml
+  type: openapi
+- name: subscriptionsApi
+  url: ../openapi/convoy-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: provision-endpoint-subscription

@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convoyApi
-  url: ../openapi/convoy-openapi.yml
+- name: filtersApi
+  url: ../openapi/convoy-filters-api-openapi.yml
+  type: openapi
+- name: subscriptionsApi
+  url: ../openapi/convoy-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: attach-filter-to-subscription

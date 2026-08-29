@@ -11,8 +11,11 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convoyApi
-  url: ../openapi/convoy-openapi.yml
+- name: deliveryAttemptsApi
+  url: ../openapi/convoy-delivery-attempts-api-openapi.yml
+  type: openapi
+- name: eventDeliveriesApi
+  url: ../openapi/convoy-event-deliveries-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: retry-failed-delivery

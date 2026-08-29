@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: convoyApi
-  url: ../openapi/convoy-openapi.yml
+- name: sourcesApi
+  url: ../openapi/convoy-sources-api-openapi.yml
+  type: openapi
+- name: subscriptionsApi
+  url: ../openapi/convoy-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: register-incoming-source
