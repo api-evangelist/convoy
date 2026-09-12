@@ -594,6 +594,8 @@ apis:
   - type: Examples
     url: ./examples/
 common:
+  - type: Website
+    url: https://www.getconvoy.io/
   - type: CapabilityMap
     url: capabilities/convoy-capability-edges.yml
     name: Convoy Business Capability Map
