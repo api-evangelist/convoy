@@ -41,7 +41,8 @@ edges:
   reason: Endpoints here are webhook subscriber destinations with signing secrets — lifecycle of outbound
     webhook subscriptions.
 - tag: EventTypes
-  spec_file: convoy-eventtypes-api-openapi.yml
+  spec_file: convoy-event-types-api-openapi.yml
+  reanchored_from: convoy-eventtypes-api-openapi.yml
   capability_id: BC-4270.80
   capability_id_l1: BC-4270
   capability_name: Webhook & Event Subscription Management
