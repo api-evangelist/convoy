@@ -1,24 +1,14 @@
 {
   "provider": "convoy",
   "sources": [
-    "convoy-delivery-attempts-api-openapi.yml",
-    "convoy-endpoints-api-openapi.yml",
-    "convoy-event-deliveries-api-openapi.yml",
-    "convoy-events-api-openapi.yml",
-    "convoy-eventtypes-api-openapi.yml",
-    "convoy-filters-api-openapi.yml",
-    "convoy-meta-events-api-openapi.yml",
-    "convoy-onboard-api-openapi.yml",
-    "convoy-portal-links-api-openapi.yml",
-    "convoy-sources-api-openapi.yml",
-    "convoy-subscriptions-api-openapi.yml"
+    "_original/convoy-openapi.yml"
   ],
   "outputs": [
     "convoy-delivery-attempts-api-openapi.yml",
     "convoy-endpoints-api-openapi.yml",
     "convoy-event-deliveries-api-openapi.yml",
-    "convoy-events-api-openapi.yml",
     "convoy-eventtypes-api-openapi.yml",
+    "convoy-events-api-openapi.yml",
     "convoy-filters-api-openapi.yml",
     "convoy-meta-events-api-openapi.yml",
     "convoy-onboard-api-openapi.yml",
@@ -26,9 +16,28 @@
     "convoy-sources-api-openapi.yml",
     "convoy-subscriptions-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "convoy-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: convoy-event-types-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 11 total)"
+  ],
+  "skipped": [
+    "convoy-delivery-attempts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-event-deliveries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-event-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-filters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-meta-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-onboard-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-portal-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "convoy-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

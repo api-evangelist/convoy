@@ -1,0 +1,25 @@
+# Front Door AI Index — convoy — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: convoy
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.getconvoy.io
+  final_host: www.getconvoy.io
+  ownership: own
+  owner: convoy
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 2.03
+  words: 492
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 0
+  top_terms:
+    LLMs: 1

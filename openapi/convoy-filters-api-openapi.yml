@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: support@getconvoy.io
@@ -9,7 +9,7 @@ info:
     name: Mozilla Public License 2.0
     url: https://www.mozilla.org/en-US/MPL/2.0/
   termsOfService: https://getconvoy.io/terms
-  title: Convoy API Reference Delivery Attempts Filters API
+  title: Convoy API Reference Filters API
   version: 26.3.5
 servers:
 - url: https://us.getconvoy.cloud/api
@@ -624,6 +624,26 @@ paths:
       summary: Update a Filter
 components:
   schemas:
+    models.FilterResponse:
+      properties:
+        body:
+          $ref: '#/components/schemas/datastore.M'
+        event_type:
+          type: string
+        headers:
+          $ref: '#/components/schemas/datastore.M'
+        raw_body:
+          $ref: '#/components/schemas/datastore.M'
+        raw_headers:
+          $ref: '#/components/schemas/datastore.M'
+        subscription_id:
+          type: string
+        uid:
+          type: string
+      type: object
+    datastore.M:
+      additionalProperties: true
+      type: object
     models.UpdateFilterRequest:
       properties:
         body:
@@ -641,25 +661,6 @@ components:
           description: Whether the filter uses flattened JSON paths (optional)
           type: boolean
       type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    models.TestFilterRequest:
-      properties:
-        payload:
-          description: Sample payload to test against the filter (required)
-      required:
-      - payload
-      type: object
-    handlers.Stub:
-      type: object
-    datastore.M:
-      additionalProperties: true
-      type: object
     models.CreateFilterRequest:
       properties:
         body:
@@ -676,10 +677,13 @@ components:
       required:
       - event_type
       type: object
-    models.TestFilterResponse:
+    handlers.Stub:
+      type: object
+    util.ServerResponse:
       properties:
-        is_match:
-          description: Whether the payload matches the filter criteria
+        message:
+          type: string
+        status:
           type: boolean
       type: object
     models.BulkUpdateFilterRequest:
@@ -697,22 +701,18 @@ components:
       required:
       - uid
       type: object
-    models.FilterResponse:
+    models.TestFilterRequest:
       properties:
-        body:
-          $ref: '#/components/schemas/datastore.M'
-        event_type:
-          type: string
-        headers:
-          $ref: '#/components/schemas/datastore.M'
-        raw_body:
-          $ref: '#/components/schemas/datastore.M'
-        raw_headers:
-          $ref: '#/components/schemas/datastore.M'
-        subscription_id:
-          type: string
-        uid:
-          type: string
+        payload:
+          description: Sample payload to test against the filter (required)
+      required:
+      - payload
+      type: object
+    models.TestFilterResponse:
+      properties:
+        is_match:
+          description: Whether the payload matches the filter criteria
+          type: boolean
       type: object
   securitySchemes:
     ApiKeyAuth:

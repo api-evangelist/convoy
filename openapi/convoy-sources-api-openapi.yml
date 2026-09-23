@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: support@getconvoy.io
@@ -9,7 +9,7 @@ info:
     name: Mozilla Public License 2.0
     url: https://www.mozilla.org/en-US/MPL/2.0/
   termsOfService: https://getconvoy.io/terms
-  title: Convoy API Reference Delivery Attempts Sources API
+  title: Convoy API Reference Sources API
   version: 26.3.5
 servers:
 - url: https://us.getconvoy.cloud/api
@@ -409,6 +409,14 @@ paths:
       summary: Update a Source
 components:
   schemas:
+    datastore.EncodingType:
+      enum:
+      - base64
+      - hex
+      type: string
+      x-enum-varnames:
+      - Base64Encoding
+      - HexEncoding
     models.HMac:
       properties:
         encoding:
@@ -425,6 +433,43 @@ components:
       - header
       - secret
       type: object
+    models.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      required:
+      - header_name
+      - header_value
+      type: object
+    datastore.TwitterProviderConfig:
+      properties:
+        crc_verified_at:
+          type: string
+      type: object
+    models.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/models.AmqpPubSubconfig'
+        google:
+          $ref: '#/components/schemas/models.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/models.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/models.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    models.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
     models.KafkaPubSubConfig:
       properties:
         auth:
@@ -437,6 +482,140 @@ components:
           type: string
         topic_name:
           type: string
+      type: object
+    models.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    datastore.VerifierConfig:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/datastore.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
+      type: object
+    handlers.Stub:
+      type: object
+    models.UpdateCustomResponse:
+      properties:
+        body:
+          type:
+          - string
+          - 'null'
+        content_type:
+          type:
+          - string
+          - 'null'
+      type: object
+    datastore.ProviderConfig:
+      properties:
+        twitter:
+          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
+      type: object
+    datastore.PubSubType:
+      enum:
+      - sqs
+      - google
+      - kafka
+      - amqp
+      type: string
+      x-enum-varnames:
+      - SqsPubSub
+      - GooglePubSub
+      - KafkaPubSub
+      - AmqpPubSub
+    models.VerifierConfig:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/models.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/models.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/models.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
+      required:
+      - type
+      type: object
+    datastore.AmqpPubSubConfig:
+      properties:
+        host:
+          type: string
+        auth:
+          $ref: '#/components/schemas/datastore.AmqpCredentials'
+        bindedExchange:
+          type: string
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        routingKey:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+    models.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      required:
+      - password
+      - username
+      type: object
+    models.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.VerifierType:
+      enum:
+      - noop
+      - hmac
+      - basic_auth
+      - api_key
+      type: string
+      x-enum-varnames:
+      - NoopVerifier
+      - HMacVerifier
+      - BasicAuthVerifier
+      - APIKeyVerifier
+    datastore.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
+        google:
+          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
       type: object
     datastore.KafkaPubSubConfig:
       properties:
@@ -451,30 +630,138 @@ components:
         topic_name:
           type: string
       type: object
-    models.BasicAuth:
+    datastore.SourceProvider:
+      enum:
+      - github
+      - twitter
+      - shopify
+      type: string
+      x-enum-varnames:
+      - GithubSourceProvider
+      - TwitterSourceProvider
+      - ShopifySourceProvider
+    datastore.SQSPubSubConfig:
       properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        endpoint:
+          description: 'Optional: for LocalStack testing'
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.KafkaAuth:
+      properties:
+        hash:
+          type: string
         password:
+          type: string
+        tls:
+          type: boolean
+        type:
           type: string
         username:
           type: string
-      required:
-      - password
-      - username
       type: object
-    datastore.PaginationData:
+    datastore.GooglePubSubConfig:
       properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
+        project_id:
           type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
           type: string
       type: object
-    handlers.Stub:
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.AmqpExchange:
+      properties:
+        exchange:
+          type: string
+        routingKey:
+          type: string
+      type: object
+    models.SourceResponse:
+      properties:
+        body_function:
+          type: string
+        created_at:
+          type: string
+        custom_response:
+          $ref: '#/components/schemas/datastore.CustomResponse'
+        deleted_at:
+          type: string
+        forward_headers:
+          items:
+            type: string
+          type: array
+        header_function:
+          type: string
+        idempotency_keys:
+          items:
+            type: string
+          type: array
+        is_disabled:
+          type: boolean
+        mask_id:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        provider:
+          $ref: '#/components/schemas/datastore.SourceProvider'
+        provider_config:
+          $ref: '#/components/schemas/datastore.ProviderConfig'
+        pub_sub:
+          $ref: '#/components/schemas/datastore.PubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.SourceType'
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+        verifier:
+          $ref: '#/components/schemas/datastore.VerifierConfig'
+      type: object
+    models.AmqpPubSubconfig:
+      properties:
+        host:
+          type: string
+        auth:
+          $ref: '#/components/schemas/models.AmqpAuth'
+        bindExchange:
+          $ref: '#/components/schemas/models.AmqpExchange'
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+    datastore.AmqpCredentials:
+      properties:
+        password:
+          type: string
+        user:
+          type: string
       type: object
     models.CreateSource:
       properties:
@@ -527,75 +814,12 @@ components:
 
             type object you choose.'
       type: object
-    datastore.ProviderConfig:
+    models.PagedResponse:
       properties:
-        twitter:
-          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
-      type: object
-    datastore.PubSubConfig:
-      properties:
-        amqp:
-          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
-        google:
-          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
-        kafka:
-          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
-        sqs:
-          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.PubSubType'
-        workers:
-          type: integer
-      type: object
-    datastore.KafkaAuth:
-      properties:
-        hash:
-          type: string
-        password:
-          type: string
-        tls:
-          type: boolean
-        type:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.SourceProvider:
-      enum:
-      - github
-      - twitter
-      - shopify
-      type: string
-      x-enum-varnames:
-      - GithubSourceProvider
-      - TwitterSourceProvider
-      - ShopifySourceProvider
-    datastore.EncodingType:
-      enum:
-      - base64
-      - hex
-      type: string
-      x-enum-varnames:
-      - Base64Encoding
-      - HexEncoding
-    datastore.PubSubType:
-      enum:
-      - sqs
-      - google
-      - kafka
-      - amqp
-      type: string
-      x-enum-varnames:
-      - SqsPubSub
-      - GooglePubSub
-      - KafkaPubSub
-      - AmqpPubSub
-    datastore.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
       type: object
     datastore.HMac:
       properties:
@@ -608,46 +832,59 @@ components:
         secret:
           type: string
       type: object
-    datastore.AmqpCredentials:
+    datastore.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    models.AmqpAuth:
       properties:
         password:
           type: string
         user:
           type: string
       type: object
-    datastore.VerifierType:
-      enum:
-      - noop
-      - hmac
-      - basic_auth
-      - api_key
-      type: string
-      x-enum-varnames:
-      - NoopVerifier
-      - HMacVerifier
-      - BasicAuthVerifier
-      - APIKeyVerifier
-    models.PubSubConfig:
+    datastore.BasicAuth:
       properties:
-        amqp:
-          $ref: '#/components/schemas/models.AmqpPubSubconfig'
-        google:
-          $ref: '#/components/schemas/models.GooglePubSubConfig'
-        kafka:
-          $ref: '#/components/schemas/models.KafkaPubSubConfig'
-        sqs:
-          $ref: '#/components/schemas/models.SQSPubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.PubSubType'
-        workers:
-          type: integer
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
+        password:
           type: string
-        status:
+        username:
+          type: string
+      type: object
+    models.KafkaAuth:
+      properties:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
           type: boolean
+        type:
+          type: string
+        username:
+          type: string
       type: object
     models.UpdateSource:
       properties:
@@ -704,143 +941,6 @@ components:
 
             type object you choose.'
       type: object
-    datastore.GooglePubSubConfig:
-      properties:
-        project_id:
-          type: string
-        service_account:
-          items:
-            type: integer
-          type: array
-        subscription_id:
-          type: string
-      type: object
-    models.SQSPubSubConfig:
-      properties:
-        access_key_id:
-          type: string
-        default_region:
-          type: string
-        queue_name:
-          type: string
-        secret_key:
-          type: string
-      type: object
-    models.GooglePubSubConfig:
-      properties:
-        project_id:
-          type: string
-        service_account:
-          items:
-            type: integer
-          type: array
-        subscription_id:
-          type: string
-      type: object
-    models.AmqpAuth:
-      properties:
-        password:
-          type: string
-        user:
-          type: string
-      type: object
-    datastore.BasicAuth:
-      properties:
-        password:
-          type: string
-        username:
-          type: string
-      type: object
-    models.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      required:
-      - header_name
-      - header_value
-      type: object
-    models.PagedResponse:
-      properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
-          nullable: true
-      type: object
-    datastore.CustomResponse:
-      properties:
-        body:
-          type: string
-        content_type:
-          type: string
-      type: object
-    models.CustomResponse:
-      properties:
-        body:
-          type: string
-        content_type:
-          type: string
-      type: object
-    models.VerifierConfig:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/models.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/models.BasicAuth'
-        hmac:
-          $ref: '#/components/schemas/models.HMac'
-        type:
-          $ref: '#/components/schemas/datastore.VerifierType'
-      required:
-      - type
-      type: object
-    models.SourceResponse:
-      properties:
-        body_function:
-          type: string
-        created_at:
-          type: string
-        custom_response:
-          $ref: '#/components/schemas/datastore.CustomResponse'
-        deleted_at:
-          type: string
-        forward_headers:
-          items:
-            type: string
-          type: array
-        header_function:
-          type: string
-        idempotency_keys:
-          items:
-            type: string
-          type: array
-        is_disabled:
-          type: boolean
-        mask_id:
-          type: string
-        name:
-          type: string
-        project_id:
-          type: string
-        provider:
-          $ref: '#/components/schemas/datastore.SourceProvider'
-        provider_config:
-          $ref: '#/components/schemas/datastore.ProviderConfig'
-        pub_sub:
-          $ref: '#/components/schemas/datastore.PubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.SourceType'
-        uid:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
-        verifier:
-          $ref: '#/components/schemas/datastore.VerifierConfig'
-      type: object
     datastore.SourceType:
       enum:
       - http
@@ -853,105 +953,6 @@ components:
       - RestApiSource
       - PubSubSource
       - DBChangeStream
-    models.AmqpExchange:
-      properties:
-        exchange:
-          type: string
-        routingKey:
-          type: string
-      type: object
-    models.KafkaAuth:
-      properties:
-        hash:
-          type: string
-        password:
-          type: string
-        tls:
-          type: boolean
-        type:
-          type: string
-        username:
-          type: string
-      type: object
-    models.UpdateCustomResponse:
-      properties:
-        body:
-          nullable: true
-          type: string
-        content_type:
-          nullable: true
-          type: string
-      type: object
-    datastore.VerifierConfig:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/datastore.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/datastore.BasicAuth'
-        hmac:
-          $ref: '#/components/schemas/datastore.HMac'
-        type:
-          $ref: '#/components/schemas/datastore.VerifierType'
-      type: object
-    models.AmqpPubSubconfig:
-      properties:
-        host:
-          type: string
-        auth:
-          $ref: '#/components/schemas/models.AmqpAuth'
-        bindExchange:
-          $ref: '#/components/schemas/models.AmqpExchange'
-        deadLetterExchange:
-          type: string
-        port:
-          type: string
-        queue:
-          type: string
-        schema:
-          type: string
-        vhost:
-          type: string
-      type: object
-    datastore.TwitterProviderConfig:
-      properties:
-        crc_verified_at:
-          type: string
-      type: object
-    datastore.SQSPubSubConfig:
-      properties:
-        access_key_id:
-          type: string
-        default_region:
-          type: string
-        endpoint:
-          description: 'Optional: for LocalStack testing'
-          type: string
-        queue_name:
-          type: string
-        secret_key:
-          type: string
-      type: object
-    datastore.AmqpPubSubConfig:
-      properties:
-        host:
-          type: string
-        auth:
-          $ref: '#/components/schemas/datastore.AmqpCredentials'
-        bindedExchange:
-          type: string
-        deadLetterExchange:
-          type: string
-        port:
-          type: string
-        queue:
-          type: string
-        routingKey:
-          type: string
-        schema:
-          type: string
-        vhost:
-          type: string
-      type: object
   securitySchemes:
     ApiKeyAuth:
       in: header

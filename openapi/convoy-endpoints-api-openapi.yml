@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: support@getconvoy.io
@@ -9,7 +9,7 @@ info:
     name: Mozilla Public License 2.0
     url: https://www.mozilla.org/en-US/MPL/2.0/
   termsOfService: https://getconvoy.io/terms
-  title: Convoy API Reference Delivery Attempts Endpoints API
+  title: Convoy API Reference Endpoints API
   version: 26.3.5
 servers:
 - url: https://us.getconvoy.cloud/api
@@ -685,13 +685,67 @@ paths:
       summary: Pause Endpoint
 components:
   schemas:
-    models.MtlsClientCert:
+    datastore.OAuth2AuthenticationType:
+      enum:
+      - shared_secret
+      - client_assertion
+      type: string
+      x-enum-varnames:
+      - SharedSecretAuth
+      - ClientAssertionAuth
+    models.ApiKey:
       properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
+        header_name:
           type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
+        header_value:
+          type: string
+      required:
+      - header_name
+      - header_value
+      type: object
+    models.EndpointAuthentication:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/models.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/models.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/models.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+      type: object
+    handlers.Stub:
+      type: object
+    models.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          type: string
+        client_id:
+          type: string
+        client_secret:
+          type: string
+        expiry_time_unit:
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+          type: string
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/models.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          $ref: '#/components/schemas/models.OAuth2SigningKey'
+        subject:
+          type: string
+        url:
           type: string
       type: object
     models.BasicAuth:
@@ -704,35 +758,59 @@ components:
       - password
       - username
       type: object
-    datastore.PaginationData:
+    datastore.OAuth2SigningKey:
       properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
+        crv:
+          description: EC (Elliptic Curve) key fields
           type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
+        d:
+          description: Private key (EC only)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
           type: string
       type: object
-    datastore.Secret:
+    datastore.OAuth2FieldMapping:
       properties:
-        created_at:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
           type: string
-        deleted_at:
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
           type: string
-        expires_at:
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
           type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        value:
-          type: string
-      type: object
-    handlers.Stub:
       type: object
     models.CreateEndpoint:
       properties:
@@ -805,6 +883,265 @@ components:
             not supported.'
           type: string
       type: object
+    datastore.Secret:
+      properties:
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        expires_at:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        value:
+          type: string
+      type: object
+    models.ExpireSecret:
+      properties:
+        expiration:
+          description: 'Amount of time to wait before expiring the old endpoint secret.
+
+            If AdvancedSignatures is turned on for the project, signatures for both secrets will be generated up until
+
+            the old signature is expired.'
+          type: integer
+        secret:
+          description: New Endpoint secret value.
+          type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    models.TestOAuth2Response:
+      properties:
+        access_token:
+          type: string
+        error:
+          type: string
+        expires_at:
+          type: string
+        message:
+          type: string
+        success:
+          type: boolean
+        token_type:
+          type: string
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+      type: object
+    models.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC) or private exponent (RSA)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    models.TestOAuth2Request:
+      properties:
+        oauth2:
+          $ref: '#/components/schemas/models.OAuth2'
+      type: object
+    models.EndpointResponse:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    models.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
     models.UpdateEndpoint:
       properties:
         advanced_signatures:
@@ -872,39 +1209,6 @@ components:
             not supported.'
           type: string
       type: object
-    datastore.OAuth2FieldMapping:
-      properties:
-        access_token:
-          description: Field name for access token (e.g., "accessToken", "access_token", "token")
-          type: string
-        expires_in:
-          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
-          type: string
-        token_type:
-          description: Field name for token type (e.g., "tokenType", "token_type")
-          type: string
-      type: object
-    models.TestOAuth2Request:
-      properties:
-        oauth2:
-          $ref: '#/components/schemas/models.OAuth2'
-      type: object
-    datastore.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      type: object
-    datastore.MtlsClientCert:
-      properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
-          type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
-          type: string
-      type: object
     models.OAuth2FieldMapping:
       properties:
         access_token:
@@ -917,118 +1221,6 @@ components:
           description: Field name for token type (e.g., "tokenType", "token_type")
           type: string
       type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    models.OAuth2SigningKey:
-      properties:
-        crv:
-          description: EC (Elliptic Curve) key fields
-          type: string
-        d:
-          description: Private key (EC) or private exponent (RSA)
-          type: string
-        dp:
-          description: RSA first factor CRT exponent (RSA private key only)
-          type: string
-        dq:
-          description: RSA second factor CRT exponent (RSA private key only)
-          type: string
-        e:
-          description: RSA public exponent (RSA only)
-          type: string
-        kid:
-          description: Key ID
-          type: string
-        kty:
-          description: 'Key type: "EC" or "RSA"'
-          type: string
-        n:
-          description: RSA key fields
-          type: string
-        p:
-          description: RSA first prime factor (RSA private key only)
-          type: string
-        q:
-          description: RSA second prime factor (RSA private key only)
-          type: string
-        qi:
-          description: RSA first CRT coefficient (RSA private key only)
-          type: string
-        x:
-          description: X coordinate (EC only)
-          type: string
-        y:
-          description: Y coordinate (EC only)
-          type: string
-      type: object
-    datastore.OAuth2SigningKey:
-      properties:
-        crv:
-          description: EC (Elliptic Curve) key fields
-          type: string
-        d:
-          description: Private key (EC only)
-          type: string
-        dp:
-          description: RSA first factor CRT exponent (RSA private key only)
-          type: string
-        dq:
-          description: RSA second factor CRT exponent (RSA private key only)
-          type: string
-        e:
-          description: RSA public exponent (RSA only)
-          type: string
-        kid:
-          description: Key ID
-          type: string
-        kty:
-          description: 'Key type: "EC" or "RSA"'
-          type: string
-        n:
-          description: RSA key fields
-          type: string
-        p:
-          description: RSA first prime factor (RSA private key only)
-          type: string
-        q:
-          description: RSA second prime factor (RSA private key only)
-          type: string
-        qi:
-          description: RSA first CRT coefficient (RSA private key only)
-          type: string
-        x:
-          description: X coordinate (EC only)
-          type: string
-        y:
-          description: Y coordinate (EC only)
-          type: string
-      type: object
-    models.ExpireSecret:
-      properties:
-        expiration:
-          description: 'Amount of time to wait before expiring the old endpoint secret.
-
-            If AdvancedSignatures is turned on for the project, signatures for both secrets will be generated up until
-
-            the old signature is expired.'
-          type: integer
-        secret:
-          description: New Endpoint secret value.
-          type: string
-      type: object
-    datastore.OAuth2AuthenticationType:
-      enum:
-      - shared_secret
-      - client_assertion
-      type: string
-      x-enum-varnames:
-      - SharedSecretAuth
-      - ClientAssertionAuth
     datastore.EndpointAuthentication:
       properties:
         api_key:
@@ -1040,206 +1232,13 @@ components:
         type:
           $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
       type: object
-    datastore.BasicAuth:
+    datastore.MtlsClientCert:
       properties:
-        password:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
           type: string
-        username:
-          type: string
-      type: object
-    models.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      required:
-      - header_name
-      - header_value
-      type: object
-    models.PagedResponse:
-      properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
-          nullable: true
-      type: object
-    datastore.EndpointStatus:
-      enum:
-      - active
-      - inactive
-      - paused
-      type: string
-      x-enum-varnames:
-      - ActiveEndpointStatus
-      - InactiveEndpointStatus
-      - PausedEndpointStatus
-    datastore.OAuth2:
-      properties:
-        audience:
-          type: string
-        authentication_type:
-          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
-        client_id:
-          type: string
-        client_secret:
-          description: Encrypted at rest
-          type: string
-        expiry_time_unit:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
-          description: Expiry time unit (seconds, milliseconds, minutes, hours)
-        field_mapping:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
-          description: Field mapping for flexible token response parsing
-        grant_type:
-          type: string
-        issuer:
-          type: string
-        scope:
-          type: string
-        signing_algorithm:
-          type: string
-        signing_key:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
-          description: Encrypted at rest
-        subject:
-          type: string
-        url:
-          type: string
-      type: object
-    models.EndpointAuthentication:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/models.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/models.BasicAuth'
-        oauth2:
-          $ref: '#/components/schemas/models.OAuth2'
-        type:
-          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
-      type: object
-    models.OAuth2:
-      properties:
-        audience:
-          type: string
-        authentication_type:
-          type: string
-        client_id:
-          type: string
-        client_secret:
-          type: string
-        expiry_time_unit:
-          description: Expiry time unit (seconds, milliseconds, minutes, hours)
-          type: string
-        field_mapping:
-          allOf:
-          - $ref: '#/components/schemas/models.OAuth2FieldMapping'
-          description: Field mapping for flexible token response parsing
-        grant_type:
-          type: string
-        issuer:
-          type: string
-        scope:
-          type: string
-        signing_algorithm:
-          type: string
-        signing_key:
-          $ref: '#/components/schemas/models.OAuth2SigningKey'
-        subject:
-          type: string
-        url:
-          type: string
-      type: object
-    datastore.OAuth2ExpiryTimeUnit:
-      enum:
-      - seconds
-      - milliseconds
-      - minutes
-      - hours
-      type: string
-      x-enum-varnames:
-      - ExpiryTimeUnitSeconds
-      - ExpiryTimeUnitMilliseconds
-      - ExpiryTimeUnitMinutes
-      - ExpiryTimeUnitHours
-    datastore.EndpointAuthenticationType:
-      enum:
-      - api_key
-      - oauth2
-      - basic_auth
-      type: string
-      x-enum-varnames:
-      - APIKeyAuthentication
-      - OAuth2Authentication
-      - BasicAuthentication
-    models.EndpointResponse:
-      properties:
-        advanced_signatures:
-          type: boolean
-        authentication:
-          $ref: '#/components/schemas/datastore.EndpointAuthentication'
-        content_type:
-          type: string
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        description:
-          type: string
-        events:
-          type: integer
-        failure_rate:
-          type: number
-        http_timeout:
-          type: integer
-        mtls_client_cert:
-          allOf:
-          - $ref: '#/components/schemas/datastore.MtlsClientCert'
-          description: mTLS client certificate configuration
-        name:
-          type: string
-        owner_id:
-          type: string
-        project_id:
-          type: string
-        rate_limit:
-          type: integer
-        rate_limit_duration:
-          type: integer
-        secrets:
-          items:
-            $ref: '#/components/schemas/datastore.Secret'
-          type: array
-        slack_webhook_url:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.EndpointStatus'
-        support_email:
-          type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
-      type: object
-    models.TestOAuth2Response:
-      properties:
-        access_token:
-          type: string
-        error:
-          type: string
-        expires_at:
-          type: string
-        message:
-          type: string
-        success:
-          type: boolean
-        token_type:
+        client_key:
+          description: ClientKey is the client private key PEM string
           type: string
       type: object
   securitySchemes:

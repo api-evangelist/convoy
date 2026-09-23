@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: support@getconvoy.io
@@ -9,7 +9,7 @@ info:
     name: Mozilla Public License 2.0
     url: https://www.mozilla.org/en-US/MPL/2.0/
   termsOfService: https://getconvoy.io/terms
-  title: Convoy API Reference Delivery Attempts Event Deliveries API
+  title: Convoy API Reference Event Deliveries API
   version: 26.3.5
 servers:
 - url: https://us.getconvoy.cloud/api
@@ -517,282 +517,6 @@ paths:
       summary: Retry Event Delivery
 components:
   schemas:
-    datastore.KafkaPubSubConfig:
-      properties:
-        auth:
-          $ref: '#/components/schemas/datastore.KafkaAuth'
-        brokers:
-          items:
-            type: string
-          type: array
-        consumer_group_id:
-          type: string
-        topic_name:
-          type: string
-      type: object
-    datastore.PaginationData:
-      properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
-          type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
-          type: string
-      type: object
-    handlers.Stub:
-      type: object
-    datastore.Secret:
-      properties:
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        expires_at:
-          type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        value:
-          type: string
-      type: object
-    datastore.ProviderConfig:
-      properties:
-        twitter:
-          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
-      type: object
-    datastore.PubSubConfig:
-      properties:
-        amqp:
-          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
-        google:
-          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
-        kafka:
-          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
-        sqs:
-          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.PubSubType'
-        workers:
-          type: integer
-      type: object
-    datastore.KafkaAuth:
-      properties:
-        hash:
-          type: string
-        password:
-          type: string
-        tls:
-          type: boolean
-        type:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.DeliveryMode:
-      enum:
-      - at_least_once
-      - at_most_once
-      type: string
-      x-enum-varnames:
-      - AtLeastOnceDeliveryMode
-      - AtMostOnceDeliveryMode
-    datastore.SourceProvider:
-      enum:
-      - github
-      - twitter
-      - shopify
-      type: string
-      x-enum-varnames:
-      - GithubSourceProvider
-      - TwitterSourceProvider
-      - ShopifySourceProvider
-    datastore.EncodingType:
-      enum:
-      - base64
-      - hex
-      type: string
-      x-enum-varnames:
-      - Base64Encoding
-      - HexEncoding
-    datastore.PubSubType:
-      enum:
-      - sqs
-      - google
-      - kafka
-      - amqp
-      type: string
-      x-enum-varnames:
-      - SqsPubSub
-      - GooglePubSub
-      - KafkaPubSub
-      - AmqpPubSub
-    datastore.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      type: object
-    datastore.HMac:
-      properties:
-        encoding:
-          $ref: '#/components/schemas/datastore.EncodingType'
-        hash:
-          type: string
-        header:
-          type: string
-        secret:
-          type: string
-      type: object
-    datastore.OAuth2FieldMapping:
-      properties:
-        access_token:
-          description: Field name for access token (e.g., "accessToken", "access_token", "token")
-          type: string
-        expires_in:
-          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
-          type: string
-        token_type:
-          description: Field name for token type (e.g., "tokenType", "token_type")
-          type: string
-      type: object
-    datastore.CLIMetadata:
-      properties:
-        event_type:
-          type: string
-        source_id:
-          type: string
-      type: object
-    datastore.AmqpCredentials:
-      properties:
-        password:
-          type: string
-        user:
-          type: string
-      type: object
-    datastore.VerifierType:
-      enum:
-      - noop
-      - hmac
-      - basic_auth
-      - api_key
-      type: string
-      x-enum-varnames:
-      - NoopVerifier
-      - HMacVerifier
-      - BasicAuthVerifier
-      - APIKeyVerifier
-    datastore.MtlsClientCert:
-      properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
-          type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
-          type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    httpheader.HTTPHeader:
-      additionalProperties:
-        items:
-          type: string
-        type: array
-      type: object
-    datastore.OAuth2SigningKey:
-      properties:
-        crv:
-          description: EC (Elliptic Curve) key fields
-          type: string
-        d:
-          description: Private key (EC only)
-          type: string
-        dp:
-          description: RSA first factor CRT exponent (RSA private key only)
-          type: string
-        dq:
-          description: RSA second factor CRT exponent (RSA private key only)
-          type: string
-        e:
-          description: RSA public exponent (RSA only)
-          type: string
-        kid:
-          description: Key ID
-          type: string
-        kty:
-          description: 'Key type: "EC" or "RSA"'
-          type: string
-        n:
-          description: RSA key fields
-          type: string
-        p:
-          description: RSA first prime factor (RSA private key only)
-          type: string
-        q:
-          description: RSA second prime factor (RSA private key only)
-          type: string
-        qi:
-          description: RSA first CRT coefficient (RSA private key only)
-          type: string
-        x:
-          description: X coordinate (EC only)
-          type: string
-        y:
-          description: Y coordinate (EC only)
-          type: string
-      type: object
-    datastore.Device:
-      properties:
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        endpoint_id:
-          type: string
-        host_name:
-          type: string
-        last_seen_at:
-          type: string
-        project_id:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.DeviceStatus'
-        uid:
-          type: string
-        updated_at:
-          type: string
-      type: object
-    datastore.DeviceStatus:
-      enum:
-      - offline
-      - online
-      - disabled
-      type: string
-      x-enum-varnames:
-      - DeviceStatusOffline
-      - DeviceStatusOnline
-      - DeviceStatusDisabled
-    datastore.GooglePubSubConfig:
-      properties:
-        project_id:
-          type: string
-        service_account:
-          items:
-            type: integer
-          type: array
-        subscription_id:
-          type: string
-      type: object
     datastore.OAuth2AuthenticationType:
       enum:
       - shared_secret
@@ -801,6 +525,14 @@ components:
       x-enum-varnames:
       - SharedSecretAuth
       - ClientAssertionAuth
+    datastore.EncodingType:
+      enum:
+      - base64
+      - hex
+      type: string
+      x-enum-varnames:
+      - Base64Encoding
+      - HexEncoding
     datastore.EndpointAuthentication:
       properties:
         api_key:
@@ -812,12 +544,86 @@ components:
         type:
           $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
       type: object
-    datastore.BasicAuth:
+    datastore.TwitterProviderConfig:
       properties:
-        password:
+        crc_verified_at:
           type: string
-        username:
+      type: object
+    datastore.Endpoint:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
           type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.Metadata:
+      properties:
+        data:
+          description: Data to be sent to endpoint.
+          items:
+            type: integer
+          type: array
+        interval_seconds:
+          type: integer
+        max_retry_seconds:
+          type: integer
+        next_send_time:
+          type: string
+        num_trials:
+          description: 'NumTrials: number of times we have tried to deliver this Event to
+
+            an application'
+          type: integer
+        raw:
+          type: string
+        retry_limit:
+          type: integer
+        strategy:
+          $ref: '#/components/schemas/datastore.StrategyProvider'
       type: object
     datastore.Event:
       properties:
@@ -872,138 +678,238 @@ components:
         url_query_params:
           type: string
       type: object
-    models.PagedResponse:
+    datastore.StrategyProvider:
+      enum:
+      - linear
+      - exponential
+      type: string
+      x-enum-varnames:
+      - LinearStrategyProvider
+      - ExponentialStrategyProvider
+    datastore.DeviceStatus:
+      enum:
+      - offline
+      - online
+      - disabled
+      type: string
+      x-enum-varnames:
+      - DeviceStatusOffline
+      - DeviceStatusOnline
+      - DeviceStatusDisabled
+    datastore.VerifierConfig:
       properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
-          nullable: true
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        hmac:
+          $ref: '#/components/schemas/datastore.HMac'
+        type:
+          $ref: '#/components/schemas/datastore.VerifierType'
       type: object
-    datastore.Endpoint:
+    handlers.Stub:
+      type: object
+    datastore.ProviderConfig:
       properties:
-        advanced_signatures:
-          type: boolean
-        authentication:
-          $ref: '#/components/schemas/datastore.EndpointAuthentication'
-        content_type:
+        twitter:
+          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
+      type: object
+    datastore.PubSubType:
+      enum:
+      - sqs
+      - google
+      - kafka
+      - amqp
+      type: string
+      x-enum-varnames:
+      - SqsPubSub
+      - GooglePubSub
+      - KafkaPubSub
+      - AmqpPubSub
+    datastore.AmqpPubSubConfig:
+      properties:
+        host:
           type: string
+        auth:
+          $ref: '#/components/schemas/datastore.AmqpCredentials'
+        bindedExchange:
+          type: string
+        deadLetterExchange:
+          type: string
+        port:
+          type: string
+        queue:
+          type: string
+        routingKey:
+          type: string
+        schema:
+          type: string
+        vhost:
+          type: string
+      type: object
+    datastore.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC only)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    datastore.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    httpheader.HTTPHeader:
+      additionalProperties:
+        items:
+          type: string
+        type: array
+      type: object
+    datastore.VerifierType:
+      enum:
+      - noop
+      - hmac
+      - basic_auth
+      - api_key
+      type: string
+      x-enum-varnames:
+      - NoopVerifier
+      - HMacVerifier
+      - BasicAuthVerifier
+      - APIKeyVerifier
+    datastore.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
+        google:
+          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    datastore.KafkaPubSubConfig:
+      properties:
+        auth:
+          $ref: '#/components/schemas/datastore.KafkaAuth'
+        brokers:
+          items:
+            type: string
+          type: array
+        consumer_group_id:
+          type: string
+        topic_name:
+          type: string
+      type: object
+    datastore.SourceProvider:
+      enum:
+      - github
+      - twitter
+      - shopify
+      type: string
+      x-enum-varnames:
+      - GithubSourceProvider
+      - TwitterSourceProvider
+      - ShopifySourceProvider
+    datastore.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        endpoint:
+          description: 'Optional: for LocalStack testing'
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    datastore.KafkaAuth:
+      properties:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
+          type: boolean
+        type:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.Secret:
+      properties:
         created_at:
           type: string
         deleted_at:
           type: string
-        description:
-          type: string
-        events:
-          type: integer
-        failure_rate:
-          type: number
-        http_timeout:
-          type: integer
-        mtls_client_cert:
-          allOf:
-          - $ref: '#/components/schemas/datastore.MtlsClientCert'
-          description: mTLS client certificate configuration
-        name:
-          type: string
-        owner_id:
-          type: string
-        project_id:
-          type: string
-        rate_limit:
-          type: integer
-        rate_limit_duration:
-          type: integer
-        secrets:
-          items:
-            $ref: '#/components/schemas/datastore.Secret'
-          type: array
-        slack_webhook_url:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.EndpointStatus'
-        support_email:
+        expires_at:
           type: string
         uid:
           type: string
         updated_at:
           type: string
-        url:
+        value:
           type: string
       type: object
-    datastore.EndpointStatus:
-      enum:
-      - active
-      - inactive
-      - paused
-      type: string
-      x-enum-varnames:
-      - ActiveEndpointStatus
-      - InactiveEndpointStatus
-      - PausedEndpointStatus
-    datastore.CustomResponse:
-      properties:
-        body:
-          type: string
-        content_type:
-          type: string
-      type: object
-    datastore.OAuth2:
-      properties:
-        audience:
-          type: string
-        authentication_type:
-          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
-        client_id:
-          type: string
-        client_secret:
-          description: Encrypted at rest
-          type: string
-        expiry_time_unit:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
-          description: Expiry time unit (seconds, milliseconds, minutes, hours)
-        field_mapping:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
-          description: Field mapping for flexible token response parsing
-        grant_type:
-          type: string
-        issuer:
-          type: string
-        scope:
-          type: string
-        signing_algorithm:
-          type: string
-        signing_key:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
-          description: Encrypted at rest
-        subject:
-          type: string
-        url:
-          type: string
-      type: object
-    models.IDs:
-      properties:
-        ids:
-          description: A list of event delivery IDs to forcefully resend.
-          items:
-            type: string
-          type: array
-      type: object
-    datastore.SourceType:
-      enum:
-      - http
-      - rest_api
-      - pub_sub
-      - db_change_stream
-      type: string
-      x-enum-varnames:
-      - HTTPSource
-      - RestApiSource
-      - PubSubSource
-      - DBChangeStream
     datastore.Source:
       properties:
         body_function:
@@ -1049,6 +955,170 @@ components:
         verifier:
           $ref: '#/components/schemas/datastore.VerifierConfig'
       type: object
+    datastore.DeliveryMode:
+      enum:
+      - at_least_once
+      - at_most_once
+      type: string
+      x-enum-varnames:
+      - AtLeastOnceDeliveryMode
+      - AtMostOnceDeliveryMode
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.SourceType:
+      enum:
+      - http
+      - rest_api
+      - pub_sub
+      - db_change_stream
+      type: string
+      x-enum-varnames:
+      - HTTPSource
+      - RestApiSource
+      - PubSubSource
+      - DBChangeStream
+    datastore.AmqpCredentials:
+      properties:
+        password:
+          type: string
+        user:
+          type: string
+      type: object
+    datastore.EventStatus:
+      enum:
+      - Processing
+      - Failure
+      - Success
+      - Retry
+      - Pending
+      type: string
+      x-enum-varnames:
+      - ProcessingStatus
+      - FailureStatus
+      - SuccessStatus
+      - RetryStatus
+      - PendingStatus
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+      type: object
+    datastore.HMac:
+      properties:
+        encoding:
+          $ref: '#/components/schemas/datastore.EncodingType'
+        hash:
+          type: string
+        header:
+          type: string
+        secret:
+          type: string
+      type: object
+    datastore.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    models.IDs:
+      properties:
+        ids:
+          description: A list of event delivery IDs to forcefully resend.
+          items:
+            type: string
+          type: array
+      type: object
+    datastore.CLIMetadata:
+      properties:
+        event_type:
+          type: string
+        source_id:
+          type: string
+      type: object
     datastore.OAuth2ExpiryTimeUnit:
       enum:
       - seconds
@@ -1061,24 +1131,59 @@ components:
       - ExpiryTimeUnitMilliseconds
       - ExpiryTimeUnitMinutes
       - ExpiryTimeUnitHours
-    datastore.StrategyProvider:
+    datastore.Device:
+      properties:
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        endpoint_id:
+          type: string
+        host_name:
+          type: string
+        last_seen_at:
+          type: string
+        project_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.DeviceStatus'
+        uid:
+          type: string
+        updated_at:
+          type: string
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    datastore.EventDeliveryStatus:
       enum:
-      - linear
-      - exponential
+      - Scheduled
+      - Processing
+      - Discarded
+      - Failure
+      - Success
+      - Retry
       type: string
       x-enum-varnames:
-      - LinearStrategyProvider
-      - ExponentialStrategyProvider
-    datastore.EndpointAuthenticationType:
-      enum:
-      - api_key
-      - oauth2
-      - basic_auth
-      type: string
-      x-enum-varnames:
-      - APIKeyAuthentication
-      - OAuth2Authentication
-      - BasicAuthentication
+      - ScheduledEventStatus
+      - ProcessingEventStatus
+      - DiscardedEventStatus
+      - FailureEventStatus
+      - SuccessEventStatus
+      - RetryEventStatus
     models.EventDeliveryResponse:
       properties:
         acknowledged_at:
@@ -1133,112 +1238,6 @@ components:
         url_query_params:
           type: string
       type: object
-    datastore.VerifierConfig:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/datastore.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/datastore.BasicAuth'
-        hmac:
-          $ref: '#/components/schemas/datastore.HMac'
-        type:
-          $ref: '#/components/schemas/datastore.VerifierType'
-      type: object
-    datastore.EventStatus:
-      enum:
-      - Processing
-      - Failure
-      - Success
-      - Retry
-      - Pending
-      type: string
-      x-enum-varnames:
-      - ProcessingStatus
-      - FailureStatus
-      - SuccessStatus
-      - RetryStatus
-      - PendingStatus
-    datastore.TwitterProviderConfig:
-      properties:
-        crc_verified_at:
-          type: string
-      type: object
-    datastore.Metadata:
-      properties:
-        data:
-          description: Data to be sent to endpoint.
-          items:
-            type: integer
-          type: array
-        interval_seconds:
-          type: integer
-        max_retry_seconds:
-          type: integer
-        next_send_time:
-          type: string
-        num_trials:
-          description: 'NumTrials: number of times we have tried to deliver this Event to
-
-            an application'
-          type: integer
-        raw:
-          type: string
-        retry_limit:
-          type: integer
-        strategy:
-          $ref: '#/components/schemas/datastore.StrategyProvider'
-      type: object
-    datastore.SQSPubSubConfig:
-      properties:
-        access_key_id:
-          type: string
-        default_region:
-          type: string
-        endpoint:
-          description: 'Optional: for LocalStack testing'
-          type: string
-        queue_name:
-          type: string
-        secret_key:
-          type: string
-      type: object
-    datastore.AmqpPubSubConfig:
-      properties:
-        host:
-          type: string
-        auth:
-          $ref: '#/components/schemas/datastore.AmqpCredentials'
-        bindedExchange:
-          type: string
-        deadLetterExchange:
-          type: string
-        port:
-          type: string
-        queue:
-          type: string
-        routingKey:
-          type: string
-        schema:
-          type: string
-        vhost:
-          type: string
-      type: object
-    datastore.EventDeliveryStatus:
-      enum:
-      - Scheduled
-      - Processing
-      - Discarded
-      - Failure
-      - Success
-      - Retry
-      type: string
-      x-enum-varnames:
-      - ScheduledEventStatus
-      - ProcessingEventStatus
-      - DiscardedEventStatus
-      - FailureEventStatus
-      - SuccessEventStatus
-      - RetryEventStatus
   securitySchemes:
     ApiKeyAuth:
       in: header

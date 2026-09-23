@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: support@getconvoy.io
@@ -9,7 +9,7 @@ info:
     name: Mozilla Public License 2.0
     url: https://www.mozilla.org/en-US/MPL/2.0/
   termsOfService: https://getconvoy.io/terms
-  title: Convoy API Reference Delivery Attempts EventTypes API
+  title: Convoy API Reference Event Types API
   version: 26.3.5
 servers:
 - url: https://us.getconvoy.cloud/api
@@ -18,7 +18,7 @@ servers:
   description: EU Region
 tags:
 - description: Event Types related APIs
-  name: EventTypes
+  name: Event Types
 paths:
   /v1/projects/{projectID}/event-types:
     get:
@@ -79,7 +79,7 @@ paths:
       security:
       - ApiKeyAuth: []
       tags:
-      - EventTypes
+      - Event Types
       description: This endpoint fetches the project's event types
       operationId: GetEventTypes
       summary: Retrieves a Project's Event Types
@@ -139,7 +139,7 @@ paths:
       security:
       - ApiKeyAuth: []
       tags:
-      - EventTypes
+      - Event Types
       description: This endpoint creates an event type
       operationId: CreateEventType
       requestBody:
@@ -209,7 +209,7 @@ paths:
       security:
       - ApiKeyAuth: []
       tags:
-      - EventTypes
+      - Event Types
       description: This endpoint imports event types from an OpenAPI specification
       operationId: ImportOpenApiSpec
       requestBody:
@@ -277,7 +277,7 @@ paths:
       security:
       - ApiKeyAuth: []
       tags:
-      - EventTypes
+      - Event Types
       description: This endpoint updates an event type
       operationId: UpdateEventType
       requestBody:
@@ -351,7 +351,7 @@ paths:
       security:
       - ApiKeyAuth: []
       tags:
-      - EventTypes
+      - Event Types
       description: This endpoint deprecates an event type
       operationId: DeprecateEventType
       summary: Deprecates an Event Type
@@ -373,10 +373,20 @@ components:
           description: Name is the event type name. E.g., invoice.created
           type: string
       type: object
-    models.ImportOpenAPISpec:
+    models.UpdateEventType:
       properties:
-        spec:
+        category:
+          description: Category is a product-specific grouping for the event type
           type: string
+        description:
+          description: Description is used to describe what the event type does
+          type: string
+        json_schema:
+          additionalProperties: true
+          description: JSONSchema is the JSON structure of the event type
+          type: object
+      type: object
+    handlers.Stub:
       type: object
     util.ServerResponse:
       properties:
@@ -384,6 +394,11 @@ components:
           type: string
         status:
           type: boolean
+      type: object
+    models.ImportOpenAPISpec:
+      properties:
+        spec:
+          type: string
       type: object
     models.EventTypeResponse:
       properties:
@@ -401,21 +416,6 @@ components:
           type: string
         uid:
           type: string
-      type: object
-    handlers.Stub:
-      type: object
-    models.UpdateEventType:
-      properties:
-        category:
-          description: Category is a product-specific grouping for the event type
-          type: string
-        description:
-          description: Description is used to describe what the event type does
-          type: string
-        json_schema:
-          additionalProperties: true
-          description: JSONSchema is the JSON structure of the event type
-          type: object
       type: object
   securitySchemes:
     ApiKeyAuth:
