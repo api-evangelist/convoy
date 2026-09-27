@@ -624,25 +624,15 @@ paths:
       summary: Update a Filter
 components:
   schemas:
-    models.FilterResponse:
-      properties:
-        body:
-          $ref: '#/components/schemas/datastore.M'
-        event_type:
-          type: string
-        headers:
-          $ref: '#/components/schemas/datastore.M'
-        raw_body:
-          $ref: '#/components/schemas/datastore.M'
-        raw_headers:
-          $ref: '#/components/schemas/datastore.M'
-        subscription_id:
-          type: string
-        uid:
-          type: string
-      type: object
     datastore.M:
       additionalProperties: true
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
       type: object
     models.UpdateFilterRequest:
       properties:
@@ -661,6 +651,32 @@ components:
           description: Whether the filter uses flattened JSON paths (optional)
           type: boolean
       type: object
+    handlers.Stub:
+      type: object
+    models.TestFilterRequest:
+      properties:
+        payload:
+          description: Sample payload to test against the filter (required)
+      required:
+      - payload
+      type: object
+    models.FilterResponse:
+      properties:
+        body:
+          $ref: '#/components/schemas/datastore.M'
+        event_type:
+          type: string
+        headers:
+          $ref: '#/components/schemas/datastore.M'
+        raw_body:
+          $ref: '#/components/schemas/datastore.M'
+        raw_headers:
+          $ref: '#/components/schemas/datastore.M'
+        subscription_id:
+          type: string
+        uid:
+          type: string
+      type: object
     models.CreateFilterRequest:
       properties:
         body:
@@ -677,15 +693,6 @@ components:
       required:
       - event_type
       type: object
-    handlers.Stub:
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
     models.BulkUpdateFilterRequest:
       properties:
         body:
@@ -700,13 +707,6 @@ components:
           type: string
       required:
       - uid
-      type: object
-    models.TestFilterRequest:
-      properties:
-        payload:
-          description: Sample payload to test against the filter (required)
-      required:
-      - payload
       type: object
     models.TestFilterResponse:
       properties:

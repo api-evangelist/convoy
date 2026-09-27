@@ -373,32 +373,12 @@ components:
           description: Name is the event type name. E.g., invoice.created
           type: string
       type: object
-    models.UpdateEventType:
-      properties:
-        category:
-          description: Category is a product-specific grouping for the event type
-          type: string
-        description:
-          description: Description is used to describe what the event type does
-          type: string
-        json_schema:
-          additionalProperties: true
-          description: JSONSchema is the JSON structure of the event type
-          type: object
-      type: object
-    handlers.Stub:
-      type: object
     util.ServerResponse:
       properties:
         message:
           type: string
         status:
           type: boolean
-      type: object
-    models.ImportOpenAPISpec:
-      properties:
-        spec:
-          type: string
       type: object
     models.EventTypeResponse:
       properties:
@@ -416,6 +396,26 @@ components:
           type: string
         uid:
           type: string
+      type: object
+    handlers.Stub:
+      type: object
+    models.ImportOpenAPISpec:
+      properties:
+        spec:
+          type: string
+      type: object
+    models.UpdateEventType:
+      properties:
+        category:
+          description: Category is a product-specific grouping for the event type
+          type: string
+        description:
+          description: Description is used to describe what the event type does
+          type: string
+        json_schema:
+          additionalProperties: true
+          description: JSONSchema is the JSON structure of the event type
+          type: object
       type: object
   securitySchemes:
     ApiKeyAuth:

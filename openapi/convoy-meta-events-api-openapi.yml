@@ -270,6 +270,63 @@ paths:
       summary: Retry Meta Event
 components:
   schemas:
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.HttpHeader:
+      additionalProperties:
+        type: string
+      type: object
+    datastore.EventDeliveryStatus:
+      enum:
+      - Scheduled
+      - Processing
+      - Discarded
+      - Failure
+      - Success
+      - Retry
+      type: string
+      x-enum-varnames:
+      - ScheduledEventStatus
+      - ProcessingEventStatus
+      - DiscardedEventStatus
+      - FailureEventStatus
+      - SuccessEventStatus
+      - RetryEventStatus
+    models.MetaEventResponse:
+      properties:
+        attempt:
+          $ref: '#/components/schemas/datastore.MetaEventAttempt'
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        event_type:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/datastore.Metadata'
+        project_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EventDeliveryStatus'
+        uid:
+          type: string
+        updated_at:
+          type: string
+      type: object
+    handlers.Stub:
+      type: object
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+      type: object
     datastore.PaginationData:
       properties:
         has_next_page:
@@ -282,17 +339,6 @@ components:
           type: integer
         prev_page_cursor:
           type: string
-      type: object
-    datastore.HttpHeader:
-      additionalProperties:
-        type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
       type: object
     datastore.Metadata:
       properties:
@@ -319,44 +365,6 @@ components:
         strategy:
           $ref: '#/components/schemas/datastore.StrategyProvider'
       type: object
-    datastore.StrategyProvider:
-      enum:
-      - linear
-      - exponential
-      type: string
-      x-enum-varnames:
-      - LinearStrategyProvider
-      - ExponentialStrategyProvider
-    models.PagedResponse:
-      properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
-      type: object
-    handlers.Stub:
-      type: object
-    models.MetaEventResponse:
-      properties:
-        attempt:
-          $ref: '#/components/schemas/datastore.MetaEventAttempt'
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        event_type:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/datastore.Metadata'
-        project_id:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.EventDeliveryStatus'
-        uid:
-          type: string
-        updated_at:
-          type: string
-      type: object
     datastore.MetaEventAttempt:
       properties:
         request_http_header:
@@ -366,22 +374,14 @@ components:
         response_http_header:
           $ref: '#/components/schemas/datastore.HttpHeader'
       type: object
-    datastore.EventDeliveryStatus:
+    datastore.StrategyProvider:
       enum:
-      - Scheduled
-      - Processing
-      - Discarded
-      - Failure
-      - Success
-      - Retry
+      - linear
+      - exponential
       type: string
       x-enum-varnames:
-      - ScheduledEventStatus
-      - ProcessingEventStatus
-      - DiscardedEventStatus
-      - FailureEventStatus
-      - SuccessEventStatus
-      - RetryEventStatus
+      - LinearStrategyProvider
+      - ExponentialStrategyProvider
   securitySchemes:
     ApiKeyAuth:
       in: header

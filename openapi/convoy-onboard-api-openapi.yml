@@ -106,6 +106,24 @@ paths:
       summary: Bulk Onboard Endpoints with Subscriptions
 components:
   schemas:
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    handlers.Stub:
+      type: object
+    models.BulkOnboardAcceptedResponse:
+      properties:
+        batch_count:
+          type: integer
+        message:
+          type: string
+        total_items:
+          type: integer
+      type: object
     models.OnboardValidationError:
       properties:
         field:
@@ -125,24 +143,6 @@ components:
           type: integer
         valid_count:
           type: integer
-      type: object
-    models.BulkOnboardAcceptedResponse:
-      properties:
-        batch_count:
-          type: integer
-        message:
-          type: string
-        total_items:
-          type: integer
-      type: object
-    handlers.Stub:
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
       type: object
   securitySchemes:
     ApiKeyAuth:

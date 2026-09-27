@@ -164,6 +164,8 @@ paths:
       summary: Retrieve a Delivery Attempt
 components:
   schemas:
+    handlers.Stub:
+      type: object
     util.ServerResponse:
       properties:
         message:
@@ -211,8 +213,6 @@ components:
           type: string
         url:
           type: string
-      type: object
-    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:

@@ -10,6 +10,10 @@ humanURL: https://getconvoy.io
 baseURL: https://us.getconvoy.cloud/api
 deliveryModel:
   model: unknown
+  license_evidence:
+    repo: frain-dev/convoy
+    spdx: NOASSERTION
+    stars: 2875
   open_source: unknown
   commercial: true
   callable_host: true
@@ -19,7 +23,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-28'
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium

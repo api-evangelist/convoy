@@ -477,89 +477,42 @@ paths:
       summary: Revoke a Portal Link
 components:
   schemas:
-    datastore.OAuth2AuthenticationType:
-      enum:
-      - shared_secret
-      - client_assertion
-      type: string
-      x-enum-varnames:
-      - SharedSecretAuth
-      - ClientAssertionAuth
-    datastore.EndpointAuthentication:
+    util.ServerResponse:
       properties:
-        api_key:
-          $ref: '#/components/schemas/datastore.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/datastore.BasicAuth'
-        oauth2:
-          $ref: '#/components/schemas/datastore.OAuth2'
-        type:
-          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+        message:
+          type: string
+        status:
+          type: boolean
       type: object
-    datastore.CreatePortalLinkRequest:
+    datastore.PortalLinkResponse:
       properties:
+        auth_key:
+          type: string
         auth_type:
-          type: string
+          $ref: '#/components/schemas/datastore.PortalAuthType'
         can_manage_endpoint:
-          description: Specify whether endpoint management can be done through the Portal Link UI
           type: boolean
-        endpoints:
-          description: 'Deprecated
-
-            IDs of endpoints in this portal link'
-          items:
-            type: string
-          type: array
-        name:
-          description: Portal Link Name
-          type: string
-        owner_id:
-          description: OwnerID, the portal link will inherit all the endpoints with this owner ID
-          type: string
-      type: object
-    datastore.Endpoint:
-      properties:
-        advanced_signatures:
-          type: boolean
-        authentication:
-          $ref: '#/components/schemas/datastore.EndpointAuthentication'
-        content_type:
-          type: string
         created_at:
           type: string
         deleted_at:
           type: string
-        description:
-          type: string
-        events:
+        endpoint_count:
           type: integer
-        failure_rate:
-          type: number
-        http_timeout:
-          type: integer
-        mtls_client_cert:
-          allOf:
-          - $ref: '#/components/schemas/datastore.MtlsClientCert'
-          description: mTLS client certificate configuration
+        endpoints:
+          items:
+            type: string
+          type: array
+        endpoints_metadata:
+          items:
+            $ref: '#/components/schemas/datastore.Endpoint'
+          type: array
         name:
           type: string
         owner_id:
           type: string
         project_id:
           type: string
-        rate_limit:
-          type: integer
-        rate_limit_duration:
-          type: integer
-        secrets:
-          items:
-            $ref: '#/components/schemas/datastore.Secret'
-          type: array
-        slack_webhook_url:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.EndpointStatus'
-        support_email:
+        token:
           type: string
         uid:
           type: string
@@ -568,7 +521,28 @@ components:
         url:
           type: string
       type: object
-    handlers.Stub:
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
       type: object
     datastore.OAuth2SigningKey:
       properties:
@@ -620,6 +594,36 @@ components:
       x-enum-varnames:
       - PortalAuthTypeRefreshToken
       - PortalAuthTypeStaticToken
+    datastore.CreatePortalLinkRequest:
+      properties:
+        auth_type:
+          type: string
+        can_manage_endpoint:
+          description: Specify whether endpoint management can be done through the Portal Link UI
+          type: boolean
+        endpoints:
+          description: 'Deprecated
+
+            IDs of endpoints in this portal link'
+          items:
+            type: string
+          type: array
+        name:
+          description: Portal Link Name
+          type: string
+        owner_id:
+          description: OwnerID, the portal link will inherit all the endpoints with this owner ID
+          type: string
+      type: object
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
     datastore.OAuth2FieldMapping:
       properties:
         access_token:
@@ -631,28 +635,6 @@ components:
         token_type:
           description: Field name for token type (e.g., "tokenType", "token_type")
           type: string
-      type: object
-    datastore.Secret:
-      properties:
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        expires_at:
-          type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        value:
-          type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
       type: object
     datastore.OAuth2:
       properties:
@@ -690,6 +672,108 @@ components:
         url:
           type: string
       type: object
+    models.PagedResponse:
+      properties:
+        content: {}
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/datastore.PaginationData'
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.Endpoint:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
+    datastore.OAuth2AuthenticationType:
+      enum:
+      - shared_secret
+      - client_assertion
+      type: string
+      x-enum-varnames:
+      - SharedSecretAuth
+      - ClientAssertionAuth
     datastore.UpdatePortalLinkRequest:
       properties:
         auth_type:
@@ -711,117 +795,33 @@ components:
           description: OwnerID, the portal link will inherit all the endpoints with this owner ID
           type: string
       type: object
-    datastore.EndpointStatus:
-      enum:
-      - active
-      - inactive
-      - paused
-      type: string
-      x-enum-varnames:
-      - ActiveEndpointStatus
-      - InactiveEndpointStatus
-      - PausedEndpointStatus
-    datastore.EndpointAuthenticationType:
-      enum:
-      - api_key
-      - oauth2
-      - basic_auth
-      type: string
-      x-enum-varnames:
-      - APIKeyAuthentication
-      - OAuth2Authentication
-      - BasicAuthentication
-    models.PagedResponse:
-      properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
+    handlers.Stub:
       type: object
-    datastore.PortalLinkResponse:
+    datastore.Secret:
       properties:
-        auth_key:
-          type: string
-        auth_type:
-          $ref: '#/components/schemas/datastore.PortalAuthType'
-        can_manage_endpoint:
-          type: boolean
         created_at:
           type: string
         deleted_at:
           type: string
-        endpoint_count:
-          type: integer
-        endpoints:
-          items:
-            type: string
-          type: array
-        endpoints_metadata:
-          items:
-            $ref: '#/components/schemas/datastore.Endpoint'
-          type: array
-        name:
-          type: string
-        owner_id:
-          type: string
-        project_id:
-          type: string
-        token:
+        expires_at:
           type: string
         uid:
           type: string
         updated_at:
           type: string
-        url:
+        value:
           type: string
       type: object
-    datastore.ApiKey:
+    datastore.EndpointAuthentication:
       properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      type: object
-    datastore.PaginationData:
-      properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
-          type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
-          type: string
-      type: object
-    datastore.OAuth2ExpiryTimeUnit:
-      enum:
-      - seconds
-      - milliseconds
-      - minutes
-      - hours
-      type: string
-      x-enum-varnames:
-      - ExpiryTimeUnitSeconds
-      - ExpiryTimeUnitMilliseconds
-      - ExpiryTimeUnitMinutes
-      - ExpiryTimeUnitHours
-    datastore.BasicAuth:
-      properties:
-        password:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.MtlsClientCert:
-      properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
-          type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
-          type: string
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/datastore.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
       type: object
   securitySchemes:
     ApiKeyAuth:
