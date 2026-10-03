@@ -106,22 +106,15 @@ paths:
       summary: Bulk Onboard Endpoints with Subscriptions
 components:
   schemas:
-    util.ServerResponse:
+    models.BulkOnboardDryRunResponse:
       properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    handlers.Stub:
-      type: object
-    models.BulkOnboardAcceptedResponse:
-      properties:
-        batch_count:
+        errors:
+          items:
+            $ref: '#/components/schemas/models.OnboardValidationError'
+          type: array
+        total_rows:
           type: integer
-        message:
-          type: string
-        total_items:
+        valid_count:
           type: integer
       type: object
     models.OnboardValidationError:
@@ -133,16 +126,23 @@ components:
         row:
           type: integer
       type: object
-    models.BulkOnboardDryRunResponse:
+    util.ServerResponse:
       properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/models.OnboardValidationError'
-          type: array
-        total_rows:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    models.BulkOnboardAcceptedResponse:
+      properties:
+        batch_count:
           type: integer
-        valid_count:
+        message:
+          type: string
+        total_items:
           type: integer
+      type: object
+    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:

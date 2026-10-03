@@ -164,14 +164,14 @@ paths:
       summary: Retrieve a Delivery Attempt
 components:
   schemas:
-    handlers.Stub:
-      type: object
     util.ServerResponse:
       properties:
         message:
           type: string
         status:
           type: boolean
+      type: object
+    handlers.Stub:
       type: object
     datastore.HttpHeader:
       additionalProperties:

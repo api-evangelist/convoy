@@ -270,16 +270,18 @@ paths:
       summary: Retry Meta Event
 components:
   schemas:
-    util.ServerResponse:
+    datastore.PaginationData:
       properties:
-        message:
-          type: string
-        status:
+        has_next_page:
           type: boolean
-      type: object
-    datastore.HttpHeader:
-      additionalProperties:
-        type: string
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
       type: object
     datastore.EventDeliveryStatus:
       enum:
@@ -297,28 +299,16 @@ components:
       - FailureEventStatus
       - SuccessEventStatus
       - RetryEventStatus
-    models.MetaEventResponse:
+    util.ServerResponse:
       properties:
-        attempt:
-          $ref: '#/components/schemas/datastore.MetaEventAttempt'
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        event_type:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/datastore.Metadata'
-        project_id:
+        message:
           type: string
         status:
-          $ref: '#/components/schemas/datastore.EventDeliveryStatus'
-        uid:
-          type: string
-        updated_at:
-          type: string
+          type: boolean
       type: object
-    handlers.Stub:
+    datastore.HttpHeader:
+      additionalProperties:
+        type: string
       type: object
     models.PagedResponse:
       properties:
@@ -327,18 +317,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/datastore.PaginationData'
       type: object
-    datastore.PaginationData:
-      properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
-          type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
-          type: string
+    handlers.Stub:
       type: object
     datastore.Metadata:
       properties:
@@ -373,6 +352,27 @@ components:
           type: string
         response_http_header:
           $ref: '#/components/schemas/datastore.HttpHeader'
+      type: object
+    models.MetaEventResponse:
+      properties:
+        attempt:
+          $ref: '#/components/schemas/datastore.MetaEventAttempt'
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        event_type:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/datastore.Metadata'
+        project_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/datastore.EventDeliveryStatus'
+        uid:
+          type: string
+        updated_at:
+          type: string
       type: object
     datastore.StrategyProvider:
       enum:

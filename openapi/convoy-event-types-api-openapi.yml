@@ -357,29 +357,6 @@ paths:
       summary: Deprecates an Event Type
 components:
   schemas:
-    models.CreateEventType:
-      properties:
-        category:
-          description: Category is a product-specific grouping for the event type
-          type: string
-        description:
-          description: Description is used to describe what the event type does
-          type: string
-        json_schema:
-          additionalProperties: true
-          description: JSONSchema is the JSON structure of the event type
-          type: object
-        name:
-          description: Name is the event type name. E.g., invoice.created
-          type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
     models.EventTypeResponse:
       properties:
         category:
@@ -397,12 +374,35 @@ components:
         uid:
           type: string
       type: object
-    handlers.Stub:
+    models.CreateEventType:
+      properties:
+        category:
+          description: Category is a product-specific grouping for the event type
+          type: string
+        description:
+          description: Description is used to describe what the event type does
+          type: string
+        json_schema:
+          additionalProperties: true
+          description: JSONSchema is the JSON structure of the event type
+          type: object
+        name:
+          description: Name is the event type name. E.g., invoice.created
+          type: string
       type: object
     models.ImportOpenAPISpec:
       properties:
         spec:
           type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    handlers.Stub:
       type: object
     models.UpdateEventType:
       properties:

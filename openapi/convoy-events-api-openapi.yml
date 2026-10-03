@@ -695,33 +695,154 @@ paths:
       summary: Replay Event
 components:
   schemas:
-    util.ServerResponse:
+    datastore.KafkaAuth:
       properties:
-        message:
+        hash:
+          type: string
+        password:
+          type: string
+        tls:
+          type: boolean
+        type:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.TwitterProviderConfig:
+      properties:
+        crc_verified_at:
+          type: string
+      type: object
+    datastore.PubSubConfig:
+      properties:
+        amqp:
+          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
+        google:
+          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
+        kafka:
+          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
+        sqs:
+          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.PubSubType'
+        workers:
+          type: integer
+      type: object
+    datastore.SQSPubSubConfig:
+      properties:
+        access_key_id:
+          type: string
+        default_region:
+          type: string
+        endpoint:
+          description: 'Optional: for LocalStack testing'
+          type: string
+        queue_name:
+          type: string
+        secret_key:
+          type: string
+      type: object
+    datastore.EndpointAuthentication:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/datastore.ApiKey'
+        basic_auth:
+          $ref: '#/components/schemas/datastore.BasicAuth'
+        oauth2:
+          $ref: '#/components/schemas/datastore.OAuth2'
+        type:
+          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
+      type: object
+    handlers.Stub:
+      type: object
+    models.BroadcastEvent:
+      properties:
+        acknowledged_at:
+          type: string
+        custom_headers:
+          additionalProperties:
+            type: string
+          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
+          type: object
+        data:
+          description: 'Data is an arbitrary JSON value that gets sent as the body of the
+
+            webhook to the endpoints'
+          type: object
+        event_type:
+          description: Event Type is used for filtering and debugging e.g invoice.paid
+          type: string
+        idempotency_key:
+          description: Specify a key for event deduplication
+          type: string
+      type: object
+    datastore.HMac:
+      properties:
+        encoding:
+          $ref: '#/components/schemas/datastore.EncodingType'
+        hash:
+          type: string
+        header:
+          type: string
+        secret:
+          type: string
+      type: object
+    datastore.ProviderConfig:
+      properties:
+        twitter:
+          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
+      type: object
+    datastore.Endpoint:
+      properties:
+        advanced_signatures:
+          type: boolean
+        authentication:
+          $ref: '#/components/schemas/datastore.EndpointAuthentication'
+        content_type:
+          type: string
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        description:
+          type: string
+        events:
+          type: integer
+        failure_rate:
+          type: number
+        http_timeout:
+          type: integer
+        mtls_client_cert:
+          allOf:
+          - $ref: '#/components/schemas/datastore.MtlsClientCert'
+          description: mTLS client certificate configuration
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        rate_limit:
+          type: integer
+        rate_limit_duration:
+          type: integer
+        secrets:
+          items:
+            $ref: '#/components/schemas/datastore.Secret'
+          type: array
+        slack_webhook_url:
           type: string
         status:
-          type: boolean
+          $ref: '#/components/schemas/datastore.EndpointStatus'
+        support_email:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
       type: object
-    datastore.EndpointAuthenticationType:
-      enum:
-      - api_key
-      - oauth2
-      - basic_auth
-      type: string
-      x-enum-varnames:
-      - APIKeyAuthentication
-      - OAuth2Authentication
-      - BasicAuthentication
-    datastore.SourceProvider:
-      enum:
-      - github
-      - twitter
-      - shopify
-      type: string
-      x-enum-varnames:
-      - GithubSourceProvider
-      - TwitterSourceProvider
-      - ShopifySourceProvider
     datastore.PaginationData:
       properties:
         has_next_page:
@@ -735,18 +856,137 @@ components:
         prev_page_cursor:
           type: string
       type: object
-    datastore.PubSubType:
+    datastore.SourceProvider:
       enum:
-      - sqs
-      - google
-      - kafka
-      - amqp
+      - github
+      - twitter
+      - shopify
       type: string
       x-enum-varnames:
-      - SqsPubSub
-      - GooglePubSub
-      - KafkaPubSub
-      - AmqpPubSub
+      - GithubSourceProvider
+      - TwitterSourceProvider
+      - ShopifySourceProvider
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
+    datastore.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    models.FanoutEvent:
+      properties:
+        custom_headers:
+          additionalProperties:
+            type: string
+          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
+          type: object
+        data:
+          description: 'Data is an arbitrary JSON value that gets sent as the body of the
+
+            webhook to the endpoints'
+          type: object
+        event_type:
+          description: Event Type is used for filtering and debugging e.g invoice.paid
+          type: string
+        idempotency_key:
+          description: Specify a key for event deduplication
+          type: string
+        owner_id:
+          description: Used for fanout, sends this event to all endpoints with this OwnerID.
+          type: string
+      type: object
+    datastore.KafkaPubSubConfig:
+      properties:
+        auth:
+          $ref: '#/components/schemas/datastore.KafkaAuth'
+        brokers:
+          items:
+            type: string
+          type: array
+        consumer_group_id:
+          type: string
+        topic_name:
+          type: string
+      type: object
     datastore.OAuth2SigningKey:
       properties:
         crv:
@@ -789,11 +1029,150 @@ components:
           description: Y coordinate (EC only)
           type: string
       type: object
-    httpheader.HTTPHeader:
-      additionalProperties:
-        items:
+    datastore.AmqpCredentials:
+      properties:
+        password:
           type: string
-        type: array
+        user:
+          type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    datastore.VerifierType:
+      enum:
+      - noop
+      - hmac
+      - basic_auth
+      - api_key
+      type: string
+      x-enum-varnames:
+      - NoopVerifier
+      - HMacVerifier
+      - BasicAuthVerifier
+      - APIKeyVerifier
+    models.DynamicEvent:
+      properties:
+        custom_headers:
+          additionalProperties:
+            type: string
+          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
+          type: object
+        data:
+          description: 'Data is an arbitrary JSON value that gets sent as the body of the
+
+            webhook to the endpoints'
+          type: object
+        event_type:
+          description: Event Type is used for filtering and debugging e.g invoice.paid
+          type: string
+        event_types:
+          description: A list of event types for the subscription filter config
+          items:
+            type: string
+          type: array
+        idempotency_key:
+          description: Specify a key for event deduplication
+          type: string
+        secret:
+          description: Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.
+          type: string
+        url:
+          description: 'URL is the endpoint''s URL prefixed with https. non-https urls are currently
+
+            not supported.'
+          type: string
+      type: object
+    datastore.EventStatus:
+      enum:
+      - Processing
+      - Failure
+      - Success
+      - Retry
+      - Pending
+      type: string
+      x-enum-varnames:
+      - ProcessingStatus
+      - FailureStatus
+      - SuccessStatus
+      - RetryStatus
+      - PendingStatus
+    datastore.GooglePubSubConfig:
+      properties:
+        project_id:
+          type: string
+        service_account:
+          items:
+            type: integer
+          type: array
+        subscription_id:
+          type: string
+      type: object
+    datastore.Source:
+      properties:
+        body_function:
+          type: string
+        created_at:
+          type: string
+        custom_response:
+          $ref: '#/components/schemas/datastore.CustomResponse'
+        deleted_at:
+          type: string
+        forward_headers:
+          items:
+            type: string
+          type: array
+        header_function:
+          type: string
+        idempotency_keys:
+          items:
+            type: string
+          type: array
+        is_disabled:
+          type: boolean
+        mask_id:
+          type: string
+        name:
+          type: string
+        project_id:
+          type: string
+        provider:
+          $ref: '#/components/schemas/datastore.SourceProvider'
+        provider_config:
+          $ref: '#/components/schemas/datastore.ProviderConfig'
+        pub_sub:
+          $ref: '#/components/schemas/datastore.PubSubConfig'
+        type:
+          $ref: '#/components/schemas/datastore.SourceType'
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+        verifier:
+          $ref: '#/components/schemas/datastore.VerifierConfig'
+      type: object
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
       type: object
     datastore.VerifierConfig:
       properties:
@@ -806,6 +1185,18 @@ components:
         type:
           $ref: '#/components/schemas/datastore.VerifierType'
       type: object
+    datastore.SourceType:
+      enum:
+      - http
+      - rest_api
+      - pub_sub
+      - db_change_stream
+      type: string
+      x-enum-varnames:
+      - HTTPSource
+      - RestApiSource
+      - PubSubSource
+      - DBChangeStream
     datastore.AmqpPubSubConfig:
       properties:
         host:
@@ -826,6 +1217,31 @@ components:
           type: string
         vhost:
           type: string
+      type: object
+    datastore.PubSubType:
+      enum:
+      - sqs
+      - google
+      - kafka
+      - amqp
+      type: string
+      x-enum-varnames:
+      - SqsPubSub
+      - GooglePubSub
+      - KafkaPubSub
+      - AmqpPubSub
+    datastore.CustomResponse:
+      properties:
+        body:
+          type: string
+        content_type:
+          type: string
+      type: object
+    httpheader.HTTPHeader:
+      additionalProperties:
+        items:
+          type: string
+        type: array
       type: object
     models.EventResponse:
       properties:
@@ -880,137 +1296,6 @@ components:
         url_query_params:
           type: string
       type: object
-    datastore.MtlsClientCert:
-      properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
-          type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
-          type: string
-      type: object
-    datastore.OAuth2FieldMapping:
-      properties:
-        access_token:
-          description: Field name for access token (e.g., "accessToken", "access_token", "token")
-          type: string
-        expires_in:
-          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
-          type: string
-        token_type:
-          description: Field name for token type (e.g., "tokenType", "token_type")
-          type: string
-      type: object
-    datastore.OAuth2:
-      properties:
-        audience:
-          type: string
-        authentication_type:
-          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
-        client_id:
-          type: string
-        client_secret:
-          description: Encrypted at rest
-          type: string
-        expiry_time_unit:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
-          description: Expiry time unit (seconds, milliseconds, minutes, hours)
-        field_mapping:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
-          description: Field mapping for flexible token response parsing
-        grant_type:
-          type: string
-        issuer:
-          type: string
-        scope:
-          type: string
-        signing_algorithm:
-          type: string
-        signing_key:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
-          description: Encrypted at rest
-        subject:
-          type: string
-        url:
-          type: string
-      type: object
-    models.PagedResponse:
-      properties:
-        content: {}
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/datastore.PaginationData'
-      type: object
-    datastore.BasicAuth:
-      properties:
-        password:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.HMac:
-      properties:
-        encoding:
-          $ref: '#/components/schemas/datastore.EncodingType'
-        hash:
-          type: string
-        header:
-          type: string
-        secret:
-          type: string
-      type: object
-    datastore.CustomResponse:
-      properties:
-        body:
-          type: string
-        content_type:
-          type: string
-      type: object
-    datastore.SQSPubSubConfig:
-      properties:
-        access_key_id:
-          type: string
-        default_region:
-          type: string
-        endpoint:
-          description: 'Optional: for LocalStack testing'
-          type: string
-        queue_name:
-          type: string
-        secret_key:
-          type: string
-      type: object
-    datastore.GooglePubSubConfig:
-      properties:
-        project_id:
-          type: string
-        service_account:
-          items:
-            type: integer
-          type: array
-        subscription_id:
-          type: string
-      type: object
-    datastore.ProviderConfig:
-      properties:
-        twitter:
-          $ref: '#/components/schemas/datastore.TwitterProviderConfig'
-      type: object
-    datastore.SourceType:
-      enum:
-      - http
-      - rest_api
-      - pub_sub
-      - db_change_stream
-      type: string
-      x-enum-varnames:
-      - HTTPSource
-      - RestApiSource
-      - PubSubSource
-      - DBChangeStream
     models.CreateEvent:
       properties:
         app_id:
@@ -1036,104 +1321,13 @@ components:
           description: Specify a key for event deduplication
           type: string
       type: object
-    datastore.TwitterProviderConfig:
+    models.PagedResponse:
       properties:
-        crc_verified_at:
-          type: string
-      type: object
-    datastore.EndpointStatus:
-      enum:
-      - active
-      - inactive
-      - paused
-      type: string
-      x-enum-varnames:
-      - ActiveEndpointStatus
-      - InactiveEndpointStatus
-      - PausedEndpointStatus
-    datastore.Endpoint:
-      properties:
-        advanced_signatures:
-          type: boolean
-        authentication:
-          $ref: '#/components/schemas/datastore.EndpointAuthentication'
-        content_type:
-          type: string
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        description:
-          type: string
-        events:
-          type: integer
-        failure_rate:
-          type: number
-        http_timeout:
-          type: integer
-        mtls_client_cert:
+        content: {}
+        pagination:
           allOf:
-          - $ref: '#/components/schemas/datastore.MtlsClientCert'
-          description: mTLS client certificate configuration
-        name:
-          type: string
-        owner_id:
-          type: string
-        project_id:
-          type: string
-        rate_limit:
-          type: integer
-        rate_limit_duration:
-          type: integer
-        secrets:
-          items:
-            $ref: '#/components/schemas/datastore.Secret'
-          type: array
-        slack_webhook_url:
-          type: string
-        status:
-          $ref: '#/components/schemas/datastore.EndpointStatus'
-        support_email:
-          type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
+          - $ref: '#/components/schemas/datastore.PaginationData'
       type: object
-    datastore.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      type: object
-    datastore.KafkaPubSubConfig:
-      properties:
-        auth:
-          $ref: '#/components/schemas/datastore.KafkaAuth'
-        brokers:
-          items:
-            type: string
-          type: array
-        consumer_group_id:
-          type: string
-        topic_name:
-          type: string
-      type: object
-    datastore.OAuth2ExpiryTimeUnit:
-      enum:
-      - seconds
-      - milliseconds
-      - minutes
-      - hours
-      type: string
-      x-enum-varnames:
-      - ExpiryTimeUnitSeconds
-      - ExpiryTimeUnitMilliseconds
-      - ExpiryTimeUnitMinutes
-      - ExpiryTimeUnitHours
     datastore.OAuth2AuthenticationType:
       enum:
       - shared_secret
@@ -1142,78 +1336,6 @@ components:
       x-enum-varnames:
       - SharedSecretAuth
       - ClientAssertionAuth
-    datastore.PubSubConfig:
-      properties:
-        amqp:
-          $ref: '#/components/schemas/datastore.AmqpPubSubConfig'
-        google:
-          $ref: '#/components/schemas/datastore.GooglePubSubConfig'
-        kafka:
-          $ref: '#/components/schemas/datastore.KafkaPubSubConfig'
-        sqs:
-          $ref: '#/components/schemas/datastore.SQSPubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.PubSubType'
-        workers:
-          type: integer
-      type: object
-    models.BroadcastEvent:
-      properties:
-        acknowledged_at:
-          type: string
-        custom_headers:
-          additionalProperties:
-            type: string
-          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
-          type: object
-        data:
-          description: 'Data is an arbitrary JSON value that gets sent as the body of the
-
-            webhook to the endpoints'
-          type: object
-        event_type:
-          description: Event Type is used for filtering and debugging e.g invoice.paid
-          type: string
-        idempotency_key:
-          description: Specify a key for event deduplication
-          type: string
-      type: object
-    models.FanoutEvent:
-      properties:
-        custom_headers:
-          additionalProperties:
-            type: string
-          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
-          type: object
-        data:
-          description: 'Data is an arbitrary JSON value that gets sent as the body of the
-
-            webhook to the endpoints'
-          type: object
-        event_type:
-          description: Event Type is used for filtering and debugging e.g invoice.paid
-          type: string
-        idempotency_key:
-          description: Specify a key for event deduplication
-          type: string
-        owner_id:
-          description: Used for fanout, sends this event to all endpoints with this OwnerID.
-          type: string
-      type: object
-    datastore.VerifierType:
-      enum:
-      - noop
-      - hmac
-      - basic_auth
-      - api_key
-      type: string
-      x-enum-varnames:
-      - NoopVerifier
-      - HMacVerifier
-      - BasicAuthVerifier
-      - APIKeyVerifier
-    handlers.Stub:
-      type: object
     datastore.EncodingType:
       enum:
       - base64
@@ -1235,128 +1357,6 @@ components:
         updated_at:
           type: string
         value:
-          type: string
-      type: object
-    datastore.EventStatus:
-      enum:
-      - Processing
-      - Failure
-      - Success
-      - Retry
-      - Pending
-      type: string
-      x-enum-varnames:
-      - ProcessingStatus
-      - FailureStatus
-      - SuccessStatus
-      - RetryStatus
-      - PendingStatus
-    datastore.EndpointAuthentication:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/datastore.ApiKey'
-        basic_auth:
-          $ref: '#/components/schemas/datastore.BasicAuth'
-        oauth2:
-          $ref: '#/components/schemas/datastore.OAuth2'
-        type:
-          $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
-      type: object
-    datastore.KafkaAuth:
-      properties:
-        hash:
-          type: string
-        password:
-          type: string
-        tls:
-          type: boolean
-        type:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.Source:
-      properties:
-        body_function:
-          type: string
-        created_at:
-          type: string
-        custom_response:
-          $ref: '#/components/schemas/datastore.CustomResponse'
-        deleted_at:
-          type: string
-        forward_headers:
-          items:
-            type: string
-          type: array
-        header_function:
-          type: string
-        idempotency_keys:
-          items:
-            type: string
-          type: array
-        is_disabled:
-          type: boolean
-        mask_id:
-          type: string
-        name:
-          type: string
-        project_id:
-          type: string
-        provider:
-          $ref: '#/components/schemas/datastore.SourceProvider'
-        provider_config:
-          $ref: '#/components/schemas/datastore.ProviderConfig'
-        pub_sub:
-          $ref: '#/components/schemas/datastore.PubSubConfig'
-        type:
-          $ref: '#/components/schemas/datastore.SourceType'
-        uid:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
-        verifier:
-          $ref: '#/components/schemas/datastore.VerifierConfig'
-      type: object
-    models.DynamicEvent:
-      properties:
-        custom_headers:
-          additionalProperties:
-            type: string
-          description: Specifies custom headers you want convoy to add when the event is dispatched to your endpoint
-          type: object
-        data:
-          description: 'Data is an arbitrary JSON value that gets sent as the body of the
-
-            webhook to the endpoints'
-          type: object
-        event_type:
-          description: Event Type is used for filtering and debugging e.g invoice.paid
-          type: string
-        event_types:
-          description: A list of event types for the subscription filter config
-          items:
-            type: string
-          type: array
-        idempotency_key:
-          description: Specify a key for event deduplication
-          type: string
-        secret:
-          description: Endpoint's webhook secret. If not provided, Convoy autogenerates one for the endpoint.
-          type: string
-        url:
-          description: 'URL is the endpoint''s URL prefixed with https. non-https urls are currently
-
-            not supported.'
-          type: string
-      type: object
-    datastore.AmqpCredentials:
-      properties:
-        password:
-          type: string
-        user:
           type: string
       type: object
   securitySchemes:

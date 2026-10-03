@@ -627,11 +627,10 @@ components:
     datastore.M:
       additionalProperties: true
       type: object
-    util.ServerResponse:
+    models.TestFilterResponse:
       properties:
-        message:
-          type: string
-        status:
+        is_match:
+          description: Whether the payload matches the filter criteria
           type: boolean
       type: object
     models.UpdateFilterRequest:
@@ -651,14 +650,21 @@ components:
           description: Whether the filter uses flattened JSON paths (optional)
           type: boolean
       type: object
-    handlers.Stub:
-      type: object
-    models.TestFilterRequest:
+    models.CreateFilterRequest:
       properties:
-        payload:
-          description: Sample payload to test against the filter (required)
+        body:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Body matching criteria (optional)
+        event_type:
+          description: Type of event this filter applies to (required)
+          type: string
+        headers:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Header matching criteria (optional)
       required:
-      - payload
+      - event_type
       type: object
     models.FilterResponse:
       properties:
@@ -677,21 +683,19 @@ components:
         uid:
           type: string
       type: object
-    models.CreateFilterRequest:
+    util.ServerResponse:
       properties:
-        body:
-          allOf:
-          - $ref: '#/components/schemas/datastore.M'
-          description: Body matching criteria (optional)
-        event_type:
-          description: Type of event this filter applies to (required)
+        message:
           type: string
-        headers:
-          allOf:
-          - $ref: '#/components/schemas/datastore.M'
-          description: Header matching criteria (optional)
+        status:
+          type: boolean
+      type: object
+    models.TestFilterRequest:
+      properties:
+        payload:
+          description: Sample payload to test against the filter (required)
       required:
-      - event_type
+      - payload
       type: object
     models.BulkUpdateFilterRequest:
       properties:
@@ -708,11 +712,7 @@ components:
       required:
       - uid
       type: object
-    models.TestFilterResponse:
-      properties:
-        is_match:
-          description: Whether the payload matches the filter criteria
-          type: boolean
+    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:
