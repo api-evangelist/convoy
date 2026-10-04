@@ -164,19 +164,6 @@ paths:
       summary: Retrieve a Delivery Attempt
 components:
   schemas:
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    handlers.Stub:
-      type: object
-    datastore.HttpHeader:
-      additionalProperties:
-        type: string
-      type: object
     datastore.DeliveryAttempt:
       properties:
         api_version:
@@ -213,6 +200,19 @@ components:
           type: string
         url:
           type: string
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
+    handlers.Stub:
+      type: object
+    datastore.HttpHeader:
+      additionalProperties:
+        type: string
       type: object
   securitySchemes:
     ApiKeyAuth:

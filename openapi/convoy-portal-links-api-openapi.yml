@@ -477,6 +477,126 @@ paths:
       summary: Revoke a Portal Link
 components:
   schemas:
+    datastore.ApiKey:
+      properties:
+        header_name:
+          type: string
+        header_value:
+          type: string
+      type: object
+    datastore.MtlsClientCert:
+      properties:
+        client_cert:
+          description: ClientCert is the client certificate PEM string
+          type: string
+        client_key:
+          description: ClientKey is the client private key PEM string
+          type: string
+      type: object
+    datastore.OAuth2SigningKey:
+      properties:
+        crv:
+          description: EC (Elliptic Curve) key fields
+          type: string
+        d:
+          description: Private key (EC only)
+          type: string
+        dp:
+          description: RSA first factor CRT exponent (RSA private key only)
+          type: string
+        dq:
+          description: RSA second factor CRT exponent (RSA private key only)
+          type: string
+        e:
+          description: RSA public exponent (RSA only)
+          type: string
+        kid:
+          description: Key ID
+          type: string
+        kty:
+          description: 'Key type: "EC" or "RSA"'
+          type: string
+        n:
+          description: RSA key fields
+          type: string
+        p:
+          description: RSA first prime factor (RSA private key only)
+          type: string
+        q:
+          description: RSA second prime factor (RSA private key only)
+          type: string
+        qi:
+          description: RSA first CRT coefficient (RSA private key only)
+          type: string
+        x:
+          description: X coordinate (EC only)
+          type: string
+        y:
+          description: Y coordinate (EC only)
+          type: string
+      type: object
+    datastore.PaginationData:
+      properties:
+        has_next_page:
+          type: boolean
+        has_prev_page:
+          type: boolean
+        next_page_cursor:
+          type: string
+        per_page:
+          type: integer
+        prev_page_cursor:
+          type: string
+      type: object
+    datastore.OAuth2AuthenticationType:
+      enum:
+      - shared_secret
+      - client_assertion
+      type: string
+      x-enum-varnames:
+      - SharedSecretAuth
+      - ClientAssertionAuth
+    datastore.OAuth2FieldMapping:
+      properties:
+        access_token:
+          description: Field name for access token (e.g., "accessToken", "access_token", "token")
+          type: string
+        expires_in:
+          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
+          type: string
+        token_type:
+          description: Field name for token type (e.g., "tokenType", "token_type")
+          type: string
+      type: object
+    datastore.EndpointStatus:
+      enum:
+      - active
+      - inactive
+      - paused
+      type: string
+      x-enum-varnames:
+      - ActiveEndpointStatus
+      - InactiveEndpointStatus
+      - PausedEndpointStatus
+    datastore.OAuth2ExpiryTimeUnit:
+      enum:
+      - seconds
+      - milliseconds
+      - minutes
+      - hours
+      type: string
+      x-enum-varnames:
+      - ExpiryTimeUnitSeconds
+      - ExpiryTimeUnitMilliseconds
+      - ExpiryTimeUnitMinutes
+      - ExpiryTimeUnitHours
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
     datastore.EndpointAuthentication:
       properties:
         api_key:
@@ -488,7 +608,126 @@ components:
         type:
           $ref: '#/components/schemas/datastore.EndpointAuthenticationType'
       type: object
+    datastore.PortalAuthType:
+      enum:
+      - refresh_token
+      - static_token
+      type: string
+      x-enum-varnames:
+      - PortalAuthTypeRefreshToken
+      - PortalAuthTypeStaticToken
     handlers.Stub:
+      type: object
+    datastore.BasicAuth:
+      properties:
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    datastore.EndpointAuthenticationType:
+      enum:
+      - api_key
+      - oauth2
+      - basic_auth
+      type: string
+      x-enum-varnames:
+      - APIKeyAuthentication
+      - OAuth2Authentication
+      - BasicAuthentication
+    datastore.OAuth2:
+      properties:
+        audience:
+          type: string
+        authentication_type:
+          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
+        client_id:
+          type: string
+        client_secret:
+          description: Encrypted at rest
+          type: string
+        expiry_time_unit:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
+          description: Expiry time unit (seconds, milliseconds, minutes, hours)
+        field_mapping:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
+          description: Field mapping for flexible token response parsing
+        grant_type:
+          type: string
+        issuer:
+          type: string
+        scope:
+          type: string
+        signing_algorithm:
+          type: string
+        signing_key:
+          allOf:
+          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
+          description: Encrypted at rest
+        subject:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.PortalLinkResponse:
+      properties:
+        auth_key:
+          type: string
+        auth_type:
+          $ref: '#/components/schemas/datastore.PortalAuthType'
+        can_manage_endpoint:
+          type: boolean
+        created_at:
+          type: string
+        deleted_at:
+          type: string
+        endpoint_count:
+          type: integer
+        endpoints:
+          items:
+            type: string
+          type: array
+        endpoints_metadata:
+          items:
+            $ref: '#/components/schemas/datastore.Endpoint'
+          type: array
+        name:
+          type: string
+        owner_id:
+          type: string
+        project_id:
+          type: string
+        token:
+          type: string
+        uid:
+          type: string
+        updated_at:
+          type: string
+        url:
+          type: string
+      type: object
+    datastore.CreatePortalLinkRequest:
+      properties:
+        auth_type:
+          type: string
+        can_manage_endpoint:
+          description: Specify whether endpoint management can be done through the Portal Link UI
+          type: boolean
+        endpoints:
+          description: 'Deprecated
+
+            IDs of endpoints in this portal link'
+          items:
+            type: string
+          type: array
+        name:
+          description: Portal Link Name
+          type: string
+        owner_id:
+          description: OwnerID, the portal link will inherit all the endpoints with this owner ID
+          type: string
       type: object
     datastore.UpdatePortalLinkRequest:
       properties:
@@ -562,251 +801,12 @@ components:
         url:
           type: string
       type: object
-    datastore.PaginationData:
-      properties:
-        has_next_page:
-          type: boolean
-        has_prev_page:
-          type: boolean
-        next_page_cursor:
-          type: string
-        per_page:
-          type: integer
-        prev_page_cursor:
-          type: string
-      type: object
-    datastore.OAuth2ExpiryTimeUnit:
-      enum:
-      - seconds
-      - milliseconds
-      - minutes
-      - hours
-      type: string
-      x-enum-varnames:
-      - ExpiryTimeUnitSeconds
-      - ExpiryTimeUnitMilliseconds
-      - ExpiryTimeUnitMinutes
-      - ExpiryTimeUnitHours
-    datastore.OAuth2FieldMapping:
-      properties:
-        access_token:
-          description: Field name for access token (e.g., "accessToken", "access_token", "token")
-          type: string
-        expires_in:
-          description: Field name for expiry time (e.g., "expiresIn", "expires_in", "expiresAt")
-          type: string
-        token_type:
-          description: Field name for token type (e.g., "tokenType", "token_type")
-          type: string
-      type: object
-    datastore.EndpointStatus:
-      enum:
-      - active
-      - inactive
-      - paused
-      type: string
-      x-enum-varnames:
-      - ActiveEndpointStatus
-      - InactiveEndpointStatus
-      - PausedEndpointStatus
-    datastore.OAuth2:
-      properties:
-        audience:
-          type: string
-        authentication_type:
-          $ref: '#/components/schemas/datastore.OAuth2AuthenticationType'
-        client_id:
-          type: string
-        client_secret:
-          description: Encrypted at rest
-          type: string
-        expiry_time_unit:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2ExpiryTimeUnit'
-          description: Expiry time unit (seconds, milliseconds, minutes, hours)
-        field_mapping:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2FieldMapping'
-          description: Field mapping for flexible token response parsing
-        grant_type:
-          type: string
-        issuer:
-          type: string
-        scope:
-          type: string
-        signing_algorithm:
-          type: string
-        signing_key:
-          allOf:
-          - $ref: '#/components/schemas/datastore.OAuth2SigningKey'
-          description: Encrypted at rest
-        subject:
-          type: string
-        url:
-          type: string
-      type: object
-    datastore.BasicAuth:
-      properties:
-        password:
-          type: string
-        username:
-          type: string
-      type: object
-    datastore.MtlsClientCert:
-      properties:
-        client_cert:
-          description: ClientCert is the client certificate PEM string
-          type: string
-        client_key:
-          description: ClientKey is the client private key PEM string
-          type: string
-      type: object
-    datastore.OAuth2SigningKey:
-      properties:
-        crv:
-          description: EC (Elliptic Curve) key fields
-          type: string
-        d:
-          description: Private key (EC only)
-          type: string
-        dp:
-          description: RSA first factor CRT exponent (RSA private key only)
-          type: string
-        dq:
-          description: RSA second factor CRT exponent (RSA private key only)
-          type: string
-        e:
-          description: RSA public exponent (RSA only)
-          type: string
-        kid:
-          description: Key ID
-          type: string
-        kty:
-          description: 'Key type: "EC" or "RSA"'
-          type: string
-        n:
-          description: RSA key fields
-          type: string
-        p:
-          description: RSA first prime factor (RSA private key only)
-          type: string
-        q:
-          description: RSA second prime factor (RSA private key only)
-          type: string
-        qi:
-          description: RSA first CRT coefficient (RSA private key only)
-          type: string
-        x:
-          description: X coordinate (EC only)
-          type: string
-        y:
-          description: Y coordinate (EC only)
-          type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    datastore.CreatePortalLinkRequest:
-      properties:
-        auth_type:
-          type: string
-        can_manage_endpoint:
-          description: Specify whether endpoint management can be done through the Portal Link UI
-          type: boolean
-        endpoints:
-          description: 'Deprecated
-
-            IDs of endpoints in this portal link'
-          items:
-            type: string
-          type: array
-        name:
-          description: Portal Link Name
-          type: string
-        owner_id:
-          description: OwnerID, the portal link will inherit all the endpoints with this owner ID
-          type: string
-      type: object
-    datastore.EndpointAuthenticationType:
-      enum:
-      - api_key
-      - oauth2
-      - basic_auth
-      type: string
-      x-enum-varnames:
-      - APIKeyAuthentication
-      - OAuth2Authentication
-      - BasicAuthentication
-    datastore.ApiKey:
-      properties:
-        header_name:
-          type: string
-        header_value:
-          type: string
-      type: object
-    datastore.PortalAuthType:
-      enum:
-      - refresh_token
-      - static_token
-      type: string
-      x-enum-varnames:
-      - PortalAuthTypeRefreshToken
-      - PortalAuthTypeStaticToken
     models.PagedResponse:
       properties:
         content: {}
         pagination:
           allOf:
           - $ref: '#/components/schemas/datastore.PaginationData'
-      type: object
-    datastore.OAuth2AuthenticationType:
-      enum:
-      - shared_secret
-      - client_assertion
-      type: string
-      x-enum-varnames:
-      - SharedSecretAuth
-      - ClientAssertionAuth
-    datastore.PortalLinkResponse:
-      properties:
-        auth_key:
-          type: string
-        auth_type:
-          $ref: '#/components/schemas/datastore.PortalAuthType'
-        can_manage_endpoint:
-          type: boolean
-        created_at:
-          type: string
-        deleted_at:
-          type: string
-        endpoint_count:
-          type: integer
-        endpoints:
-          items:
-            type: string
-          type: array
-        endpoints_metadata:
-          items:
-            $ref: '#/components/schemas/datastore.Endpoint'
-          type: array
-        name:
-          type: string
-        owner_id:
-          type: string
-        project_id:
-          type: string
-        token:
-          type: string
-        uid:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
       type: object
     datastore.Secret:
       properties:

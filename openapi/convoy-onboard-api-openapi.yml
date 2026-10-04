@@ -106,6 +106,13 @@ paths:
       summary: Bulk Onboard Endpoints with Subscriptions
 components:
   schemas:
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
+          type: boolean
+      type: object
     models.BulkOnboardDryRunResponse:
       properties:
         errors:
@@ -126,12 +133,7 @@ components:
         row:
           type: integer
       type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
+    handlers.Stub:
       type: object
     models.BulkOnboardAcceptedResponse:
       properties:
@@ -141,8 +143,6 @@ components:
           type: string
         total_items:
           type: integer
-      type: object
-    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:

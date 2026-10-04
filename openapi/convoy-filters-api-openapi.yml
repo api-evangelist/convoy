@@ -624,14 +624,36 @@ paths:
       summary: Update a Filter
 components:
   schemas:
-    datastore.M:
-      additionalProperties: true
+    handlers.Stub:
       type: object
-    models.TestFilterResponse:
+    models.BulkUpdateFilterRequest:
       properties:
-        is_match:
-          description: Whether the payload matches the filter criteria
+        body:
+          additionalProperties: true
+          type: object
+        event_type:
+          type: string
+        headers:
+          additionalProperties: true
+          type: object
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    util.ServerResponse:
+      properties:
+        message:
+          type: string
+        status:
           type: boolean
+      type: object
+    models.TestFilterRequest:
+      properties:
+        payload:
+          description: Sample payload to test against the filter (required)
+      required:
+      - payload
       type: object
     models.UpdateFilterRequest:
       properties:
@@ -650,6 +672,9 @@ components:
           description: Whether the filter uses flattened JSON paths (optional)
           type: boolean
       type: object
+    datastore.M:
+      additionalProperties: true
+      type: object
     models.CreateFilterRequest:
       properties:
         body:
@@ -665,6 +690,12 @@ components:
           description: Header matching criteria (optional)
       required:
       - event_type
+      type: object
+    models.TestFilterResponse:
+      properties:
+        is_match:
+          description: Whether the payload matches the filter criteria
+          type: boolean
       type: object
     models.FilterResponse:
       properties:
@@ -682,37 +713,6 @@ components:
           type: string
         uid:
           type: string
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    models.TestFilterRequest:
-      properties:
-        payload:
-          description: Sample payload to test against the filter (required)
-      required:
-      - payload
-      type: object
-    models.BulkUpdateFilterRequest:
-      properties:
-        body:
-          additionalProperties: true
-          type: object
-        event_type:
-          type: string
-        headers:
-          additionalProperties: true
-          type: object
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:
