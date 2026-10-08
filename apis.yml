@@ -596,6 +596,8 @@ apis:
   - type: Examples
     url: ./examples/
 common:
+  - type: FinOps
+    url: finops/convoy-finops.yml
   - type: Website
     url: https://www.getconvoy.io/
   - type: CapabilityMap
