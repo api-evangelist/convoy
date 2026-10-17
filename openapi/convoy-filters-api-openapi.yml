@@ -624,54 +624,6 @@ paths:
       summary: Update a Filter
 components:
   schemas:
-    handlers.Stub:
-      type: object
-    models.BulkUpdateFilterRequest:
-      properties:
-        body:
-          additionalProperties: true
-          type: object
-        event_type:
-          type: string
-        headers:
-          additionalProperties: true
-          type: object
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    util.ServerResponse:
-      properties:
-        message:
-          type: string
-        status:
-          type: boolean
-      type: object
-    models.TestFilterRequest:
-      properties:
-        payload:
-          description: Sample payload to test against the filter (required)
-      required:
-      - payload
-      type: object
-    models.UpdateFilterRequest:
-      properties:
-        body:
-          allOf:
-          - $ref: '#/components/schemas/datastore.M'
-          description: Body matching criteria (optional)
-        event_type:
-          description: Type of event this filter applies to (optional)
-          type: string
-        headers:
-          allOf:
-          - $ref: '#/components/schemas/datastore.M'
-          description: Header matching criteria (optional)
-        is_flattened:
-          description: Whether the filter uses flattened JSON paths (optional)
-          type: boolean
-      type: object
     datastore.M:
       additionalProperties: true
       type: object
@@ -691,11 +643,19 @@ components:
       required:
       - event_type
       type: object
-    models.TestFilterResponse:
+    util.ServerResponse:
       properties:
-        is_match:
-          description: Whether the payload matches the filter criteria
+        message:
+          type: string
+        status:
           type: boolean
+      type: object
+    models.TestFilterRequest:
+      properties:
+        payload:
+          description: Sample payload to test against the filter (required)
+      required:
+      - payload
       type: object
     models.FilterResponse:
       properties:
@@ -713,6 +673,46 @@ components:
           type: string
         uid:
           type: string
+      type: object
+    models.TestFilterResponse:
+      properties:
+        is_match:
+          description: Whether the payload matches the filter criteria
+          type: boolean
+      type: object
+    models.UpdateFilterRequest:
+      properties:
+        body:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Body matching criteria (optional)
+        event_type:
+          description: Type of event this filter applies to (optional)
+          type: string
+        headers:
+          allOf:
+          - $ref: '#/components/schemas/datastore.M'
+          description: Header matching criteria (optional)
+        is_flattened:
+          description: Whether the filter uses flattened JSON paths (optional)
+          type: boolean
+      type: object
+    models.BulkUpdateFilterRequest:
+      properties:
+        body:
+          additionalProperties: true
+          type: object
+        event_type:
+          type: string
+        headers:
+          additionalProperties: true
+          type: object
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    handlers.Stub:
       type: object
   securitySchemes:
     ApiKeyAuth:
