@@ -1,4 +1,4 @@
-# Convoy (convoy)
+# Convoy
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,109 +66,256 @@
 
 Convoy is an open-source, cloud-native webhooks gateway used to securely ingest, persist, debug, deliver, and manage events. It positions itself as "the complete solution for secure, scalable, and reliable webhook delivery," covering both outbound (sending) and inbound (receiving) webhooks with retries, payload signing, fan-out, rate limiting, message broker ingestion, and customer-facing portals. Convoy is offered as a self-hosted open-source project (Elastic License v2.0, with the OpenAPI spec under MPL 2.0) and a fully managed cloud service in US and EU regions.
 
-**APIs.json:** [https://github.com/api-evangelist/convoy](https://github.com/api-evangelist/convoy)
+**Areas:** Webhook · Webhook Gateway · Event Delivery · Eventing · Messaging · Integration · API Infrastructure
 
-## Scope
+## Convoy on APIs.io
 
-- **Type:** Index
+Everything profiled for Convoy is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/convoy/](https://apis.io/providers/convoy/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- Webhooks
-- Webhook Gateway
-- Event Delivery
-- Eventing
-- Messaging
-- Integration
-- API Infrastructure
+- [Convoy Delivery Attempts API](https://apis.io/apis/convoy/convoy-delivery-attempts-api/) — Delivery Attempt related APIs
+- [Convoy Endpoints API](https://apis.io/apis/convoy/convoy-endpoints-api/) — Endpoint related APIs
+- [Convoy Event Deliveries API](https://apis.io/apis/convoy/convoy-event-deliveries-api/) — EventDelivery related APIs
+- [Convoy Events API](https://apis.io/apis/convoy/convoy-events-api/) — Event related APIs
+- [Convoy Filters API](https://apis.io/apis/convoy/convoy-filters-api/) — Filters related APIs
+- [Convoy Meta Events API](https://apis.io/apis/convoy/convoy-meta-events-api/) — Meta Events related APIs
+- [Convoy Onboard API](https://apis.io/apis/convoy/convoy-onboard-api/) — Onboard related APIs
+- [Convoy Portal Links API](https://apis.io/apis/convoy/convoy-portal-links-api/) — Portal Links related APIs
+- [Convoy Sources API](https://apis.io/apis/convoy/convoy-sources-api/) — Source related APIs
+- [Convoy Subscriptions API](https://apis.io/apis/convoy/convoy-subscriptions-api/) — Subscription related APIs
+- [Convoy Event Types API](https://apis.io/apis/convoy/convoy-event-types-api/) — Event Types related APIs
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-22
-- **Modified:** 2026-05-22
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (12)
 
-### Convoy API
+Multi-step workflows that chain operations into a business task.
 
-The Convoy REST API, version 26.3.5, exposes 44 operations across 11 resource groups for managing webhook delivery infrastructure: Subscriptions, Endpoints, Events, Sources, Event Deliveries, Delivery Attempts, Portal Links, Meta Events, Event Types, Filters, and Onboard. All operations are scoped to a project (`/v1/projects/{projectID}/...`) and authenticated via Bearer API key in the Authorization header. The managed cloud is split into independently-deployed US and EU regions.
+- [Convoy Attach Filter to Subscription](https://apis.io/arazzos/convoy/convoy-attach-filter-to-subscription-workflow/)
+- [Convoy Batch Retry Failed Deliveries](https://apis.io/arazzos/convoy/convoy-batch-retry-failed-deliveries-workflow/)
+- [Convoy Broadcast Event and Track](https://apis.io/arazzos/convoy/convoy-broadcast-event-and-track-workflow/)
+- [Convoy Create Event and Trace Delivery](https://apis.io/arazzos/convoy/convoy-create-event-and-trace-delivery-workflow/)
+- [Convoy Define Event Type and Subscribe](https://apis.io/arazzos/convoy/convoy-define-event-type-and-subscribe-workflow/)
+- [Convoy Fan Out Event to Owner](https://apis.io/arazzos/convoy/convoy-fanout-event-to-owner-workflow/)
+- [Convoy Force Resend Successful Deliveries](https://apis.io/arazzos/convoy/convoy-force-resend-deliveries-workflow/)
+- [Convoy Inspect Delivery Attempts](https://apis.io/arazzos/convoy/convoy-inspect-delivery-attempts-workflow/)
+- [Convoy Provision Endpoint and Subscription](https://apis.io/arazzos/convoy/convoy-provision-endpoint-subscription-workflow/)
+- [Convoy Register Incoming Source](https://apis.io/arazzos/convoy/convoy-register-incoming-source-workflow/)
+- [Convoy Replay Event](https://apis.io/arazzos/convoy/convoy-replay-event-workflow/)
+- [Convoy Retry a Failed Delivery](https://apis.io/arazzos/convoy/convoy-retry-failed-delivery-workflow/)
 
-- **Human URL:** [https://getconvoy.io/docs/api-reference/welcome](https://getconvoy.io/docs/api-reference/welcome)
-- **Base URL:** `https://us.getconvoy.cloud/api`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Webhooks
-- Event Delivery
-- API Gateway
-- Subscriptions
-- Endpoints
+- [Convoy Agentic Access](https://apis.io/agentic-access/convoy/convoy-agentic-access/)
 
-#### Properties
+#### JSON Schema (8)
 
-- [OpenAPI](https://raw.githubusercontent.com/frain-dev/convoy/main/docs/v3/openapi3.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](./openapi/convoy-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/convoy.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/convoy.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [API Reference](https://getconvoy.io/docs/api-reference/welcome)
+The data models the API reads and writes.
+
+- [Convoy DeliveryAttempt](https://apis.io/schemas/convoy/convoy-delivery-attempt/)
+- [Convoy Endpoint](https://apis.io/schemas/convoy/convoy-endpoint/)
+- [Convoy Event](https://apis.io/schemas/convoy/convoy-event/)
+- [Convoy EventDelivery](https://apis.io/schemas/convoy/convoy-event-delivery/)
+- [Convoy EventType](https://apis.io/schemas/convoy/convoy-event-type/)
+- [Convoy PortalLink](https://apis.io/schemas/convoy/convoy-portal-link/)
+- [Convoy Source](https://apis.io/schemas/convoy/convoy-source/)
+- [Convoy Subscription](https://apis.io/schemas/convoy/convoy-subscription/)
+
+#### JSON Structure (8)
+
+Data models expressed in JSON Structure.
+
+- [Convoy Delivery Attempt Structure](https://apis.io/json-structure/convoy/convoy-delivery-attempt-structure/)
+- [Convoy Endpoint Structure](https://apis.io/json-structure/convoy/convoy-endpoint-structure/)
+- [Convoy Event Delivery Structure](https://apis.io/json-structure/convoy/convoy-event-delivery-structure/)
+- [Convoy Event Structure](https://apis.io/json-structure/convoy/convoy-event-structure/)
+- [Convoy Event Type Structure](https://apis.io/json-structure/convoy/convoy-event-type-structure/)
+- [Convoy Portal Link Structure](https://apis.io/json-structure/convoy/convoy-portal-link-structure/)
+- [Convoy Source Structure](https://apis.io/json-structure/convoy/convoy-source-structure/)
+- [Convoy Subscription Structure](https://apis.io/json-structure/convoy/convoy-subscription-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Convoy Context](https://apis.io/jsonld/convoy/convoy-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Convoy Vocabulary](https://apis.io/vocabularies/convoy/convoy-vocabulary/)
+
+#### Examples (68)
+
+Example requests and responses.
+
+- [Convoy Delivery Attempt Example](https://apis.io/examples/convoy/convoy-delivery-attempt-example/)
+- [Convoy Endpoint Example](https://apis.io/examples/convoy/convoy-endpoint-example/)
+- [Convoy Event Delivery Example](https://apis.io/examples/convoy/convoy-event-delivery-example/)
+- [Convoy Event Example](https://apis.io/examples/convoy/convoy-event-example/)
+- [Convoy Event Type Example](https://apis.io/examples/convoy/convoy-event-type-example/)
+- [Convoy Op Activateendpoint Example](https://apis.io/examples/convoy/convoy-op-activateendpoint-example/)
+- [Convoy Op Batchreplayevents Example](https://apis.io/examples/convoy/convoy-op-batchreplayevents-example/)
+- [Convoy Op Batchretryeventdelivery Example](https://apis.io/examples/convoy/convoy-op-batchretryeventdelivery-example/)
+- [Convoy Op Bulkcreatefilters Example](https://apis.io/examples/convoy/convoy-op-bulkcreatefilters-example/)
+- [Convoy Op Bulkonboard Example](https://apis.io/examples/convoy/convoy-op-bulkonboard-example/)
+- [Convoy Op Bulkupdatefilters Example](https://apis.io/examples/convoy/convoy-op-bulkupdatefilters-example/)
+- [Convoy Op Createbroadcastevent Example](https://apis.io/examples/convoy/convoy-op-createbroadcastevent-example/)
+- [Convoy Op Createdynamicevent Example](https://apis.io/examples/convoy/convoy-op-createdynamicevent-example/)
+- [Convoy Op Createendpoint Example](https://apis.io/examples/convoy/convoy-op-createendpoint-example/)
+- [Convoy Op Createendpointevent Example](https://apis.io/examples/convoy/convoy-op-createendpointevent-example/)
+- [Convoy Op Createendpointfanoutevent Example](https://apis.io/examples/convoy/convoy-op-createendpointfanoutevent-example/)
+- [Convoy Op Createeventtype Example](https://apis.io/examples/convoy/convoy-op-createeventtype-example/)
+- [Convoy Op Createfilter Example](https://apis.io/examples/convoy/convoy-op-createfilter-example/)
+- [Convoy Op Createportallink Example](https://apis.io/examples/convoy/convoy-op-createportallink-example/)
+- [Convoy Op Createsource Example](https://apis.io/examples/convoy/convoy-op-createsource-example/)
+- [Convoy Op Createsubscription Example](https://apis.io/examples/convoy/convoy-op-createsubscription-example/)
+- [Convoy Op Deleteendpoint Example](https://apis.io/examples/convoy/convoy-op-deleteendpoint-example/)
+- [Convoy Op Deletefilter Example](https://apis.io/examples/convoy/convoy-op-deletefilter-example/)
+- [Convoy Op Deletesource Example](https://apis.io/examples/convoy/convoy-op-deletesource-example/)
+- [Convoy Op Deletesubscription Example](https://apis.io/examples/convoy/convoy-op-deletesubscription-example/)
+- …and 43 more published on APIs.io
+
+#### Collections (13)
+
+Postman and Open Collection request collections.
+
+- [Convoy API Reference](https://apis.io/collections/convoy/open-convoy/)
+- [Convoy API Reference Delivery Attempts API](https://apis.io/collections/convoy/open-convoy-delivery-attempts-api/)
+- [Convoy API Reference Delivery Attempts Endpoints API](https://apis.io/collections/convoy/open-convoy-endpoints-api/)
+- [Convoy API Reference Delivery Attempts Event Deliveries API](https://apis.io/collections/convoy/open-convoy-event-deliveries-api/)
+- [Convoy API Reference Delivery Attempts Events API](https://apis.io/collections/convoy/open-convoy-events-api/)
+- [Convoy API Reference Delivery Attempts EventTypes API](https://apis.io/collections/convoy/open-convoy-eventtypes-api/)
+- [Convoy API Reference Delivery Attempts Filters API](https://apis.io/collections/convoy/open-convoy-filters-api/)
+- [Convoy API Reference Delivery Attempts Meta Events API](https://apis.io/collections/convoy/open-convoy-meta-events-api/)
+- [Convoy API Reference Delivery Attempts Onboard API](https://apis.io/collections/convoy/open-convoy-onboard-api/)
+- [Convoy API Reference Delivery Attempts Portal Links API](https://apis.io/collections/convoy/open-convoy-portal-links-api/)
+- [Convoy API Reference Delivery Attempts Sources API](https://apis.io/collections/convoy/open-convoy-sources-api/)
+- [Convoy API Reference Delivery Attempts Subscriptions API](https://apis.io/collections/convoy/open-convoy-subscriptions-api/)
+- [Convoy API Reference](https://apis.io/collections/convoy/postman-convoy/)
+
+#### Overlays (11)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Convoy Delivery Attempts Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-delivery-attempts-api-phrasing-overlay/)
+- [Convoy Endpoints Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-endpoints-api-phrasing-overlay/)
+- [Convoy Event Deliveries Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-event-deliveries-api-phrasing-overlay/)
+- [Convoy Event Types Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-event-types-api-phrasing-overlay/)
+- [Convoy Events Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-events-api-phrasing-overlay/)
+- [Convoy Filters Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-filters-api-phrasing-overlay/)
+- [Convoy Meta Events Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-meta-events-api-phrasing-overlay/)
+- [Convoy Onboard Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-onboard-api-phrasing-overlay/)
+- [Convoy Portal Links Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-portal-links-api-phrasing-overlay/)
+- [Convoy Sources Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-sources-api-phrasing-overlay/)
+- [Convoy Subscriptions Api Phrasing Overlay](https://apis.io/overlays/convoy/convoy-subscriptions-api-phrasing-overlay/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Convoy — jsonschema rules](https://apis.io/rules/convoy/convoy-jsonschema-spectral-rules/)
+- [Convoy API Rules](https://apis.io/rules/convoy/convoy-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Convoy Authentication](https://apis.io/security/convoy/convoy-authentication/)
+- [Convoy Domain Security](https://apis.io/security/convoy/convoy-domain-security/)
+
+#### Plans and pricing (2)
+
+Published plans, tiers and prices.
+
+- [Convoy Plans Pricing](https://apis.io/plans/convoy/convoy-plans-pricing/)
+- [Convoy Price Estimates](https://apis.io/plans/convoy/convoy-price-estimates/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Convoy Rate Limits](https://apis.io/rate-limits/convoy/convoy-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Convoy Finops](https://apis.io/finops/convoy/convoy-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.getconvoy.io/)
 - [Documentation](https://getconvoy.io/docs/)
-- [Authentication](https://getconvoy.io/docs/api-reference/authentication)
-- [Getting Started](https://getconvoy.io/docs/quickstart)
-- [Regions](https://getconvoy.io/docs)
-- [GitHub Repository](https://github.com/frain-dev/convoy)
-- [Terms of Service](https://getconvoy.io/terms)
-- [JSON Schema](./json-schema/convoy-endpoint-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-event-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-event-delivery-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-delivery-attempt-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-subscription-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-source-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-portal-link-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](./json-schema/convoy-event-type-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](./json-ld/convoy-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](./rules/convoy-rules.yml)
-- [Vocabulary](./vocabulary/convoy-vocabulary.yml)
-- [Examples](./examples/)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://getconvoy.io)
-- [Developer Portal](https://getconvoy.io/docs/)
-- [Documentation](https://getconvoy.io/docs/)
-- [API Reference](https://getconvoy.io/docs/api-reference/welcome)
-- [Getting Started](https://getconvoy.io/docs/quickstart)
-- [Sign Up](https://dashboard.getconvoy.io/signup)
-- [Login](https://dashboard.getconvoy.io/login)
+- [Getting started](https://getconvoy.io/docs/quickstart)
+- [API reference](https://getconvoy.io/docs/api-reference/welcome)
 - [Pricing](https://getconvoy.io/pricing)
-- [Plans](./plans/convoy-plans-pricing.yml)
-- [Rate Limits](./rate-limits/convoy-rate-limits.yml)
 - [Changelog](https://getconvoy.io/changelog)
 - [Blog](https://getconvoy.io/blog)
-- [Status Page](https://status.getconvoy.io)
 - [Security](https://getconvoy.io/docs/product-manual/signatures)
 - [Compliance](https://getconvoy.io/pricing)
-- [Support](mailto:support@getconvoy.io)
-- [Contact](https://getconvoy.io)
-- [GitHub Organization](https://github.com/frain-dev)
-- [GitHub Repository](https://github.com/frain-dev/convoy)
-- [SDK](https://github.com/frain-dev/convoy-go)
-- [SDK](https://github.com/frain-dev/convoy.js)
-- [SDK](https://github.com/frain-dev/convoy-python)
-- [SDK](https://github.com/frain-dev/convoy-php)
-- [SDK](https://github.com/frain-dev/convoy.rb)
-- [C L I](https://github.com/frain-dev/convoy-cli)
-- [C L I](https://github.com/frain-dev/homebrew-tools)
-- [Integrations](https://github.com/frain-dev/helm-charts)
-- [Integrations](https://github.com/frain-dev/prometheus-grafana-dashboard)
-- [Integrations](https://github.com/frain-dev/convoy-ingester)
-- [Code Examples](https://github.com/frain-dev/convoy-playground)
-- [Code Examples](https://github.com/frain-dev/webhooks-with-kafka-demo)
-- [Code Examples](https://github.com/frain-dev/convoy-paystack)
-- [Features](undefined)
-- [Features](undefined)
-- [Features](undefined)
-- [Regions](undefined)
-- [Use Cases](undefined)
-- [Customers](undefined)
-- [L L Ms Txt](https://eu.getconvoy.cloud/llms.txt)
+- [GitHub](https://github.com/frain-dev)
+- [Status](https://status.getconvoy.io)
+
+## API Evangelist rating
+
+**Kin Score 66.9** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 67.9 |
+| Contract quality | 68.8 |
+| Contract governance | 27.3 |
+| Operational transparency | 65.8 |
+| Developer ergonomics | 70.2 |
+| Access clarity | 67.1 |
+
+**Agent readiness 33.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | verified |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | yes |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 25.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/convoy/](https://apis.io/providers/convoy/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Convoy: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/convoy/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
